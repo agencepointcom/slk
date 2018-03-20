@@ -1,0 +1,269 @@
+page-home {
+    overflow: hidden;
+   #legende{
+       width:70px;
+       height:20px;
+       font-family: 'lado', sans-serif;
+       font-size: 9.5px;
+       background:linear-gradient(#14b0b9,#17969c);
+       position:absolute;
+       top:77.3%;
+       left:-2px;
+       letter-spacing:0.2em
+   }
+    #map {
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        position: absolute!important;
+        overflow: hidden!important;
+    }
+    .currentitem {
+        position: fixed;
+        opacity: .8;
+        top: 12rem;
+        left: 0;
+        z-index: 103;
+        width: 100%;
+        height: 50px;
+        .item-ios .item-inner {
+            background: none;
+            padding-right: 10px;
+        }
+    }
+    .hidemap {
+        visibility: hidden;
+        margin-top: -1000px;
+    }
+    ion-searchbar {
+        position: absolute;
+        opacity: .7;
+        z-index: 3;
+    }
+    .switch {
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        width: 80%;
+        border-radius: 10px;
+        text-align: center;
+        z-index: 100;
+        opacity: .9;
+        .active {
+            background: #3366CC!important;
+            color: #fff;
+        }
+        .button {
+            width: 100px;
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .toolbar-background{
+        background-color: #14b0b9
+    }
+ 
+    .toolbar-title{
+        color: white;
+        padding:10px;
+        font-weight:1;
+        font-family: 'Lato', sans-serif;
+
+    }
+    .toolbar-title-ios {
+        position:absolute;
+            left:-63px;
+        top:20px    }
+    .toolbar-title-md{
+        font-size: 17px
+    }
+
+    .custom-icon{
+        color:white;
+        font-size:0.8em
+    }
+    #navmenu{
+        width:100%;
+        height:120px;
+        background-color:  #14b0b9;
+        position: fixed;
+        z-index: 100;
+        top:83%;
+        left:0px;
+        display:flex;
+        align-content:center;
+        align-items:center;
+        justify-content: center;
+    }
+    .navbas{
+        background-color:white;
+        width:60px;
+        height:45px;
+        display:flex;
+        justify-content:space-around;
+        align-content:center;
+        align-items:center;
+       
+        justify-content:center;
+        img{
+            width:45%;
+            height:45%
+        }
+        
+    }
+    #listenav{
+        border-radius: 7px 0px 0px 7px;
+        margin-right:5px;
+       ion-icon{
+            font-size:3.4em;
+            color:#14b0b9;
+            font-weight: bold;
+        }
+
+    }
+    #mapinav{
+       
+        border-left:none;
+        border-right:none;
+        img{
+            width:45%;
+            height:55%
+        }
+
+    }
+    #searchnav{
+        border-radius:50%;
+        width: 75px;
+        height:75px;
+        border:10px solid white;
+        background-color: #14b0b9;
+        ion-icon{
+            font-size:3.0em;
+            color:white;
+            font-weight: bold;
+        }
+    }
+    #conav{
+        border-radius: 0px 7px 7px 0px;
+        margin-left:5px;
+
+    }
+    #divsearch{
+        border:7px solid #14b0b9;
+        border-radius:50%;
+        z-index:9;
+        margin: -5px
+
+
+    }
+    #pagesearch{
+        background-color:white;
+        width: 55%;
+        height:40%;
+        position:relative;
+        z-index:102;
+        margin:auto;
+        top:41%;
+        border-radius:5px;
+        display:flex;
+        justify-content:center;
+        flex-direction: column;
+        align-content: center;
+        align-items:center;
+        display:none
+
+        
+    }
+    #bulle{
+     
+        z-index:101;
+        top:77%;
+        position:absolute;
+        left:144px;
+  
+        margin:auto;
+        display:none
+
+      
+;  /*Un carré de dimensions 0px */
+
+    }
+    .select{
+        background-color:#14b0b9;
+        
+        width:180px;
+        height:32px;
+        font-family: 'lado', sans-serif;
+        font-size:13px;
+        border-radius:7px;
+        margin-bottom:15px;
+        display:flex;
+        position: relative;
+        justify-content: space-between;
+        color:white;
+        align-content:center;
+        align-items:center;
+        padding:7px;
+       
+    }
+    #button{
+        position: absolute;
+        display:flex;
+        top:10px;
+        left:10px;
+        flex-direction: column
+    }
+    .sel{
+        display:flex;
+        justify-content: center;
+        text-align:center;
+        align-content: center;
+        align-items:center
+    }
+    .butsuite{
+        background-color:#fbb24d;
+        top:70px;
+        width:120px;
+        height:25px;
+        font-family: 'lado', sans-serif;
+        font-size:13px;
+        border-radius:3px;
+        margin-bottom:10px;
+        display:flex;
+        position: relative;
+        justify-content: center;
+        align-content:center;
+        align-items:center;
+        color:white;
+
+    }
+    .butsuites{
+        background-color:#6d6d6d;
+        top:70px;
+        width:120px;
+        height:25px;
+        font-family: 'lado', sans-serif;
+        font-size:13px;
+        border-radius:3px;
+        margin-bottom:10px;
+        display:flex;
+        position: relative;
+        justify-content: center;
+        align-content:center;
+        align-items:center;
+        color:white;
+
+    }
+    #fond{
+        background-color: rgba(94, 94, 94, 0.562);
+        width:100%;
+        height:82%;
+        position:absolute;
+        z-index:100;
+        top:0px;
+        left:0px;
+        display:none
+    }
+}

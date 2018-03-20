@@ -1,0 +1,25 @@
+ 
+<ion-content padding class="auth-form">
+  <form [formGroup]="loginData" (ngSubmit)="submitLogin()">
+
+
+
+
+      <ion-list inset no-padding>
+
+        <ion-item>
+          <ion-input type="email" na placeholder="Adresse email" formControlName="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="password" placeholder="Mot de passe" formControlName="password"></ion-input>
+        </ion-item>
+
+      </ion-list>
+      <button ion-item  color="primary" block full text-center [disabled]="!loginData.valid">Me connecter</button>
+
+
+ 
+
+  </form>
+</ion-content>
