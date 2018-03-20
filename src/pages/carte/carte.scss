@@ -1,96 +1,27 @@
-page-home {
-    overflow: hidden;
-   #legende{
-       width:70px;
-       height:20px;
-       font-family: 'lado', sans-serif;
-       font-size: 9.5px;
-       background:linear-gradient(#14b0b9,#17969c);
-       position:absolute;
-       top:77.3%;
-       left:-2px;
-       letter-spacing:0.2em
+page-carte {
+   h1, h2{
+    color:white;
+    text-align: center;
+    font-family: 'lado', sans-serif;
+    letter-spacing:0.1em;
+    margin-bottom: -15px;
+    font-size:20px;
    }
-    #map {
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        position: absolute!important;
-        overflow: hidden!important;
-    }
-    .currentitem {
-        position: fixed;
-        opacity: .8;
-        top: 12rem;
-        left: 0;
-        z-index: 103;
-        width: 100%;
-        height: 50px;
-        .item-ios .item-inner {
-            background: none;
-            padding-right: 10px;
-        }
-    }
-    .hidemap {
-        visibility: hidden;
-        margin-top: -1000px;
-    }
-    ion-searchbar {
-        position: absolute;
-        opacity: .7;
-        z-index: 3;
-    }
-    .switch {
-        position: fixed;
-        bottom: 10px;
-        left: 50%;
-        transform: translate3d(-50%, -50%, 0);
-        width: 80%;
-        border-radius: 10px;
-        text-align: center;
-        z-index: 100;
-        opacity: .9;
-        .active {
-            background: #3366CC!important;
-            color: #fff;
-        }
-        .button {
-            width: 100px;
-            margin: 0;
-            padding: 0;
-        }
-    }
-    .toolbar-background{
-        background-color: #14b0b9
-    }
- 
-    .toolbar-title{
-        color: white;
-        padding:10px;
-        font-weight:1;
-        font-family: 'Lato', sans-serif;
+   h1{
+    font-weight:bold ;
+    font-size: 22px;
 
-    }
-    .toolbar-title-ios {
-        position:absolute;
-            left:-63px;
-        top:20px    }
-    .toolbar-title-md{
-        font-size: 17px
-    }
-
-    .custom-icon{
-        color:white;
-        font-size:0.8em
-    }
+   }
+    .fixed-content{
+    background-image:url("../assets/icon/fondcarte.png");
+    background-size: cover;
+    color:white;}
     #navmenu{
         width:100%;
         height:120px;
-        background-color:  #14b0b9;
         position: fixed;
-        z-index: 100;
         top:83%;
+        z-index:100;
         left:0px;
         display:flex;
         align-content:center;
@@ -105,7 +36,7 @@ page-home {
         justify-content:space-around;
         align-content:center;
         align-items:center;
-       
+      
         justify-content:center;
         img{
             width:45%;
@@ -116,6 +47,8 @@ page-home {
     #listenav{
         border-radius: 7px 0px 0px 7px;
         margin-right:5px;
+        z-index: 110;
+
        ion-icon{
             font-size:3.4em;
             color:#14b0b9;
@@ -127,6 +60,8 @@ page-home {
        
         border-left:none;
         border-right:none;
+        z-index: 110;
+
         img{
             width:45%;
             height:55%
@@ -135,6 +70,8 @@ page-home {
     }
     #searchnav{
         border-radius:50%;
+        z-index: 110;
+
         width: 75px;
         height:75px;
         border:10px solid white;
@@ -148,24 +85,28 @@ page-home {
     #conav{
         border-radius: 0px 7px 7px 0px;
         margin-left:5px;
+        z-index: 110;
+
 
     }
     #divsearch{
         border:7px solid #14b0b9;
         border-radius:50%;
         z-index:9;
-        margin: -5px
+        margin: -5px;
+        z-index: 110;
+
 
 
     }
     #pagesearch{
         background-color:white;
-        width: 55%;
+        width: 57%;
         height:40%;
         position:relative;
-        z-index:102;
+        z-index:107;
         margin:auto;
-        top:42%;
+        top:39%;
         border-radius:5px;
         display:flex;
         justify-content:center;
@@ -178,8 +119,8 @@ page-home {
     }
     #bulle{
      
-        z-index:101;
-        top:77%;
+        z-index:106;
+        top:79%;
         position:absolute;
         left:144px;
   
@@ -257,13 +198,14 @@ page-home {
 
     }
     #fond{
-        background-color: rgba(94, 94, 94, 0.562);
+        background-color: rgba(255, 251, 251, 0.281);
         width:100%;
-        height:82%;
+        height:100%;
         position:absolute;
-        z-index:100;
+        z-index:105;
         top:0px;
         left:0px;
         display:none
     }
+
 }

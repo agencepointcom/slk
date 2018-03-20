@@ -2,4 +2,36 @@ page-login {
     .tabbar.show-tabbar  {
        opacity:0
     }
+    .fixed-content{
+        background-image:url("../assets/icon/fondlogin.png");
+        background-size: cover;
+        color:white;}
+}
+#email{
+background-color:white;
+border-radius:7px;
+margin-bottom:15px;
+
+}
+
+#password{
+    background-color:white;
+border-radius:7px;
+}
+ion-list{
+    position:absolute;
+    top:40%;
+    left:15%;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+margin:auto;}
+
+button{
+    position:absolute;
+    background-color:white;
+border-radius:7px;
+margin-bottom:15px;
+top:60%;
+left:15%;
 }

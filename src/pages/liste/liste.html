@@ -1,0 +1,112 @@
+<!--
+  Generated template for the ListePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+      <div id="butto">
+          <div class="selec"> 
+             <div class="se"> 
+               <p>Tranche d'âge</p>
+             </div> 
+             <div class="se">
+                 <ion-icon name="ios-arrow-down"></ion-icon>
+             </div>
+          
+           </div>
+           <div class="selec"> 
+               <div class="se"> 
+                 <p>Categorie</p>
+               </div> 
+               <div class="se">
+                   <ion-icon name="ios-arrow-down"></ion-icon>
+               </div>
+            
+             </div>
+             <div class="selec"> 
+                 <div class="se"> 
+                   <p>Localisation</p>
+                 </div> 
+                 <div class="se">
+                     <ion-icon name="ios-arrow-down"></ion-icon>
+                 </div>
+              
+               </div>
+               <div id="liste"> AFFICHER LA LISTE</div>
+
+              </div>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div id="affichage">
+      <ion-scroll  scrollX="true">
+        </ion-scroll>
+  </div>    
+  <div id="pagesearch">
+        <div id="button">
+          <div class="select"> 
+             <div class="sel"> 
+               <p>Tranche d'âge</p>
+             </div> 
+             <div class="sel">
+                 <ion-icon name="ios-arrow-down"></ion-icon>
+             </div>
+          
+           </div>
+           <div class="select"> 
+               <div class="sel"> 
+                 <p>Categorie</p>
+               </div> 
+               <div class="sel">
+                   <ion-icon name="ios-arrow-down"></ion-icon>
+               </div>
+            
+             </div>
+             <div class="select"> 
+                 <div class="sel"> 
+                   <p>Localisation</p>
+                 </div> 
+                 <div class="sel">
+                     <ion-icon name="ios-arrow-down"></ion-icon>
+                 </div>
+              
+               </div>
+        </div>
+        <div id="buttonsuite">
+           <div class="butsuite"> Afficher la liste</div>
+           <div class="butsuites"> Afficher la carte</div>
+      
+        </div>
+      </div>
+      
+      <img id="bulle" src="./assets/icon/fleche.png">
+      <div (click)='clickfond()' id="fond"></div>
+      <div id="navmenu">
+        <div id="listenav" (click)='clickliste()' class="navbas">
+            <img src="./assets/icon/liste.png">
+        </div>
+      
+        <div id="mapinav" (click)='clickmap()' class="navbas">
+            <img src="./assets/icon/map.png" >
+      
+        </div>
+      
+        <div id="divsearch"> <div id="searchnav" (click)='clicksearch()' class="navbas"><ion-icon name="ios-search"></ion-icon></div></div>
+      
+        <div id="cartenav" (click)='clickcarte()' class="navbas">
+            <img src="./assets/icon/carte.png" >
+        </div>
+      
+        <div id="conav"  (click)='clickexit()'class="navbas">
+            <img src="./assets/icon/exit.png">
+        </div>
+        
+      
+      </div>
+</ion-content>

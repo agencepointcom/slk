@@ -1,6 +1,6 @@
 import { identifierModuleUrl } from '@angular/compiler/compiler';
 import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
-import { ActionSheetController, AlertController, App, LoadingController, NavController, Platform, ToastController } from 'ionic-angular';
+import { ActionSheetController, AlertController, App, LoadingController, NavController, Platform, ToastController, IonicPage } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { Observable } from 'rxjs/Observable';
@@ -14,6 +14,7 @@ import {
 
 declare var google: any;
 declare var MarkerClusterer: any;
+@IonicPage()
 
 @Component({
   selector: 'page-home',

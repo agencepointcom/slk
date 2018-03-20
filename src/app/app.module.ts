@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { HomePageModule } from '../pages/home/home.module';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { Geolocation } from '@ionic-native/geolocation';
@@ -19,6 +19,7 @@ import { AuthService } from '../services/auth';
 import {TokenExpiration} from "../services/token-expiration";
 import {TokenInterceptor} from "../services/token-interceptor";
 import {LoginPageModule} from "../pages/login/login.module";
+import { CartePageModule } from '../pages/carte/carte.module';
 
 
 
@@ -26,8 +27,7 @@ import {LoginPageModule} from "../pages/login/login.module";
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    
+  
   ],
   imports: [
     BrowserModule,
@@ -40,13 +40,14 @@ import {LoginPageModule} from "../pages/login/login.module";
     HttpClientModule,
     IonicStorageModule.forRoot(),
     LoginPageModule,
-    
+    CartePageModule,
+    HomePageModule,
+
 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
   
   ],
   providers: [
