@@ -42,7 +42,7 @@ La carte de nos partenaires    </ion-title>
     <ion-searchbar #searchbar placeholder="Suchen" [hidden]="!search"></ion-searchbar>
     <div id="map" #map></div>
   </div>
-  <button ion-button id="legende">LEGENDE</button>
+  <button ion-button (click)='clicklegende()' id="legende">LEGENDE</button>
   <div id="navmenu">
       <div id="listenav" (click)='clickliste()' class="navbas">
           <img src="./assets/icon/liste.png">
@@ -102,9 +102,8 @@ La carte de nos partenaires    </ion-title>
      </div>
   </div>
   
-  <img id="bulle" src="./assets/icon/fleche.png">
 <div (click)='clickfond()' id="fond"></div>
-  
+  <div (click)='clicklegendes()' id="legendes"></div>
 </ion-content>
 
 

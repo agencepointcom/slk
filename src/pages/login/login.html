@@ -1,5 +1,10 @@
  
 <ion-content padding class="auth-form">
+  <img src="./assets/img/logo.png">
+  <div id="pres">
+  <p>Bienvenue sur l'application</p>
+  <h3>SORTIR LES KIDS !</h3>
+  </div>
   <form [formGroup]="loginData" (ngSubmit)="submitLogin()">
 
 
@@ -16,10 +21,18 @@
         </ion-item>
 
       </ion-list>
-      <button ion-item   text-center [disabled]="!loginData.valid">CONNEXION</button>
+      <button id ="button" [disabled]="!loginData.valid">CONNEXION</button>
 
+      <div id="fin" >  <p><a href="https://www.sortirleskids.com/">J'ai oublié mon mot de passe </a></p>
+        <h6 (click)='clickparcourir()'>Parcourir l'application </h6>
+      </div>
 
  
 
   </form>
+  <div id="footer">
+    <p>Design & Création par </p>
+    <p id="ag">AGENCE POINT COM </p>
+  </div>
+  
 </ion-content>

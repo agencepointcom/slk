@@ -402,13 +402,11 @@ addCluster(map){
     if(this.boolean==false){
     this.boolean=true
     document.getElementById('pagesearch').style.display = "flex";
-    document.getElementById('bulle').style.display = "block";
     document.getElementById('fond').style.display = "flex";
     }
     else{
       this.boolean=false
       document.getElementById('pagesearch').style.display = "none";
-      document.getElementById('bulle').style.display = "none";
       document.getElementById('fond').style.display = "none";
     }
 
@@ -424,8 +422,19 @@ addCluster(map){
   clickfond(){
     this.boolean=false
     document.getElementById('pagesearch').style.display = "none";
-    document.getElementById('bulle').style.display = "none";
     document.getElementById('fond').style.display = "none";
+    document.getElementById('legendes').style.left = "-22%";
+    document.getElementById('legendes').style.transition = "1s";
   }
+  clicklegende(){
 
-}
+    document.getElementById('legendes').style.top = "24%";
+    document.getElementById('legendes').style.transition = "1s";
+    }
+   clicklegendes(){
+      document.getElementById('legendes').style.top = "100%";
+      document.getElementById('legendes').style.transition = "1s";
+   }
+    }
+
+  

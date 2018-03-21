@@ -74,13 +74,14 @@ page-liste {
 
     }
     #pagesearch{
-        background-color:white;
-        width: 58%;
-        height:45%;
+        background-image:url('../assets/img/search.png');
+        background-size: cover;
+        width: 210px;
+        height:250px;
         position:relative;
         z-index:102;
         margin:auto;
-        top:35%;
+        top:30%;
         border-radius:5px;
         display:flex;
         justify-content:center;
@@ -91,20 +92,10 @@ page-liste {
 
         
     }
-    #bulle{
-     
-        z-index:101;
-        top:73%;
-        position:absolute;
-        left:144px;
-  
-        margin:auto;
-        display:none
-
-      
-;  /*Un carré de dimensions 0px */
-
+    #buttonsuite{
+        position:relative
     }
+   
     .select{
         background-color:#14b0b9;
         
@@ -124,10 +115,9 @@ page-liste {
        
     }
     #button{
-        position: absolute;
+        position: relative;
         display:flex;
-        top:10px;
-        left:10px;
+        
         flex-direction: column
     }
     .sel{
@@ -139,7 +129,7 @@ page-liste {
     }
     .butsuite{
         background-color:#fbb24d;
-        top:70px;
+      
         width:120px;
         height:25px;
         font-family: 'lado', sans-serif;
@@ -156,7 +146,7 @@ page-liste {
     }
     .butsuites{
         background-color:#6d6d6d;
-        top:70px;
+      
         width:120px;
         height:25px;
         font-family: 'lado', sans-serif;
@@ -172,7 +162,7 @@ page-liste {
 
     }
     #fond{
-        background-color: rgba(94, 94, 94, 0.562);
+        background-color: rgba(94, 94, 94, 0.685);
         width:100%;
         height:82%;
         position:absolute;

@@ -100,13 +100,14 @@ page-carte {
 
     }
     #pagesearch{
-        background-color:white;
-        width: 57%;
-        height:40%;
+        background-image:url('../assets/img/search.png');
+        background-size: cover;
+        width: 210px;
+        height:250px;
         position:relative;
-        z-index:107;
+        z-index:120;
         margin:auto;
-        top:39%;
+        top:40%;
         border-radius:5px;
         display:flex;
         justify-content:center;
@@ -117,19 +118,8 @@ page-carte {
 
         
     }
-    #bulle{
-     
-        z-index:106;
-        top:79%;
-        position:absolute;
-        left:144px;
-  
-        margin:auto;
-        display:none
-
-      
-;  /*Un carré de dimensions 0px */
-
+    #buttonsuite{
+        position:relative
     }
     .select{
         background-color:#14b0b9;
@@ -150,10 +140,9 @@ page-carte {
        
     }
     #button{
-        position: absolute;
+        position: relative;
         display:flex;
-        top:10px;
-        left:10px;
+        
         flex-direction: column
     }
     .sel{
@@ -165,7 +154,7 @@ page-carte {
     }
     .butsuite{
         background-color:#fbb24d;
-        top:70px;
+      
         width:120px;
         height:25px;
         font-family: 'lado', sans-serif;
@@ -182,7 +171,7 @@ page-carte {
     }
     .butsuites{
         background-color:#6d6d6d;
-        top:70px;
+      
         width:120px;
         height:25px;
         font-family: 'lado', sans-serif;

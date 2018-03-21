@@ -20,7 +20,7 @@ export class LoginPage {
   //  Notre groupe d'inputs (à l'intérieur de <form>)
   public loginData: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public authProvider: AuthProvider, public toastCtrl: ToastController, public authService: AuthService, public app: App) {
+  constructor(public nav: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public authProvider: AuthProvider, public toastCtrl: ToastController, public authService: AuthService, public app: App) {
     this.config = AppConfig.config;
 
     //  On définit des règles de validation
@@ -45,10 +45,7 @@ export class LoginPage {
 
   /**
    * Direction la page d'inscription
-   */
-  goToRegister() {
-    this.navCtrl.setRoot('RegisterPage');
-  }
+
 
   /**
    * Soumission du formulaire de connexion
@@ -81,6 +78,10 @@ export class LoginPage {
     }, error => {
       console.log(error);
     });
+  }
+  clickparcourir(){
+    this.nav.setRoot('HomePage');
+
   }
 
 }

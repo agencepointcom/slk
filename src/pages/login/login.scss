@@ -6,32 +6,100 @@ page-login {
         background-image:url("../assets/icon/fondlogin.png");
         background-size: cover;
         color:white;}
-}
+
 #email{
 background-color:white;
 border-radius:7px;
 margin-bottom:15px;
+height:10px;
 
 }
-
+.list-ios[inset]{
+    margin: 0px
+}
 #password{
     background-color:white;
 border-radius:7px;
 }
 ion-list{
-    position:absolute;
+    position:relative;
     top:40%;
-    left:15%;
+    padding: 0px;
+    width:70%;
+    margin:0px;
     display:flex;
     flex-direction:column;
     justify-content: center;
-margin:auto;}
+}
 
-button{
+a[disabled], button[disabled], [ion-button][disabled]{
     position:absolute;
     background-color:white;
-border-radius:7px;
+border-radius:5px;
 margin-bottom:15px;
-top:60%;
-left:15%;
+top:100%;
+width:120px;
+height:30px;
+background-color: #6d6d6d;
+opacity:1;
+color:white;
+font-family:'lado' sans-serif;
+}
+.item-ios {
+    font-size: 1.0rem
+}
+#pres{
+    h3{
+        margin-top:-10px;
+        letter-spacing:0.09em
+
+    }
+    width:100%;
+    position : relative;
+    top:25px;
+display:flex;
+justify-content: center;
+flex-direction: column;
+align-content: center;
+align-items: center;
+font-family:'lado' sans-serif;
+color:white}
+
+#fin{
+    width:100%;
+    position : absolute;
+    top:130%;
+display:flex;
+justify-content: center;
+flex-direction: column;
+align-content: center;
+align-items: center;
+font-family:'lado' sans-serif;
+color:white
+}
+#footer{
+    #ag{
+        margin:-5px;
+    }
+    width:100%;
+    position : relative;
+    top:40%;
+display:flex;
+justify-content: center;
+flex-direction: column;
+align-content: center;
+align-items: center;
+font-family:'lado' sans-serif;
+color:white;
+font-size:10px;
+}
+form{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    top:5%;
+    position: relative;
+}
+
 }
