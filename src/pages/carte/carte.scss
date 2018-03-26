@@ -99,15 +99,22 @@ page-carte {
 
 
     }
+    #serach{
+        width: 100%;
+        height:100%;
+        display:flex;
+        justify-content: center;
+       align-items: center;
+    }
     #pagesearch{
         background-image:url('../assets/img/search.png');
         background-size: cover;
         width: 210px;
         height:250px;
-        position:relative;
+     
         z-index:120;
-        margin:auto;
-        top:40%;
+      
+     
         border-radius:5px;
         display:flex;
         justify-content:center;
@@ -196,5 +203,59 @@ page-carte {
         left:0px;
         display:none
     }
-
+    #clickag{
+        background-color:#14b0b9;
+            
+        width:180px;
+        height:0px;
+        font-family: 'lado', sans-serif;
+        font-size:13px;
+        margin-bottom:15px;
+        display:flex;
+        position: relative;
+        justify-content: space-between;
+        color:white;
+        align-content:center;
+        align-items:center;
+        margin-top:25px;
+        z-index:1;
+    position:fixed;
+    }
+    #clickcategori{
+        background-color:#14b0b9;
+            
+        width:180px;
+        height:0px;
+        font-family: 'lado', sans-serif;
+        font-size:13px;
+        margin-bottom:15px;
+        display:flex;
+        position: relative;
+        justify-content: space-between;
+        color:white;
+        align-content:center;
+        align-items:center;
+        margin-top:75px;
+        z-index:1;
+    position:fixed;
+    }
+    #clicklocalisatio{
+        background-color:#14b0b9;
+            
+        width:180px;
+        height:0px;
+        font-family: 'lado', sans-serif;
+        font-size:13px;
+        margin-bottom:15px;
+        display:flex;
+        position: relative;
+        justify-content: space-between;
+        color:white;
+        align-content:center;
+        align-items:center;
+        margin-top:115px;
+        
+        z-index:1;
+    position:fixed;
+    }
 }

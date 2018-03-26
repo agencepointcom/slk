@@ -7,43 +7,47 @@
 
 <h1> SORTIR LES KIDS</h1>
 </div>
+<section id="serach">
 <div id="pagesearch">
-  <div id="button">
-    <div class="select"> 
-       <div class="sel"> 
-         <p>Tranche d'âge</p>
-       </div> 
-       <div class="sel">
-           <ion-icon name="ios-arrow-down"></ion-icon>
-       </div>
-    
-     </div>
-     <div class="select"> 
+    <div id="button">
+        <div id="clickag"></div>
+        <div id="clickcategori"></div>
+        <div id="clicklocalisatio"><p id="ploc"></p></div>
+      <div  class="select" (click)='clickagesearch()'> 
          <div class="sel"> 
-           <p>Categorie</p>
+           <p>Tranche d'âge</p>
          </div> 
          <div class="sel">
              <ion-icon name="ios-arrow-down"></ion-icon>
          </div>
       
        </div>
-       <div class="select"> 
+       <div  class="select"  (click)='clickcatsearch()'> 
            <div class="sel"> 
-             <p>Localisation</p>
+             <p>Categorie</p>
            </div> 
            <div class="sel">
                <ion-icon name="ios-arrow-down"></ion-icon>
            </div>
         
          </div>
-  </div>
+         <div  class="select"  (click)='clicklocsearch()' > 
+             <div class="sel"> 
+               <p>Localisation</p>
+             </div> 
+             <div class="sel">
+                 <ion-icon name="ios-arrow-down"></ion-icon>
+             </div>
+          
+           </div>
+    </div>
   <div id="buttonsuite">
      <div class="butsuite"> Afficher la liste</div>
      <div class="butsuites"> Afficher la carte</div>
 
   </div>
 </div>
-
+</section>
 
 <div (click)='clickfond()' id="fond"></div>
 <div id="navmenu">

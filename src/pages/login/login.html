@@ -1,38 +1,34 @@
  
 <ion-content padding class="auth-form">
   <img src="./assets/img/logo.png">
+  <section id="login">
   <div id="pres">
-  <p>Bienvenue sur l'application</p>
-  <h3>SORTIR LES KIDS !</h3>
+    <p>Bienvenue sur l'application</p>
+    <h3>SORTIR LES KIDS !</h3>
   </div>
   <form [formGroup]="loginData" (ngSubmit)="submitLogin()">
+    <ion-list inset no-padding>
 
+      <ion-item id="email">
+        <ion-input type="email"  na  formControlName="email"></ion-input>
+      </ion-item>
 
+      <ion-item id="password">
+        <ion-input type="password" id="password"  formControlName="password"></ion-input>
+      </ion-item>
 
+    </ion-list>
+    <button id ="button" [disabled]="!loginData.valid">CONNEXION</button>
 
-      <ion-list inset no-padding>
-
-        <ion-item id="email">
-          <ion-input type="email"  na  formControlName="email"></ion-input>
-        </ion-item>
-
-        <ion-item id="password">
-          <ion-input type="password" id="password"  formControlName="password"></ion-input>
-        </ion-item>
-
-      </ion-list>
-      <button id ="button" [disabled]="!loginData.valid">CONNEXION</button>
-
-      <div id="fin" >  <p><a href="https://www.sortirleskids.com/">J'ai oublié mon mot de passe </a></p>
-        <h6 (click)='clickparcourir()'>Parcourir l'application </h6>
-      </div>
-
- 
 
   </form>
+  <div id="fin" >  <p><a href="https://www.sortirleskids.com/">J'ai oublié mon mot de passe </a></p>
+    <h6 (click)='clickparcourir()'>Parcourir l'application </h6>
+  </div>
+
   <div id="footer">
     <p>Design & Création par </p>
     <p id="ag">AGENCE POINT COM </p>
   </div>
-  
+</section>
 </ion-content>

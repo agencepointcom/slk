@@ -435,6 +435,79 @@ addCluster(map){
       document.getElementById('legendes').style.top = "100%";
       document.getElementById('legendes').style.transition = "1s";
    }
+   agesearch=false
+catsearch=false
+locsearch=false
+clickagesearch(){
+  console.log('trolololo')
+  if(this.agesearch==false){
+    this.agesearch=true
+    this.catsearch=false
+    this.locsearch=false
+
+    document.getElementById('clickag').style.height = "80px";
+    document.getElementById('clickag').style.transition = "1s";
+    document.getElementById('clickcategori').style.height = "0px";
+    document.getElementById('clicklocalisatio').style.height = "0px";
+  }
+  else{
+    this.agesearch=false
+    document.getElementById('clickag').style.height = "0px";
+    document.getElementById('clickag').style.transition = "1s";
+    this.catsearch=false
+    this.locsearch=false
+
+
+  }
+
+
+}
+
+clickcatsearch(){
+if(this.catsearch==false){
+  this.catsearch=true
+  this.agesearch=false
+  this.locsearch=false
+  document.getElementById('clickcategori').style.height = "80px";
+  document.getElementById('clickcategori').style.transition = "1s";   
+  document.getElementById('clicklocalisatio').style.height = "0px";
+  document.getElementById('clickag').style.height = "0px";
+
+
+}
+else{
+  this.catsearch=false
+  this.agesearch=false
+  this.locsearch=false
+  document.getElementById('clickcategori').style.height = "0px";
+  document.getElementById('clickcategori').style.transition = "1s";
+;
+}
+
+
+}
+
+clicklocsearch(){
+if(this.locsearch==false){
+  this.locsearch=true
+  document.getElementById('clicklocalisatio').style.height = "80px";
+  document.getElementById('clickcategori').style.height = "0px";
+  document.getElementById('clickag').style.height = "0px";
+  document.getElementById('clicklocalisatio').style.transition = "1s";
+  document.getElementById('ploc').style.display = "block";
+
+}
+else{
+  this.catsearch=false
+  this.agesearch=false
+  this.locsearch=false
+  document.getElementById('clicklocalisatio').style.height = "0px";
+  document.getElementById('clicklocalisatio').style.transition = "1s";
+  document.getElementById('ploc').style.display = "none";
+
+}
+
+}
     }
 
   
