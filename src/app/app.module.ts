@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { BrowserModule } from '@angular/platform-browser';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 
 import { MyApp } from './app.component';
@@ -20,6 +21,7 @@ import {TokenExpiration} from "../services/token-expiration";
 import {TokenInterceptor} from "../services/token-interceptor";
 import {LoginPageModule} from "../pages/login/login.module";
 import { CartePageModule } from '../pages/carte/carte.module';
+import { ConfigServiceTsProvider } from '../providers/config-service-ts/config-service-ts';
 
 
 
@@ -30,6 +32,7 @@ import { CartePageModule } from '../pages/carte/carte.module';
   
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: true,
@@ -66,6 +69,8 @@ import { CartePageModule } from '../pages/carte/carte.module';
     ApiProvider,
     AuthService,
     TokenExpiration,
+    ConfigServiceTsProvider,
+    AndroidPermissions
 
   ]
 })

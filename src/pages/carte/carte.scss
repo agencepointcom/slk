@@ -258,4 +258,82 @@ page-carte {
         z-index:1;
     position:fixed;
     }
+    #divcarte{
+    
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        position:absolute;
+       top:0px;
+       left:0px;
+   
+        #carte{
+            
+            width:300px;
+            height:195px;
+            z-index:-10
+        
+        }
+       
+    }
+    #fondnouser{
+        width:100%;
+        height:86%;
+        position:absolute;
+        top:0px;
+        left:0px;
+        background-color: rgba(10, 10, 10, 0.411);
+        z-index:200;
+    }
+    #divpopup{
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        position:absolute;
+       top:0px;
+       left:0px;
+    #popup{
+      
+        width: 200px;
+        height:200px;
+        background-color: #14b0b9;
+        color:white;
+        z-index:300;
+        text-align: center;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        align-items:center;
+        flex-direction: column;
+        font-family: 'lado', sans-serif;
+        letter-spacing:0.1em;
+        border-radius:7px;
+        padding:3px;
+      
+    }
+}
+.divh{
+    font-family: 'lado', sans-serif;
+    letter-spacing:0.1em;
+
+    background-color: #6d6d6d;
+    width:120px;
+    height:20px;
+    color:white;
+    display:flex;
+    margin-top:10px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding:2px;
+    
+    border-radius:5px;
+    text-align: center;
+}
 }

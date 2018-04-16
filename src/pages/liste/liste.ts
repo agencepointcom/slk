@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
+import 'rxjs/add/operator/map';
+import {ConfigServiceTsProvider} from '../../providers/config-service-ts/config-service-ts';
 /**
  * Generated class for the ListePage page.
  *
@@ -12,15 +16,48 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-liste',
   templateUrl: 'liste.html',
+  providers :[ConfigServiceTsProvider]
 })
 export class ListePage {
+  listes: any[];
+  constructor(public nav: NavController, public navParams: NavParams, private http: Http, public ConfigServ: ConfigServiceTsProvider ) {
 
-  constructor(public nav: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListePage');
+
+    // this.callBDD( this.http)
   }
+
+  ionViewDidEnter(){
+    this.ConfigServ.getlistes()
+      //Au moment ou la requête est terminé, subscribe se déclenche !
+      .subscribe( (data) => {
+            var liste = data;
+            //console.log(users[0].name);
+            // for(var i=0; i<users.length; i++){
+            //   if(users[i].name == 'Nyle' && users[i].email == 'j.alsina@hotmail.fr'){
+            //     //console.log("OK")
+            //   }     
+            //   //console.log(users[i]);       
+            // }
+      },
+        err => {
+            alert(err);
+      });
+  }
+//   callBDD( $http) {
+//     $http.get('../../bdd_wp.php').then(successCallback, errorCallback);
+
+// function successCallback(response){
+
+// this.terms = response.data;}
+// function errorCallback(error){
+//     //error code
+// }
+//   }
+
   clickliste(){
     this.nav.setRoot('ListePage');
     
@@ -205,4 +242,3 @@ else{
 
 
 }
-

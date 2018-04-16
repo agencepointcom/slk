@@ -2,7 +2,7 @@ import { identifierModuleUrl } from '@angular/compiler/compiler';
 import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { ActionSheetController, AlertController, App, LoadingController, NavController, Platform, ToastController, IonicPage } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
-
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
 import {
@@ -51,11 +51,18 @@ export class HomePage {
     public alertCtrl: AlertController,
     public storage: Storage,
     public actionSheetCtrl: ActionSheetController,
-    public geolocation: Geolocation
+    public geolocation: Geolocation,
+    private androidPermissions: AndroidPermissions
   ) {
     this.platform.ready().then(() => this.loadMaps());
     console.log('Hello GoogleMapsCluster Provider');
- 
+    //permission localisation 
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
+      result => console.log('Has permission?',result.hasPermission),
+      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+    );
+    
+    this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION, this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
     this.locations = [
         {lat: -31.563910, lng: 147.154312},
         {lat: -33.718234, lng: 150.363181},
@@ -134,61 +141,61 @@ addCluster(map){
     alert.present();
   }
 
-  // mapsSearchBar(ev: any) {
-  //   // set input to the value of the searchbar
-  //   //this.search = ev.target.value;
-  //   console.log(ev);
-  //   const autocomplete = new google.maps.places.Autocomplete(ev);
-  //   autocomplete.bindTo('bounds', this.map);
-  //   return new Observable((sub: any) => {
-  //     google.maps.event.addListener(autocomplete, 'place_changed', () => {
-  //       const place = autocomplete.getPlace();
-  //       if (!place.geometry) {
-  //         sub.error({
-  //           message: 'Autocomplete returned place with no geometry'
-  //         });
-  //       } else {
-  //         sub.next(place.geometry.location);
-  //         sub.complete();
-  //       }
-  //     });
-  //   });
-  // }
+  mapsSearchBar(ev: any) {
+    // set input to the value of the searchbar
+    //this.search = ev.target.value;
+    console.log(ev);
+    const autocomplete = new google.maps.places.Autocomplete(ev);
+    autocomplete.bindTo('bounds', this.map);
+    return new Observable((sub: any) => {
+      google.maps.event.addListener(autocomplete, 'place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (!place.geometry) {
+          sub.error({
+            message: 'Autocomplete returned place with no geometry'
+          });
+        } else {
+          sub.next(place.geometry.location);
+          sub.complete();
+        }
+      });
+    });
+  }
 
-  // initAutocomplete(): void {
+  initAutocomplete(): void {
  
-  //   this.addressElement = this.searchbar.nativeElement.querySelector('.searchbar-input');
-  //   this.createAutocomplete(this.addressElement).subscribe((location) => {
-  //     console.log('Searchdata', location);
+    this.addressElement = this.searchbar.nativeElement.querySelector('.searchbar-input');
+    this.createAutocomplete(this.addressElement).subscribe((location) => {
+      console.log('Searchdata', location);
 
-  //     let options = {
-  //       center: location,
-  //       zoom: 15
-  //     };
-  //     this.map.setOptions(options);
+      let options = {
+        center: location,
+        zoom: 15
+      };
+      this.map.setOptions(options);
 
-  //   });
-  // }
+    });
+  }
 
-  // createAutocomplete(addressEl: HTMLInputElement): Observable<any> {
-  //   const autocomplete = new google.maps.places.Autocomplete(addressEl);
-  //   autocomplete.bindTo('bounds', this.map);
-  //   return new Observable((sub: any) => {
-  //     google.maps.event.addListener(autocomplete, 'place_changed', () => {
-  //       const place = autocomplete.getPlace();
-  //       if (!place.geometry) {
-  //         sub.error({
-  //           message: 'Autocomplete returned place with no geometry'
-  //         });
-  //       } else {
-  //         console.log('Search Lat', place.geometry.location.lat());
-  //         console.log('Search Lng', place.geometry.location.lng());
-  //         sub.next(place.geometry.location);
-  //         //sub.complete();
-  //       }
-  //     });
-  //   });
-  // }
+  createAutocomplete(addressEl: HTMLInputElement): Observable<any> {
+    const autocomplete = new google.maps.places.Autocomplete(addressEl);
+    autocomplete.bindTo('bounds', this.map);
+    return new Observable((sub: any) => {
+      google.maps.event.addListener(autocomplete, 'place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (!place.geometry) {
+          sub.error({
+            message: 'Autocomplete returned place with no geometry'
+          });
+        } else {
+          console.log('Search Lat', place.geometry.location.lat());
+          console.log('Search Lng', place.geometry.location.lng());
+          sub.next(place.geometry.location);
+          //sub.complete();
+        }
+      });
+    });
+  }
 
   initializeMap() {
     var myLatLng = {lat: -25.363, lng: 131.044};
@@ -203,6 +210,7 @@ addCluster(map){
         disableDefaultUI: true,
         zoomControl: true,
         scaleControl: true,
+
       });
 
       var marker = new google.maps.Marker({
@@ -309,53 +317,59 @@ addCluster(map){
     this.loading.present();
 
     let locationOptions = { timeout: 10000, enableHighAccuracy: true };
+    if(navigator.geolocation){
+      var options={
+        enableHighAccuracy: true
 
-    this.geolocation.getCurrentPosition(locationOptions).then(
-      (position) => {
-        this.loading.dismiss().then(() => {
-
-          this.showToast('Location found!');
-
-          console.log(position.coords.latitude, position.coords.longitude);
-          let myPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          let options = {
-            center: myPos,
-            zoom: 14
-          };
-          this.map.setOptions(options);
-          this.addMarker(myPos, "Mein Standort!");
-
-          let alert = this.alertCtrl.create({
-            title: 'Location',
-            message: 'Do you want to save the Location?',
-            buttons: [
-              {
-                text: 'Cancel'
-              },
-              {
-                text: 'Save',
-                handler: data => {
-                  let lastLocation = { lat: position.coords.latitude, long: position.coords.longitude };
-                  console.log(lastLocation);
-                  this.storage.set('lastLocation', lastLocation).then(() => {
-                    this.showToast('Location saved');
-                  });
-                }
-              }
-            ]
-          });
-          alert.present();
-
-        });
-      },
-      (error) => {
-        this.loading.dismiss().then(() => {
-          this.showToast('Location not found. Please enable your GPS!');
-
-          console.log(error);
-        });
       }
-    )
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.loading.dismiss().then(() => {
+  
+            this.showToast('Location found!');
+  
+            console.log(position.coords.latitude, position.coords.longitude);
+            let myPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            let options = {
+              center: myPos,
+              zoom: 14
+            };
+            this.map.setOptions(options);
+            this.addMarker(myPos, "Mein Standort!");
+  
+            let alert = this.alertCtrl.create({
+              title: 'Location',
+              message: 'Do you want to save the Location?',
+              buttons: [
+                {
+                  text: 'Cancel'
+                },
+                {
+                  text: 'Save',
+                  handler: data => {
+                    let lastLocation = { lat: position.coords.latitude, long: position.coords.longitude };
+                    console.log(lastLocation);
+                    this.storage.set('lastLocation', lastLocation).then(() => {
+                      this.showToast('Location saved');
+                    });
+                  }
+                }
+              ]
+            });
+            alert.present();
+  
+          });
+        },
+        (error) => {
+          this.loading.dismiss().then(() => {
+            this.showToast('Location not found. Please enable your GPS!');
+  
+            console.log(error);
+          }, options);
+        }
+      )
+    }
+
   }
 
   toggleSearch() {

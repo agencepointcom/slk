@@ -10,80 +10,21 @@ import {AuthService} from "../../services/auth";
  */
 export class ApiProvider {
 
-  //  URL de notre API en ligne
-  private apiUrl: string = 'http://localhost:8000/api3/api/';
+  api_url = 'kids.serveur66.fr'+'wp-json/wp/v2/users/';
 
-  /**
-   * Constructeur
-   *
-   * @param {HttpClient} http
-   * @param {Storage} storage
-   * @param {AuthService} authService
-   */
-  constructor(public http: HttpClient, public storage: Storage, public authService: AuthService) {
+  constructor(public http: HttpClient) {
+    console.log('Hello AuthProvider Provider');
   }
-
-  /**
-   * Requête get prenant en compte une fin d'url et des paramètres
-   *
-   * @param endpoint
-   * @param params
-   * @returns {Observable<Object>}
-   */
-  get(endpoint, params ?: any) {
-
-    //let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.getToken());
-
-    return this.http.get(this.apiUrl + endpoint, {
-      params: params,
-      //headers: headers,
-    });
+ 
+  postLogin(email, password){
+    let data = {
+      email: email,
+      password: password
+    };
+ 
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    return this.http.post(this.api_url, data, {headers: headers});
   }
-
-  /**
-   * Requête POST
-   *
-   * @param endpoint
-   * @param body
-   * @param options
-   * @returns {Observable<ArrayBuffer>}
-   */
-  post(endpoint, body, options ?: any) {
-    return this.http.post(this.apiUrl + endpoint, body, options);
-  }
-
-  /**
-   * Requête PUT
-   *
-   * @param endpoint
-   * @param body
-   * @param options
-   * @returns {Observable<ArrayBuffer>}
-   */
-  put(endpoint, body, options ?: any) {
-    return this.http.put(this.apiUrl + endpoint, body, options);
-  }
-
-  /**
-   * Requête DELETE
-   *
-   * @param endpoint
-   * @param body
-   * @returns {Observable<Object>}
-   */
-  delete(endpoint, body) {
-    return this.http.delete(this.apiUrl + endpoint);
-  }
-
-  /**
-   * Requête PATCH
-   *
-   * @param endpoint
-   * @param body
-   * @returns {Observable<Object>}
-   */
-  patch(endpoint, body) {
-    return this.http.patch(this.apiUrl + endpoint, body);
-  }
-
-}
+ 
+ }
