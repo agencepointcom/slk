@@ -38,4 +38,10 @@ export class LoginPage {
         localStorage.setItem('wpIonicToken', JSON.stringify(data));
       });
     }
+    clickparcourir(){
+      this.navCtrl.setRoot('HomePage');
+ 
+    }
    }
+
+   

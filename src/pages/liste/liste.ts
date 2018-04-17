@@ -44,7 +44,7 @@ export class ListePage {
             // }
       },
         err => {
-            alert(err);
+            
       });
   }
 //   callBDD( $http) {

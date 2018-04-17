@@ -203,8 +203,8 @@ addCluster(map){
     this.zone.run(() => {
       var mapEle = this.mapElement.nativeElement;
       this.map = new google.maps.Map(mapEle, {
-        zoom: 10,
-        center: { lat: 51.165691, lng: 10.451526 },
+        zoom: 8,
+        center: { lat: 43.2077961, lng:2.314061 },
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         disableDoubleClickZoom: false,
         disableDefaultUI: true,
@@ -255,7 +255,7 @@ addCluster(map){
           center: myPos,
           zoom: 9
         });
-        let marker = this.addMarker(myPos, "My last saved Location: " + result.location);
+        let marker = this.addMarker(myPos, "Mon ancienne position sauvegardée: " + result.location);
 
         markers.push(marker);
         // this.bounceMap(markers);
@@ -274,28 +274,28 @@ addCluster(map){
   }
 
   choosePosition() {
-    this.storage.get('lastLocation').then((result) => {
+    this.storage.get('Dernière position').then((result) => {
       if (result) {
         let actionSheet = this.actionSheetCtrl.create({
-          title: 'Last Location: ' + result.location,
           buttons: [
             {
-              text: 'Reload',
+              text: 'Recharger',
               handler: () => {
+                this.initializeMap();
                 this.getCurrentPosition();
               }
             },
             {
-              text: 'Delete',
+              text: 'Supprimer',
               handler: () => {
-                this.storage.set('lastLocation', null);
-                this.showToast('Location deleted!');
+                this.storage.set('Dernière Position ', null);
+                this.showToast('Position supprimée!');
                 this.initializeMap();
               }
             },
             {
-              text: 'Cancel',
-              role: 'cancel',
+              text: 'Annuler',
+              role: 'Annuler',
               handler: () => {
               }
             }
@@ -312,11 +312,11 @@ addCluster(map){
   // go show currrent location
   getCurrentPosition() {
     this.loading = this.loadingCtrl.create({
-      content: 'Searching Location ...'
+      content: 'Recherche de votre position ...'
     });
     this.loading.present();
 
-    let locationOptions = { timeout: 10000, enableHighAccuracy: true };
+    let locationOptions = { timeout: 100, enableHighAccuracy: true };
     if(navigator.geolocation){
       var options={
         enableHighAccuracy: true
@@ -326,7 +326,7 @@ addCluster(map){
         (position) => {
           this.loading.dismiss().then(() => {
   
-            this.showToast('Location found!');
+            this.showToast('Position trouvée!');
   
             console.log(position.coords.latitude, position.coords.longitude);
             let myPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -338,19 +338,19 @@ addCluster(map){
             this.addMarker(myPos, "Mein Standort!");
   
             let alert = this.alertCtrl.create({
-              title: 'Location',
-              message: 'Do you want to save the Location?',
+              title: 'Position',
+              message: 'Voulez vous sauvegarder la position?',
               buttons: [
                 {
-                  text: 'Cancel'
+                  text: 'Annuler'
                 },
                 {
-                  text: 'Save',
+                  text: 'Sauvegarder',
                   handler: data => {
                     let lastLocation = { lat: position.coords.latitude, long: position.coords.longitude };
                     console.log(lastLocation);
-                    this.storage.set('lastLocation', lastLocation).then(() => {
-                      this.showToast('Location saved');
+                    this.storage.set('Dernière position', lastLocation).then(() => {
+                      this.showToast('Position sauvegardée');
                     });
                   }
                 }
@@ -362,7 +362,7 @@ addCluster(map){
         },
         (error) => {
           this.loading.dismiss().then(() => {
-            this.showToast('Location not found. Please enable your GPS!');
+            this.showToast("Position non trouvée. Merci d'activer votre GPS!");
   
             console.log(error);
           }, options);
