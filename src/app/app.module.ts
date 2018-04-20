@@ -15,13 +15,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 import { AuthProvider } from '../providers/auth/auth';
-import { ApiProvider } from '../providers/api/api';
 import { AuthService } from '../services/auth';
 import {TokenExpiration} from "../services/token-expiration";
 import {TokenInterceptor} from "../services/token-interceptor";
 import {LoginPageModule} from "../pages/login/login.module";
 import { CartePageModule } from '../pages/carte/carte.module';
 import { ConfigServiceTsProvider } from '../providers/config-service-ts/config-service-ts';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { AuthenticationService } from '../services/authentication.service';
 
 
 
@@ -56,17 +57,18 @@ import { ConfigServiceTsProvider } from '../providers/config-service-ts/config-s
   providers: [
     StatusBar,
     SplashScreen,
+    NativeStorage,
+    AuthenticationService,
+
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    ApiProvider,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
     },
     AuthProvider,
-    ApiProvider,
     AuthService,
     TokenExpiration,
     ConfigServiceTsProvider,

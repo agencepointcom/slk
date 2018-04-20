@@ -6,19 +6,20 @@
     <p>Bienvenue sur l'application</p>
     <h3>SORTIR LES KIDS !</h3>
   </div>
-    <ion-list inset no-padding>
-
+   
+      <form class="form" [formGroup]="login_form" (ngSubmit)="login(login_form.value)">
       <ion-item id="email">
-        <ion-input type="email"  placeholder="Email ou Identifiant " [(ngModel)]="email"></ion-input>
+        <ion-input type="text" formControlName="user_login" class="form-controll" required></ion-input>
       </ion-item>
 
       <ion-item id="password">
-        <ion-input type="password" placeholder="Mot de passe" [(ngModel)]="password"></ion-input>
+        <ion-input type="password" formControlName="user_pass" class="form-controll" required></ion-input>
       </ion-item>
+      <p class="error-message" *ngIf="error_message">{{error_message}}</p>
 
-    </ion-list>
-    <button id ="button" (click)='onLogin()'>CONNEXION</button>
+    <button ion-button full id="button" [disabled]="!login_form.valid" type="submit">Connexion</button>
 
+  </form>
 
   <div id="fin" >  <p><a href="https://www.sortirleskids.com/">J'ai oublié mon mot de passe </a></p>
     <h6 (click)='clickparcourir()'>Parcourir l'application </h6>
