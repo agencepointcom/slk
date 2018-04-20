@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http, Headers } from '@angular/http';
 import * as Config from '../config';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthenticationService {
@@ -25,8 +26,8 @@ export class AuthenticationService {
 
   doLogin(user_login, user_pass){
     return this.http.post(Config.WORDPRESS_URL + 'wp-json/jwt-auth/v1/token',{
-      user_login: user_login,
-      user_pass: user_pass
+      username: user_login,
+      password: user_pass
     })
   }
 

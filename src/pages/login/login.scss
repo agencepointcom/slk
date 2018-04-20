@@ -17,11 +17,13 @@ page-login {
                 margin-top:50px;
             }
             #button{
-                    background-color:white;
+                   
                 border-radius:4px;
+                margin-top:15px;
+                margin:auto;
                 width:40%;
                 height:30PX;
-                background-color: #6d6d6d;
+                background: linear-gradient(45deg, #6d6d6d 0%, #6d6d6d 50%, #8a8a8a 51%, #8a8a8a 100%);
                 opacity:1;
                 color:white;
                 font-family:'lado' sans-serif;

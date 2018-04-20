@@ -1,0 +1,173 @@
+page-deco {
+    .tabbar.show-tabbar  {
+        opacity:0
+     }
+     .fixed-content{
+         background-image:url("../assets/icon/fondlogin.png");
+         background-size: cover;
+         color:white;}
+ 
+         #login{
+             a{
+                 color:white;
+                 text-decoration: none;
+             }
+             #footer{
+                 font-size:10px;
+                 margin-top:50px;
+                 position: relative;
+                 top:150px;
+             }
+             #button{
+                    
+                 border-radius:4px;
+                 margin-top:15px;
+                 margin:auto;
+                 width:40%;
+                 height:30PX;
+                 background: linear-gradient(45deg, #6d6d6d 0%, #6d6d6d 50%, #8a8a8a 51%, #8a8a8a 100%);
+                 opacity:1;
+                 color:white;
+                 font-family:'lado' sans-serif;
+                 position:relative;
+                 top:100px;
+                 }
+             #email{
+             background-color:white;
+             border-radius:7px;
+             margin-bottom:5%;
+             height:10px;
+                 }
+                 #password{
+                 background-color:white;
+                 border-radius:7px;
+                 margin-bottom:1%;
+                 height:10px;
+ 
+ }
+             display:flex;
+             flex-direction: column;
+             justify-content:center;
+             align-items: center;
+             align-content: center;
+             text-align: center;
+             color:white;
+             position:relative;
+             font-family:'lado' sans-serif;
+             top:30px;
+ 
+            
+         }
+         #navmenu{
+            width:100%;
+            height:120px;
+            position: fixed;
+            top:83%;
+            z-index:100;
+            left:0px;
+            display:flex;
+            align-content:center;
+            align-items:center;
+            justify-content: center;
+        }
+        .navbas{
+            background-color:white;
+            width:60px;
+            height:45px;
+            display:flex;
+            justify-content:space-around;
+            align-content:center;
+            align-items:center;
+          
+            justify-content:center;
+            img{
+                width:45%;
+                height:45%
+            }
+            
+        }
+        #listenav{
+            border-radius: 7px 0px 0px 7px;
+            margin-right:5px;
+            z-index: 110;
+    
+           ion-icon{
+                font-size:3.4em;
+                color:#14b0b9;
+                font-weight: bold;
+            }
+    
+        }
+        #mapinav{
+           
+            border-left:none;
+            border-right:none;
+            z-index: 110;
+    
+            img{
+                width:45%;
+                height:55%
+            }
+    
+        }
+        #searchnav{
+            border-radius:50%;
+            z-index: 110;
+    
+            width: 75px;
+            height:75px;
+            border:10px solid white;
+            background-color: #14b0b9;
+            ion-icon{
+                font-size:3.0em;
+                color:white;
+                font-weight: bold;
+            }
+        }
+        #conav{
+            border-radius: 0px 7px 7px 0px;
+            margin-left:5px;
+            z-index: 110;
+    
+    
+        }
+        #divsearch{
+            border:7px solid #14b0b9;
+            border-radius:50%;
+            z-index:9;
+            margin: -5px;
+            z-index: 110;
+    
+    
+    
+        }
+        #serach{
+            width: 100%;
+            height:100%;
+            display:flex;
+            justify-content: center;
+           align-items: center;
+        }
+        #pagesearch{
+            background-image:url('../assets/img/search.png');
+            background-size: cover;
+            width: 210px;
+            height:250px;
+         
+            z-index:120;
+          
+         
+            border-radius:5px;
+            display:flex;
+            justify-content:center;
+            flex-direction: column;
+            align-content: center;
+            align-items:center;
+            display:none
+    
+            
+        }
+
+        
+ 
+}
