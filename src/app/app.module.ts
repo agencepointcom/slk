@@ -25,7 +25,7 @@ import { DecoPageModule } from '../pages/deco/deco.module';
 import { ConfigServiceTsProvider } from '../providers/config-service-ts/config-service-ts';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { AuthenticationService } from '../services/authentication.service';
-
+import { WordpressService} from '../services/wordpress.service'
 
 
 
@@ -61,6 +61,7 @@ import { AuthenticationService } from '../services/authentication.service';
     SplashScreen,
     NativeStorage,
     AuthenticationService,
+    WordpressService,
 
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

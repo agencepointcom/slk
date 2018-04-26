@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthenticationService } from '../../services/authentication.service';
 
 /**
  * Generated class for the CartePage page.
@@ -14,13 +15,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'carte.html',
 })
 export class CartePage {
+  loggedUser: boolean=false;
 
-  constructor(public nav: NavController, public navParams: NavParams) {
+  constructor(public nav: NavController, public navParams: NavParams, public authenticationService: AuthenticationService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CartePage');
   }
+  ionViewWillEnter() {
+	
+    this.authenticationService.getUser()
+    .then(
+      (data) => {
+      this.loggedUser = true;
+      console.log(this.loggedUser) ;
+      },
+      error => this.loggedUser = false
+   
+ 
+    ); 
+   }
   clickliste(){
     this.nav.setRoot('ListePage');
     
@@ -50,8 +65,10 @@ export class CartePage {
 
   }
   clickexit(){
-    this.nav.setRoot('LoginPage');
+    if(this.loggedUser==true){
+      document.getElementById('divpopup').style.display = "none";
 
+    }
   }
   clickfond(){
     this.boolean=false
