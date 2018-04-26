@@ -77,6 +77,7 @@ ionViewWillEnter() {
    .then(
      (data) => {
      this.loggedUser = true;
+     
      console.log(this.loggedUser) ;
      },
      error => this.loggedUser = false
@@ -84,6 +85,7 @@ ionViewWillEnter() {
 
    ); 
   }
+  
 addCluster(map){
  
   if(google.maps){

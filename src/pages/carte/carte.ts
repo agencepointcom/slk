@@ -36,6 +36,13 @@ export class CartePage {
  
     ); 
    }
+
+   true(){
+    if(this.loggedUser==true){
+      document.getElementById('divpopup').style.display = "none";
+      console.log(this.loggedUser) ;
+    }
+  }
   clickliste(){
     this.nav.setRoot('ListePage');
     
@@ -65,11 +72,11 @@ export class CartePage {
 
   }
   clickexit(){
-    if(this.loggedUser==true){
-      document.getElementById('divpopup').style.display = "none";
+    this.nav.setRoot('LoginPage');
 
-    }
   }
+ 
+  
   clickfond(){
     this.boolean=false
     document.getElementById('pagesearch').style.display = "none";
