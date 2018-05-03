@@ -5,21 +5,26 @@ page-login {
     .fixed-content{
         background-image:url("../assets/icon/fondlogin.png");
         background-size: cover;
+        background-position: center;
         color:white;}
-
+     
         #login{
+            position: relative;
+            top: 9%;
             a{
                 color:white;
                 text-decoration: none;
             }
             #footer{
                 font-size:10px;
-                margin-top:50px;
+                margin-top:30%;
             }
             #button{
                    
                 border-radius:4px;
-                margin-top:15px;
+                margin-top:5%;
+                margin-bottom:10%;
+
                 margin:auto;
                 width:40%;
                 height:30PX;
@@ -37,7 +42,7 @@ page-login {
                 #password{
                 background-color:white;
                 border-radius:7px;
-                margin-bottom:1%;
+                margin-bottom:5%;
                 height:10px;
 
 }
@@ -50,10 +55,23 @@ page-login {
             color:white;
             position:relative;
             font-family:'lado' sans-serif;
-            top:30px;
-
-           
+          
+           #activite{
+               display:none;
+           }
         }
+
+       @media(min-height: 750px){
+            #login{
+                top:13%;
+
+            }
+            #footer{
+                margin-top:50%
+            }
+        }
+
+        
 
 // #email{
 // background-color:white;

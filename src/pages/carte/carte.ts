@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthenticationService } from '../../services/authentication.service';
+import { DecoPage } from '../deco/deco';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the CartePage page.
@@ -30,18 +32,22 @@ export class CartePage {
       (data) => {
       this.loggedUser = true;
       console.log(this.loggedUser) ;
+      document.getElementById('divpopup').style.display = "none";
+      document.getElementById('fond').style.display = "none";
+      document.getElementById('fondnouser').style.display = "none";
+
+
       },
       error => this.loggedUser = false
    
  
     ); 
+ 
+    
    }
 
-   true(){
-    if(this.loggedUser==true){
-      document.getElementById('divpopup').style.display = "none";
-      console.log(this.loggedUser) ;
-    }
+   afficher(){
+
   }
   clickliste(){
     this.nav.setRoot('ListePage');
@@ -72,8 +78,22 @@ export class CartePage {
 
   }
   clickexit(){
-    this.nav.setRoot('LoginPage');
+    this.authenticationService.getUser()
+    .then(
+      (data) => {
+      this.loggedUser = true;
+      console.log(this.loggedUser) ;
+      this.nav.setRoot(DecoPage);
 
+
+      },
+      (error) => {this.loggedUser = false;
+      this.nav.setRoot(LoginPage);
+
+      }
+
+ 
+    );
   }
  
   

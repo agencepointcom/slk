@@ -5,6 +5,10 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {ConfigServiceTsProvider} from '../../providers/config-service-ts/config-service-ts';
+import { DecoPage } from '../deco/deco';
+import { LoginPage } from '../login/login';
+import { AuthenticationService } from '../../services/authentication.service';
+import { WordpressService } from '../../services/wordpress.service';
 /**
  * Generated class for the ListePage page.
  *
@@ -19,33 +23,82 @@ import {ConfigServiceTsProvider} from '../../providers/config-service-ts/config-
   providers :[ConfigServiceTsProvider]
 })
 export class ListePage {
+  hide: any;
   listes: any[];
-  constructor(public nav: NavController, public navParams: NavParams, private http: Http, public ConfigServ: ConfigServiceTsProvider ) {
+  loggedUser: boolean=false;
+  test= 'none';
+  lie= 'none';
+  tda='none'
+activite:Array<any> = new Array<any>();
+lieu: Array<any> = new Array<any>();
+tdage:Array<any> = new Array<any>();
+  constructor(public nav: NavController, 
+    public navParams: NavParams,
+     private http: Http,
+      public ConfigServ: ConfigServiceTsProvider,
+    public authenticationService: AuthenticationService,
+    public wordpressService :    WordpressService
 
+  ) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad ListePage');
+    Observable.forkJoin(
+      this.getActivite()).subscribe(data=> {
+        for( let i = 0; i <= data.length; i++){
+          let item = data[0][i];
 
+          this.activite.push(item.name);
+          console.log(this.activite)
+        }
+      
+      })
+      Observable.forkJoin(
+        this.getLieu()).subscribe(data=> {
+          for( let i = 0; i <= data.length; i++){
+            let item = data[0][i];
+  
+            this.lieu.push(item.name);
+            console.log(this.lieu)
+          }
+        
+        })
+        Observable.forkJoin(
+          this.getAge()).subscribe(data=> {
+            for( let i = 0; i <= data.length; i++){
+              let item = data[0][i];
+    
+              this.tdage.push(item.name);
+              console.log(this.tdage)
+            }
+          
+          })
+
+    
+console.log(this.activite)
     // this.callBDD( this.http)
   }
 
   ionViewDidEnter(){
-    this.ConfigServ.getlistes()
-      //Au moment ou la requête est terminé, subscribe se déclenche !
-      .subscribe( (data) => {
-            var liste = data;
-            //console.log(users[0].name);
-            // for(var i=0; i<users.length; i++){
-            //   if(users[i].name == 'Nyle' && users[i].email == 'j.alsina@hotmail.fr'){
-            //     //console.log("OK")
-            //   }     
-            //   //console.log(users[i]);       
-            // }
-      },
-        err => {
-            
-      });
+
+  }
+
+  getActivite(){
+
+    return this.wordpressService.getActivites(this.activite);
+
+  }
+  getLieu(){
+
+    return this.wordpressService.getLieu(this.lieu);
+
+  }
+
+  getAge(){
+
+    return this.wordpressService.getAge(this.age);
+
   }
 //   callBDD( $http) {
 //     $http.get('../../bdd_wp.php').then(successCallback, errorCallback);
@@ -87,7 +140,22 @@ export class ListePage {
 
   }
   clickexit(){
-    this.nav.setRoot('LoginPage');
+    this.authenticationService.getUser()
+    .then(
+      (data) => {
+      this.loggedUser = true;
+      console.log(this.loggedUser) ;
+      this.nav.setRoot(DecoPage);
+
+
+      },
+      (error) => {this.loggedUser = false;
+      this.nav.setRoot(LoginPage);
+
+      }
+
+ 
+    );
 
   }
   clickfond(){
@@ -107,6 +175,9 @@ export class ListePage {
       document.getElementById('clickage').style.transition = "1s";
       document.getElementById('clickcategorie').style.height = "0px";
       document.getElementById('clicklocalisation').style.height = "0px";
+      this.tda="block"
+      this.lie="none"
+      this.test="none"
     }
     else{
       this.age=false
@@ -114,6 +185,8 @@ export class ListePage {
       document.getElementById('clickage').style.transition = "1s";
       this.categorie=false
       this.localisation=false
+      this.tda="none"
+
 
 
     }
@@ -131,8 +204,9 @@ clickcategorie(){
     document.getElementById('clickcategorie').style.transition = "1s";   
     document.getElementById('clicklocalisation').style.height = "0px";
     document.getElementById('clickage').style.height = "0px";
-
-
+    this.test="block";
+    this.tda="none";
+    this.lie="none"
   }
   else{
     this.categorie=false
@@ -140,7 +214,8 @@ clickcategorie(){
     this.localisation=false
     document.getElementById('clickcategorie').style.height = "0px";
     document.getElementById('clickcategorie').style.transition = "1s";
- ;
+    this.test="none";
+ 
   }
   
 
@@ -149,11 +224,14 @@ localisation =false
 clicklocalisation(){
   if(this.localisation==false){
     this.localisation=true
-    document.getElementById('clicklocalisation').style.height = "35px";
+    document.getElementById('clicklocalisation').style.height = "80px";
     document.getElementById('clickcategorie').style.height = "0px";
     document.getElementById('clickage').style.height = "0px";
     document.getElementById('clicklocalisation').style.transition = "1s";
     document.getElementById('ploc').style.display = "block";
+    this.lie="block";
+    this.test="none";
+    this.tda="none";
 
   }
   else{
@@ -163,6 +241,8 @@ clicklocalisation(){
     document.getElementById('clicklocalisation').style.height = "0px";
     document.getElementById('clicklocalisation').style.transition = "1s";
     document.getElementById('ploc').style.display = "none";
+    this.lie="none";
+
 
   }
 }

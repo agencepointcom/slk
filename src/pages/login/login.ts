@@ -14,7 +14,9 @@ import { DecoPage } from '../deco/deco';
 export class LoginPage {
   login_form: FormGroup;
   error_message: string;
-boolean=false
+boolean=false;
+loggedUser: boolean=false;
+
   constructor(
     public nav: NavController,
     public navCtrl: NavController,
@@ -24,15 +26,25 @@ boolean=false
     public authenticationService: AuthenticationService
   ) {}
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListePage');
-    if(this.boolean==true){
-      this.navCtrl.setRoot(DecoPage);
-    }
-    else{
+    this.authenticationService.getUser()
+    .then(
+      (data) => {
+      this.loggedUser = true;
+      console.log(this.loggedUser) ;
+      this.navCtrl.setRoot(HomePage);
 
-    }
+
+      },
+      error => this.loggedUser = false
+   
+ 
+    ); 
+ 
+    
+   
     // this.callBDD( this.http)
   }
+
 
   ionViewWillLoad() {
     this.login_form = this.formBuilder.group({

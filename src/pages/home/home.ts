@@ -12,6 +12,8 @@ import {
   GoogleMap
 } from "@ionic-native/google-maps";
 import { AuthenticationService } from '../../services/authentication.service';
+import { DecoPage } from '../deco/deco';
+import { LoginPage } from '../login/login';
 
 declare var google: any;
 declare var MarkerClusterer: any;
@@ -429,7 +431,22 @@ addCluster(map){
 
   }
   clickexit(){
-    this.nav.setRoot('LoginPage');
+    this.authenticationService.getUser()
+    .then(
+      (data) => {
+      this.loggedUser = true;
+      console.log(this.loggedUser) ;
+      this.nav.setRoot(DecoPage);
+
+
+      },
+      (error) => {this.loggedUser = false;
+      this.nav.setRoot(LoginPage);
+
+      }
+
+ 
+    );
 
   }
   clickfond(){
@@ -441,7 +458,7 @@ addCluster(map){
   }
   clicklegende(){
 
-    document.getElementById('legendes').style.top = "24%";
+    document.getElementById('legendes').style.top = "25%";
     document.getElementById('legendes').style.transition = "1s";
     }
    clicklegendes(){

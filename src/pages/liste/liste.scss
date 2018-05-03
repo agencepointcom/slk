@@ -256,32 +256,40 @@ ion-sroll{
     display:flex;
     position: relative;
     justify-content: space-between;
-    color:white;
+    color:#14b0b9;
     align-content:center;
     align-items:center;
   margin-left: 2.5%;
   margin-top:23px;
     z-index:200;
 position:fixed;
+flex-direction: column;
+
 }
 #clickcategorie{
     background-color:white;
-        
-    width:44%;
+    color:#14b0b9;
+    width:43.65%;
     height:0px;
     font-family: 'lado', sans-serif;
     font-size:13px;
     margin-bottom:15px;
     display:flex;
     position: relative;
-    justify-content: space-between;
-    color:white;
+ 
     align-content:center;
     align-items:center;
-    margin-left:51.2%;
+ 
+    flex-direction: column;
+    margin-left:51.3%;
     margin-top:23px;
     z-index:1;
 position:fixed;
+.hide{
+    display:none;
+  
+}
+
 }
 #clicklocalisation{
     #ploc{
@@ -298,14 +306,16 @@ position:fixed;
     display:flex;
     position: relative;
     justify-content: space-between;
-    color:white;
+    color:#14b0b9;
     align-content:center;
     align-items:center;
     margin-left: 2.5%;
   margin-top:69px;
-    z-index:1;
+    z-index:600;
 position:fixed;
 overflow-y: scroll;
+flex-direction: column;
+
 overflow-x: hidden
 }
 #loc{

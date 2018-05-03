@@ -7,9 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-      <div id="clickage"></div>
-      <div id="clickcategorie"></div>
-      <div id="clicklocalisation"><p id="ploc"></p></div>
+      <div id="clickage">
+          <ion-col [style.display]="tda" *ngFor="let age  of tdage">
+              <p>{{age}}</p>
+            </ion-col>
+      </div>
+      <div id="clickcategorie"> 
+        <ion-col [style.display]="test" *ngFor="let activitee of activite">
+          <p>{{activitee}}</p>
+        </ion-col>
+
+      </div>
+      <div id="clicklocalisation"> 
+         <ion-col [style.display]="lie" *ngFor="let lieuu of lieu">
+        <p>{{lieuu}}</p>
+      </ion-col></div>
       <div id="butto">
           
           <div class="selec" (click)='clickage()'> 

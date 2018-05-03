@@ -19,6 +19,19 @@ export class WordpressService {
       + category_url)
     .map(res => res.json());
   }
+  getActivites(activite){
+    return this.http.get(Config.WORDPRESS_REST_API_URL + "type-activite/" )
+    .map(res => res.json());
+  }
+  getAge(age){
+    return this.http.get(Config.WORDPRESS_REST_API_URL + "tranche-dage/" )
+    .map(res => res.json());
+  }
+
+  getLieu(lieu){
+    return this.http.get(Config.WORDPRESS_REST_API_URL + "zone-geographique/" )
+    .map(res => res.json());
+  }
 
   getComments(postId:number, page:number = 1){
     return this.http.get(

@@ -12,7 +12,7 @@ page-home {
        font-size: 9.5px;
        background:linear-gradient(#14b0b9,#17969c);
        position:absolute;
-       top:77.3%;
+       bottom:115px;
        left:-2px;
        letter-spacing:0.2em
    }
@@ -77,7 +77,6 @@ page-home {
  
     .toolbar-title{
         color: white;
-        padding:10px;
         font-weight:1;
         font-family: 'Lato', sans-serif;
 
@@ -85,7 +84,7 @@ page-home {
     .toolbar-title-ios {
         position:absolute;
             left:-63px;
-        top:20px    }
+    }
     .toolbar-title-md{
         font-size: 17px
     }
@@ -100,7 +99,7 @@ page-home {
         background-color:  #14b0b9;
         position: fixed;
         z-index: 100;
-        top:83%;
+        bottom:0px;
         left:0px;
         display:flex;
         align-content:center;
