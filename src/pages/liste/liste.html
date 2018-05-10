@@ -7,50 +7,19 @@
 <ion-header>
 
   <ion-navbar>
-      <div id="clickage">
-          <ion-col [style.display]="tda" *ngFor="let age  of tdage">
-              <p>{{age}}</p>
-            </ion-col>
-      </div>
-      <div id="clickcategorie"> 
-        <ion-col [style.display]="test" *ngFor="let activitee of activite">
-          <p>{{activitee}}</p>
-        </ion-col>
-
-      </div>
-      <div id="clicklocalisation"> 
-         <ion-col [style.display]="lie" *ngFor="let lieuu of lieu">
-        <p>{{lieuu}}</p>
-      </ion-col></div>
+   
       <div id="butto">
           
-          <div class="selec" (click)='clickage()'> 
-             <div class="se"> 
-               <p>Tranche d'âge</p>
-             </div> 
-             <div class="se">
-                 <ion-icon name="ios-arrow-down"></ion-icon>
-             </div>
+          <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
+              <ion-option *ngFor="let ages of tdage" value="{{ages.id}}" >{{ages.name}}</ion-option>
+          </ion-select>
+          <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
+              <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
+          </ion-select>
+          <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
+              <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
+          </ion-select>  
           
-           </div>
-           <div class="selec" (click)='clickcategorie()'> 
-               <div class="se"> 
-                 <p>Categorie</p>
-               </div> 
-               <div class="se">
-                   <ion-icon name="ios-arrow-down"></ion-icon>
-               </div>
-            
-             </div>
-             <div class="selec" id="loc" (click)='clicklocalisation()'> 
-                 <div class="se"> 
-                   <p>Localisation</p>
-                 </div> 
-                 <div class="se">
-                     <ion-icon name="ios-arrow-down"></ion-icon>
-                 </div>
-              
-               </div>
                <div id="liste"> AFFICHER LA LISTE</div>
 
               </div>
@@ -62,43 +31,53 @@
 
 <ion-content padding>
   <div id="affichage">
+   <div id="partenairee">
+     
+  <ion-row *ngFor="let partenaires of partenaire_display" >
+      <div class="info">
+          <div>
+       <img class="imagepart" src="{{partenaires.image}}">
+    </div>
+       <div class=infoun>
+       <p class="hinfo">{{partenaires.title.rendered}}</p>
+
+       <p class="pinfo"> {{partenaires.acf.adresse}}</p>
+       <p class="pinfo"> {{partenaires.acf.cp_ville}}</p>
+       <p class="pinfo"> {{partenaires.acf.telephone}}</p>
+       <p class="pinfo"> {{partenaires.acf.site_web}}</p>
+    </div>
+      </div>
+          <!-- <div>
+        
+          <p> {{partenaires.acf.offre}}</p> 
+        </div>  -->
+            </ion-row>
+  </div>
+    
       <ion-scroll  scrollX="true">
         </ion-scroll>
-  </div>    
+  </div>   
+  
+
+
   <section id="secserach">
+   
+
+
+
+
+
   <div id="pagesearch">
-        <div id="button">
-            <div id="clickag"></div>
-            <div id="clickcategori"></div>
-            <div id="clicklocalisatio"><p id="ploc"></p></div>
-          <div  class="select" (click)='clickagesearch()'> 
-             <div class="sel"> 
-               <p>Tranche d'âge</p>
-             </div> 
-             <div class="sel">
-                 <ion-icon name="ios-arrow-down"></ion-icon>
-             </div>
-          
-           </div>
-           <div  class="select"  (click)='clickcatsearch()'> 
-               <div class="sel"> 
-                 <p>Categorie</p>
-               </div> 
-               <div class="sel">
-                   <ion-icon name="ios-arrow-down"></ion-icon>
-               </div>
-            
-             </div>
-             <div  class="select"  (click)='clicklocsearch()' > 
-                 <div class="sel"> 
-                   <p>Localisation</p>
-                 </div> 
-                 <div class="sel">
-                     <ion-icon name="ios-arrow-down"></ion-icon>
-                 </div>
-              
-               </div>
-        </div>
+      <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="selected">
+          <ion-option *ngFor="let ages of tdage" value="{{ages}}">{{ages.name}}</ion-option>
+      </ion-select>
+      <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="selected">
+          <ion-option *ngFor="let activitee of activite" value="{{activitee}}">{{activitee.name}}</ion-option>
+      </ion-select>
+      <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="selected">
+          <ion-option *ngFor="let lieuu of lieu" value="{{lieuu}}">{{lieuu.name}}</ion-option>
+      </ion-select>  
+      
         <div id="buttonsuite">
            <div class="butsuite"> Afficher la liste</div>
            <div class="butsuites"> Afficher la carte</div>

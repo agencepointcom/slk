@@ -14,6 +14,7 @@ import {
 import { AuthenticationService } from '../../services/authentication.service';
 import { DecoPage } from '../deco/deco';
 import { LoginPage } from '../login/login';
+import { WordpressService } from '../../services/wordpress.service';
 
 declare var google: any;
 declare var MarkerClusterer: any;
@@ -44,6 +45,9 @@ export class HomePage {
   mapLoaded: any;
   morePagesAvailable: boolean = true;
   loggedUser: boolean=false;
+  activite:Array<any> = new Array<any>();
+lieu: Array<any> = new Array<any>();
+tdage:Array<any> = new Array<any>();
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -57,7 +61,8 @@ export class HomePage {
     public actionSheetCtrl: ActionSheetController,
     public geolocation: Geolocation,
     private androidPermissions: AndroidPermissions,
-    public authenticationService: AuthenticationService
+    public authenticationService: AuthenticationService,
+    public wordpressService: WordpressService
   ) {
     this.platform.ready().then(() => this.loadMaps());
     console.log('Hello GoogleMapsCluster Provider');
@@ -74,20 +79,75 @@ export class HomePage {
 }
 
 ionViewWillEnter() {
-	
-   this.authenticationService.getUser()
-   .then(
-     (data) => {
-     this.loggedUser = true;
-     
-     console.log(this.loggedUser) ;
-     },
-     error => this.loggedUser = false
+ 	
+  this.authenticationService.getUser()
+  .then(
+    (data) => {
+    this.loggedUser = true;
+    console.log(this.loggedUser) ;
+
+    },
+   (error) => {
+     this.loggedUser = false;
+    console.log(this.loggedUser)
+ 
+   }
+  ); 
+    console.log('ionViewDidLoad ListePage');
   
 
-   ); 
-  }
+      Observable.forkJoin(
+        this.getActivite()).subscribe(data=> {
+          for( let i = 0; i <= data.length; i++){
+            let item = data[0][i];
   
+            this.activite.push(item.name);
+            console.log(this.activite)
+          }
+        
+        })
+      Observable.forkJoin(
+        this.getLieu()).subscribe(data=> {
+          for( let i = 0; i <= data.length; i++){
+            let item = data[0][i];
+  
+            this.lieu.push(item.name);
+            console.log(this.lieu)
+          }
+        
+        })
+        Observable.forkJoin(
+          this.getAge()).subscribe(data=> {
+            for( let i = 0; i <= data.length; i++){
+              let item = data[0][i];
+    
+              this.tdage.push(item.name);
+              console.log(this.tdage)
+            }
+          
+          })
+        }
+  
+  
+  getActivite(){
+
+    return this.wordpressService.getActivites(this.activite);
+
+  }
+
+  getLieu(){
+
+    return this.wordpressService.getLieu(this.lieu);
+
+  }
+
+ 
+
+  getAge(){
+
+    return this.wordpressService.getAge(this.tdage);
+
+  }
 addCluster(map){
  
   if(google.maps){

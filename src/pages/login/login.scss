@@ -7,7 +7,12 @@ page-login {
         background-size: cover;
         background-position: center;
         color:white;}
-     
+     .infoun{
+         display:flex;
+         justify-content: center;
+         align-items: center;
+         align-content: center
+     }
         #login{
             position: relative;
             top: 9%;
@@ -56,10 +61,10 @@ page-login {
             position:relative;
             font-family:'lado' sans-serif;
           
-           #activite{
-               display:none;
-           }
+       
         }
+
+  
 
        @media(min-height: 750px){
             #login{

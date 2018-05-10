@@ -55,38 +55,16 @@ La carte de nos partenaires    </ion-title>
   </div>
   <section id="secserach">
   <div id="pagesearch">
-      <div id="button">
-          <div id="clickag"></div>
-          <div id="clickcategori"></div>
-          <div id="clicklocalisatio"><p id="ploc"></p></div>
-        <div  class="select" (click)='clickagesearch()'> 
-           <div class="sel"> 
-             <p>Tranche d'âge</p>
-           </div> 
-           <div class="sel">
-               <ion-icon name="ios-arrow-down"></ion-icon>
-           </div>
-        
-         </div>
-         <div  class="select"  (click)='clickcatsearch()'> 
-             <div class="sel"> 
-               <p>Categorie</p>
-             </div> 
-             <div class="sel">
-                 <ion-icon name="ios-arrow-down"></ion-icon>
-             </div>
-          
-           </div>
-           <div  class="select"  (click)='clicklocsearch()' > 
-               <div class="sel"> 
-                 <p>Localisation</p>
-               </div> 
-               <div class="sel">
-                   <ion-icon name="ios-arrow-down"></ion-icon>
-               </div>
-            
-             </div>
-      </div>
+      <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="selected">
+          <ion-option *ngFor="let ages of tdage" value="{{ages}}">{{ages}}</ion-option>
+      </ion-select>
+      <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="selected">
+          <ion-option *ngFor="let activitee of activite" value="{{activitee}}">{{activitee}}</ion-option>
+      </ion-select>
+      <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="selected">
+          <ion-option *ngFor="let lieuu of lieu" value="{{lieuu}}">{{lieuu}}</ion-option>
+      </ion-select>  
+      
      <div id="buttonsuite">
         <div class="butsuite"> Afficher la liste</div>
         <div class="butsuites"> Afficher la carte</div>

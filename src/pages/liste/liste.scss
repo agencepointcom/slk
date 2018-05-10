@@ -4,7 +4,7 @@ page-liste {
         height:120px;
         background-color:  #14b0b9;
         position: fixed;
-        z-index: 100;
+        z-index: 999999;
         top:83%;
         left:0px;
         display:flex;
@@ -106,7 +106,7 @@ page-liste {
     }
    
     .select{
-        background-color:#14b0b9;
+        
         
         width:180px;
         height:32px;
@@ -117,7 +117,6 @@ page-liste {
         display:flex;
         position: relative;
         justify-content: space-between;
-        color:white;
         align-content:center;
         align-items:center;
         padding:7px;
@@ -232,91 +231,158 @@ page-liste {
 .toolbar{
 height:120px;
 }
+img{
+    width:205px;
+    height:110px;
+}
 
+.divpart{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    flex-direction: column
+}
 #affichage{
     background-color:white;
     width:100%;
-    height: 100%;
+    height: 80%;
     position:absolute;
     top:0px;
     left:0px;
+    overflow-y: scroll;
+    flex-direction: column;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 ion-sroll{
     width:5px;
     height:100%
 }
+#divpart{
+ position: relative;
+ top:15%
+}
+.select{
+    background-color: white;
+    color:#14b0b9;
+}
+.select-placeholder .select-text{
+    color:#14b0b9; 
+}
+.select-md .select-placeholder{
+    color:#14b0b9; 
+
+}
+.select-ios .select-placeholder{
+    color:#14b0b9 !important; 
+
+}
+#partenairee{
+    position: absolute;
+    top:0%;
+}
+.info{
+    display:flex;
+    border-bottom: 3px solid #14b0b9;
+    width:100%;
+    height:110px;;
+    justify-content: space-between
+}
+.infoun{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    width:100%
+}
+
+.info1{
+    height:200px;
+}
+.pinfo{
+font-size: 10px;
+font-family: 'lado', sans-serif;
+margin:0px;
+padding: 0px;
+
+}
+.hinfo{
+    font-size: 13px;
+    font-family: 'lado', sans-serif;
+    margin:0px;
+    padding:0px;
+    color:#14b0b9;
+    font-weight: bold;
+    margin-bottom:10px;
+    
+    }
 #clickage{
-    background-color:white;
+    background-color:#14b0b9;
         
     width:44%;
-    height:0px;
+    height:80px;
     font-family: 'lado', sans-serif;
     font-size:13px;
-    margin-bottom:15px;
-    display:flex;
+    display:none;
     position: relative;
     justify-content: space-between;
-    color:#14b0b9;
+    color:white;
     align-content:center;
     align-items:center;
-  margin-left: 2.5%;
-  margin-top:23px;
+    top:154px;
     z-index:200;
 position:fixed;
 flex-direction: column;
 
 }
+#imagepart{
+    width: 80%;
+    height:100px;
+}
 #clickcategorie{
-    background-color:white;
-    color:#14b0b9;
+    background-color:#14b0b9;
+    color:white;
     width:43.65%;
-    height:0px;
+    height:80px;
     font-family: 'lado', sans-serif;
     font-size:13px;
-    margin-bottom:15px;
-    display:flex;
+    top:154px;
+    display:none;
     position: relative;
  
     align-content:center;
     align-items:center;
  
     flex-direction: column;
-    margin-left:51.3%;
-    margin-top:23px;
+ 
     z-index:1;
 position:fixed;
-.hide{
-    display:none;
-  
-}
+
 
 }
 #clicklocalisation{
-    #ploc{
-        display:none;
-        color:#14b0b9
-    }
-    background-color:white;
+
+    background-color:#14b0b9;
         
     width:44%;
-    height:0px;
+    height:80px;
     font-family: 'lado', sans-serif;
     font-size:13px;
-    margin-bottom:15px;
-    display:flex;
+    display:none;
     position: relative;
-    justify-content: space-between;
-    color:#14b0b9;
+    justify-content:center;
+    color:white;
     align-content:center;
     align-items:center;
-    margin-left: 2.5%;
-  margin-top:69px;
+    top:154px;
     z-index:600;
 position:fixed;
-overflow-y: scroll;
 flex-direction: column;
-
-overflow-x: hidden
+overflow-y: scroll;
 }
 #loc{
     z-index:20 !important

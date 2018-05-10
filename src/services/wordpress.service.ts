@@ -32,7 +32,15 @@ export class WordpressService {
     return this.http.get(Config.WORDPRESS_REST_API_URL + "zone-geographique/" )
     .map(res => res.json());
   }
+  getPartenaire(partenaire){
+    return this.http.get(Config.WORDPRESS_REST_API_URL + "activite/" )
+    .map(res => res.json());
+  }
 
+  getImage(image_id){
+    return this.http.get(Config.WORDPRESS_REST_API_URL + "media/" + image_id )
+    .map(res => res.json());
+  }
   getComments(postId:number, page:number = 1){
     return this.http.get(
       Config.WORDPRESS_REST_API_URL
@@ -41,7 +49,7 @@ export class WordpressService {
     .map(res => res.json());
   }
 
-  getAuthor(){
+  getAuthor(user){
     return this.http.get(Config.WORDPRESS_REST_API_URL + "users/" )
     .map(res => res.json());
   }

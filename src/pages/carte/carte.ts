@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthenticationService } from '../../services/authentication.service';
 import { DecoPage } from '../deco/deco';
 import { LoginPage } from '../login/login';
+import { WordpressService } from '../../services/wordpress.service';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the CartePage page.
@@ -17,9 +19,15 @@ import { LoginPage } from '../login/login';
   templateUrl: 'carte.html',
 })
 export class CartePage {
+  user: string;
   loggedUser: boolean=false;
-
-  constructor(public nav: NavController, public navParams: NavParams, public authenticationService: AuthenticationService) {
+  activite:Array<any> = new Array<any>();
+lieu: Array<any> = new Array<any>();
+tdage:Array<any> = new Array<any>();
+  constructor(public nav: NavController, public navParams: NavParams,
+     public authenticationService: AuthenticationService,
+     public wordpressService: WordpressService
+    ) {
   }
 
   ionViewDidLoad() {
@@ -38,13 +46,82 @@ export class CartePage {
 
 
       },
-      error => this.loggedUser = false
+     (error) => {
+       this.loggedUser = false;
+      console.log(this.loggedUser)
    
- 
+     }
     ); 
+  
  
+      console.log('ionViewDidLoad ListePage');
     
-   }
+  
+        Observable.forkJoin(
+          this.getActivite()).subscribe(data=> {
+            for( let i = 0; i <= data.length; i++){
+              let item = data[0][i];
+    
+              this.activite.push(item.name);
+              console.log(this.activite)
+            }
+          
+          })
+          Observable.forkJoin(
+            this.getUser()).subscribe(data=> {
+              for( let i = 0; i <= data.length; i++){
+                let item = data[0][i];
+      
+                this.user= item.name;
+                console.log(this.user)
+              }
+            
+            })
+        Observable.forkJoin(
+          this.getLieu()).subscribe(data=> {
+            for( let i = 0; i <= data.length; i++){
+              let item = data[0][i];
+    
+              this.lieu.push(item.name);
+              console.log(this.lieu)
+            }
+          
+          })
+          Observable.forkJoin(
+            this.getAge()).subscribe(data=> {
+              for( let i = 0; i <= data.length; i++){
+                let item = data[0][i];
+      
+                this.tdage.push(item.name);
+                console.log(this.tdage)
+              }
+            
+            })
+          }
+    
+          getActivite(){
+
+            return this.wordpressService.getActivites(this.activite);
+        
+          }
+        
+          getLieu(){
+        
+            return this.wordpressService.getLieu(this.lieu);
+        
+          }
+          getUser(){
+            return this.wordpressService.getAuthor(this.user);
+        
+          }
+        
+        
+          getAge(){
+        
+            return this.wordpressService.getAge(this.tdage);
+        
+          }
+   
 
    afficher(){
 

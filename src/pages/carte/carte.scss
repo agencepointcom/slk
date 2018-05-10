@@ -12,6 +12,36 @@ page-carte {
     font-size: 22px;
 
    }
+   #user{
+       
+   }
+   .select-ios .select-placeholder{
+    color:#14b0b9 !important; 
+
+}
+   .select{
+    background-color: white;
+    color:#14b0b9;
+    width:180px;
+    height:32px;
+    font-family: 'lado', sans-serif;
+    font-size:13px;
+    border-radius:7px;
+    margin-bottom:15px;
+    display:flex;
+    position: relative;
+    justify-content: space-between;
+    align-content:center;
+    align-items:center;
+    padding:7px;
+}
+.select-placeholder .select-text{
+    color:#14b0b9; 
+}
+.select-md .select-placeholder{
+    color:#14b0b9; 
+
+}
     .fixed-content{
     background-image:url("../assets/icon/fondcarte.png");
     background-size: cover;
@@ -130,24 +160,7 @@ page-carte {
     #buttonsuite{
         position:relative
     }
-    .select{
-        background-color:#14b0b9;
-        
-        width:180px;
-        height:32px;
-        font-family: 'lado', sans-serif;
-        font-size:13px;
-        border-radius:7px;
-        margin-bottom:15px;
-        display:flex;
-        position: relative;
-        justify-content: space-between;
-        color:white;
-        align-content:center;
-        align-items:center;
-        padding:7px;
-       
-    }
+ 
     #button{
         position: relative;
         display:flex;
@@ -271,6 +284,15 @@ page-carte {
         position:absolute;
        top:0px;
        left:0px;
+       background-image: url('assets/img/carte.png');
+       background-position: center;
+       background-size: cover;
+       #user{
+           z-index: 100;
+           position:absolute;
+           margin-top: 15%;
+          left:15%
+       }
    
         #carte{
             
