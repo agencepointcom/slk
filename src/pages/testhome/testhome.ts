@@ -21,16 +21,11 @@ declare var MarkerClusterer: any;
 @IonicPage()
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: 'page-testhome',
+  templateUrl: 'testhome.html',
 })
-export class HomePage {
-  partenaire: Array<any> = new Array<any>();string: any;
-  latLng: Array<any> = new Array<any>();
-  value: any;
-  //je definie loc comme un tableau
-  loc: Array<any> = new Array<any>();
-;
+export class TesthomePage {
+  partenaire: Array<any> = new Array<any>();;
   partenaire_marker: Array<any> = new Array<any>();
   locations: any;
   @ViewChild('map') mapElement: ElementRef;
@@ -55,9 +50,31 @@ export class HomePage {
   activite:Array<any> = new Array<any>();
 lieu: Array<any> = new Array<any>();
 tdage:Array<any> = new Array<any>();
-
-
-
+ locatio = [
+  {lat: -31.563910, lng: 147.154312},
+  {lat: -33.718234, lng: 150.363181},
+  {lat: -33.727111, lng: 150.371124},
+  {lat: -33.848588, lng: 151.209834},
+  {lat: -33.851702, lng: 151.216968},
+  {lat: -34.671264, lng: 150.863657},
+  {lat: -35.304724, lng: 148.662905},
+  {lat: -36.817685, lng: 175.699196},
+  {lat: -36.828611, lng: 175.790222},
+  {lat: -37.750000, lng: 145.116667},
+  {lat: -37.759859, lng: 145.128708},
+  {lat: -37.765015, lng: 145.133858},
+  {lat: -37.770104, lng: 145.143299},
+  {lat: -37.773700, lng: 145.145187},
+  {lat: -37.774785, lng: 145.137978},
+  {lat: -37.819616, lng: 144.968119},
+  {lat: -38.330766, lng: 144.695692},
+  {lat: -39.927193, lng: 175.053218},
+  {lat: -41.330162, lng: 174.865694},
+  {lat: -42.734358, lng: 147.439506},
+  {lat: -42.734358, lng: 147.501315},
+  {lat: -42.735258, lng: 147.438000},
+  {lat: -43.999792, lng: 170.463352}
+]
 
 
   constructor(
@@ -84,8 +101,10 @@ tdage:Array<any> = new Array<any>();
     );
     
     this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION, this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
+    this.locations = [
+       
+    ];
 }
-
 
 ionViewWillEnter() {
   this.authenticationService.getUser()
@@ -110,6 +129,7 @@ ionViewWillEnter() {
             let item = data[0][i];
   
             this.activite.push(item.name);
+            console.log(this.activite)
           }
         
         })
@@ -119,6 +139,7 @@ ionViewWillEnter() {
             let item = data[0][i];
   
             this.lieu.push(item.name);
+            console.log(this.lieu)
           }
         
         })
@@ -128,38 +149,26 @@ ionViewWillEnter() {
               let item = data[0][i];
     
               this.tdage.push(item.name);
+              console.log(this.tdage)
             }
           
           })
           Observable.forkJoin(
             this.getPartenaire()).subscribe(data=> {
               let item = data[0];
-              console.log(item)
-              for( let i = 0; i < item.length; i++){
-            
-                let items= item[i];
-               
-               var itemgeo = item[i].martygeocoderlatlng.martygeocoderlatlng
-               //je converti mon tableau en string pour pouvoir faire le replace
-               var itemstring = itemgeo.toString();
-               var itemreplace= itemstring.replace(")", "}")
-               var itemreplace2= itemreplace.replace("(", "{")
-              //je push dans mon tableau partenaire_marker
-
-
           
-
-                this.partenaire_marker.push(itemreplace2);
-                this.latLng = this.partenaire_marker
-                console.log(this.latLng)
-               
-                
+              for( let i = 0; i < item.length; i++){
+                let items= item[i];
+        
+                //service qui va chercher l'image avec items.featured_media
               
-                         
-            
+                  this.partenaire_marker.push(items.martygeocoderlatlng.martygeocoderlatlng);
+                  console.log(this.partenaire_marker);
+        
                 }
                 
-                this.addMarkerMap()
+                
+                
         })
       }
   
@@ -189,22 +198,8 @@ ionViewWillEnter() {
   }
 
 
-      //ajoue marker
-  addMarkerMap(){
-    this.loc = [this.latLng]
-
-      console.log(this.loc);
-      // loc est indefini 
-      var Latlng = this.loc;
-      let marker= new google.maps.Marker({
-        position:Latlng,
-        map: this.map
-      })
+        
       
-      console.log(this.latLng)
-    
-
-  }
     
     
 addCluster(map){
@@ -317,44 +312,29 @@ addCluster(map){
   }
 
   initializeMap() {
-    console.log(this.loggedUser)
-
-    var myLatLng = {lat: -25.363, lng: 131.044};
-
-    this.zone.run(() => {
-      var mapEle = this.mapElement.nativeElement;
-      this.map = new google.maps.Map(mapEle, {
-        zoom: 5,
-        center: { lat: 43.2077961, lng:2.314061 },
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        disableDoubleClickZoom: false,
-        disableDefaultUI: true,
-        zoomControl: true,
-        scaleControl: true,
-
-      });
-
-
-    
-
-      google.maps.event.addListener(this.map, 'bounds_changed', () => {
-        this.zone.run(() => {
-          this.resizeMap();
-        });
-      });
-
-   
-
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 3,
+      center: {lat: -28.024, lng: 140.887}
     });
-        // Create an array of alphabetical characters
+
+    // Create an array of alphabetical characters used to label the markers.
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     // Add some markers to the map.
     // Note: The code uses the JavaScript Array.prototype.map() method to
     // create an array of markers based on a given "locations" array.
     // The map() method here has nothing to do with the Google Maps API.
+    var markers = this.locatio.map(function(location, i) {
+      return new google.maps.Marker({
+        position: location,
+        label: labels[i % labels.length]
+      });
+    });
 
-    
-    
+    // Add a marker clusterer to manage the markers.
+    var markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+  
   }
 
   //Center zoom

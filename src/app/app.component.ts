@@ -6,13 +6,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 
 import { LoginPage } from '../pages/login/login';
+import { TesthomePage } from '../pages/testhome/testhome';
+import { HomePage } from '../pages/home/home';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = LoginPage;
+  rootPage = HomePage;
 
   constructor(platform: Platform, public SplashScreen: SplashScreen, public StatusBar: StatusBar) {
     platform.ready().then(() => {

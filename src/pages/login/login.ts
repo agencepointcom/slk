@@ -62,7 +62,7 @@ loggedUser: boolean=false;
     console.log(value.user_pass)
     
    
-
+//autentification 
     this.authenticationService.doLogin(value.user_login, value.user_pass)
     .subscribe(res => {
 
@@ -79,7 +79,7 @@ loggedUser: boolean=false;
      },
      err => {
        loading.dismiss();
-       this.error_message = "Invalid credentials. Try with username 'aa' password 'aa'.";
+       this.error_message = "Mot de passe ou nom invalide.";
        console.log(err);
      })
   }

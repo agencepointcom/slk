@@ -39,7 +39,7 @@
        <img class="imagepart" src="{{partenaires.image}}">
     </div>
        <div class=infoun>
-       <p class="hinfo">{{partenaires.title.rendered}}</p>
+       <span [innerHtml]="partenaires.title.rendered" class="hinfo">{{partenaires.title.rendered}}</span>
 
        <p class="pinfo"> {{partenaires.acf.adresse}}</p>
        <p class="pinfo"> {{partenaires.acf.cp_ville}}</p>
@@ -47,6 +47,19 @@
        <p class="pinfo"> {{partenaires.acf.site_web}}</p>
     </div>
       </div>
+      <!-- <span [innerHtml]="partenaires.acf.offre" class="description">
+          
+         {{partenaires.acf.offre}}
+      </span>      
+      <span [innerHtml]="partenaires.acf.horaires" class="description">
+
+      {{partenaires.acf.horaires}}
+      </span>
+      <span [innerHtml]="partenaires.acf.tarifs" class="description">
+
+       {{partenaires.acf.tarifs}}
+        </span> -->
+
           <!-- <div>
         
           <p> {{partenaires.acf.offre}}</p> 

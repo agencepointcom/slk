@@ -37,11 +37,14 @@ export class ListePage {
   ageselected='';
   catselected='';
   lieuselected='';
-
+  partenaire_marker:Array<any> = new Array<any>();
 
 activite:Array<any> = new Array<any>();
 lieu: Array<any> = new Array<any>();
 tdage:Array<any> = new Array<any>();
+
+
+
   constructor(public nav: NavController, 
     public navParams: NavParams,
      private http: Http,
@@ -79,6 +82,32 @@ tdage:Array<any> = new Array<any>();
               
             
             })
+            Observable.forkJoin(
+              this.getPartenaire()).subscribe(data=> {
+                let item = data[0];
+              
+                for( let i = 0; i < item.length; i++){
+                  let items= item[i];
+  
+                  //service qui va chercher l'image avec items.featured_media
+                  Observable.forkJoin(this.getImage( items.featured_media )).subscribe(data => {
+  
+                    items.image = data[0].source_url;
+                    this.partenaire.push(items);
+                    this.partenaire_marker.push(items.martygeocoderlatlng);
+                    console.log(this.partenaire);
+  
+                  });
+                  
+                  
+                  }
+  
+  
+                  
+                
+              
+              })
+  
 
       Observable.forkJoin(
         this.getActivite()).subscribe(data=> {
