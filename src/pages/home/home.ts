@@ -137,32 +137,27 @@ ionViewWillEnter() {
               console.log(item)
               for( let i = 0; i < item.length; i++){
             
-                let items= item[i];
                
-               var itemgeo = item[i].martygeocoderlatlng.martygeocoderlatlng
-               //je converti mon tableau en string pour pouvoir faire le replace
-               var itemstring = itemgeo.toString();
-               var itemreplace= itemstring.replace(")", "}")
-               var itemreplace2= itemreplace.replace("(", "{")
-              //je push dans mon tableau partenaire_marker
-
-
-          
-
-                this.partenaire_marker.push(itemreplace2);
-                this.latLng = this.partenaire_marker
-                console.log(this.latLng)
-               
-                
-              
-                         
             
-                }
+                  let items= item[i];
                 
-                this.addMarkerMap()
-        })
-      }
-  
+                var itemgeo = item[i].martygeocoderlatlng.martygeocoderlatlng
+                //je converti mon tableau en string pour pouvoir faire le replace
+                var itemstring = itemgeo.toString();
+
+                itemstring = itemstring.replace(")", ""); //"{42.827682, 2.225718899999947"
+                itemstring = itemstring.replace("(", ""); //"42.827682, 2.225718899999947"
+                let splited = itemstring.split(","); // [ 42.827682, 2.225718899999947 ]
+                let objet = {
+                  lat: parseFloat( splited[0] ),
+                  lng: parseFloat( splited[1] )
+                };
+                this.partenaire_marker.push(objet);
+              }          
+               
+              this.addMarkerMap()
+      })
+    }
   
   getActivite(){
 
@@ -191,19 +186,18 @@ ionViewWillEnter() {
 
       //ajoue marker
   addMarkerMap(){
-    this.loc = [this.latLng]
-
-      console.log(this.loc);
-      // loc est indefini 
-      var Latlng = this.loc;
+    
+    for( let location of this.partenaire_marker){
+      console.log(location)
       let marker= new google.maps.Marker({
-        position:Latlng,
+        zoom:10,
+        position:location,
         map: this.map
       })
       
-      console.log(this.latLng)
     
-
+    
+    }
   }
     
     
@@ -319,13 +313,13 @@ addCluster(map){
   initializeMap() {
     console.log(this.loggedUser)
 
-    var myLatLng = {lat: -25.363, lng: 131.044};
+    var myLatLng = {lat: 42.6990296, lng: 2.8342897};
 
     this.zone.run(() => {
       var mapEle = this.mapElement.nativeElement;
       this.map = new google.maps.Map(mapEle, {
-        zoom: 5,
-        center: { lat: 43.2077961, lng:2.314061 },
+        zoom: 8,
+        center: myLatLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         disableDoubleClickZoom: false,
         disableDefaultUI: true,
@@ -344,7 +338,7 @@ addCluster(map){
       });
 
    
-
+      this.addMarkerMap()
     });
         // Create an array of alphabetical characters
 
@@ -402,6 +396,10 @@ addCluster(map){
   }
 
   choosePosition() {
+    let image = {
+      url : 'assets/icon/moi.png',
+      size: new google.maps.Size(25, 40)
+    }
     console.log(this.loggedUser)  
     this.storage.get('Dernière position').then((result) => {
       if (result) {
@@ -440,6 +438,10 @@ addCluster(map){
 
   // go show currrent location
   getCurrentPosition()    {
+    let image = {
+      url : './assets/icon/moi.png',
+      size: new google.maps.Size(25, 40)
+    }
     // attente recherche de votre position
     this.loading = this.loadingCtrl.create({
       content: 'Recherche de votre position ...'
@@ -466,8 +468,11 @@ addCluster(map){
             let myPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             let options = {
               center: myPos,
-              zoom: 14
+              zoom: 11,
+              icon:image ,
+              
             };
+            console.log(image)
             this.map.setOptions(options);
             this.addMarker(myPos, "Mein Standort!");
   
@@ -515,10 +520,15 @@ addCluster(map){
   }
 
   addMarker(position, content) {
+    let image = {
+      url : './assets/icon/moi.png',
+   
+    }
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
-      position: position
+      position: position,
+    icon:image
     });
 
     this.addInfoWindow(marker, content);
