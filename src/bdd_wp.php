@@ -1,23 +1,29 @@
 <?php
 
 
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-
-    try {
-        // connection to the database.
-        $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-        $bdd = new PDO('mysql:host=ns3079666.ip-147-135-131.eu/;dbname=sortirleskids_', 'flokey66', 'Nefertiti66', $pdo_options);
-
-        // Execute SQL request on the database.
-        $sql = 'SELECT * FROM terms;';
-        $response = $bdd->query($sql);
-        $output = $response->fetchAll(PDO::FETCH_ASSOC);
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
+//  inscription par design pattern
+class InscriptionRepository{
+    //appel de la connexion 
+    public $connexion;
+    public function __construct($connexion)
+    {
+        $this->connexion = $connexion;
     }
-
-    // Print JSON encode of the array.
-    echo(json_encode($output));
-?>
+    // recuperer les valeurs du formulaires pour les inserer dans la base de données 
+    public function insertinscription(Inscription $inscription){
+          
+           $query="INSERT INTO inscription SET prenom=:prenom,
+           nom=:nom, email=:email,
+           mdp=:mdp ";
+           $pdo=$this->connexion->prepare($query);
+           $pdo->execute (array(
+               
+            'prenom'=>$inscription->getPrenom(),
+            'nom' => $inscription->getNom(),
+            'email' => $inscription->getEmail(),
+            'mdp' => $inscription->getMdp(),
+            
+           ));
+           return $pdo->rowCount();
+    }
+}

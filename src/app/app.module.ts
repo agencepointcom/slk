@@ -22,7 +22,7 @@ import {LoginPageModule} from "../pages/login/login.module";
 import { CartePageModule } from '../pages/carte/carte.module';
 import { DecoPageModule } from '../pages/deco/deco.module';
 import { TesthomePageModule } from '../pages/testhome/testhome.module';
-
+import {DescriptionPageModule} from'../pages/description/description.module';
 import { ConfigServiceTsProvider } from '../providers/config-service-ts/config-service-ts';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { AuthenticationService } from '../services/authentication.service';
@@ -51,7 +51,8 @@ import { WordpressService} from '../services/wordpress.service';
     CartePageModule,
     HomePageModule,
     DecoPageModule,
-    TesthomePageModule
+    TesthomePageModule,
+    DescriptionPageModule
 
   ],
   bootstrap: [IonicApp],

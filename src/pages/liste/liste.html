@@ -33,43 +33,45 @@
   <div id="affichage">
    <div id="partenairee">
      
-  <ion-row *ngFor="let partenaires of partenaire_display" >
-      <div class="info">
-          <div>
-       <img class="imagepart" src="{{partenaires.image}}">
-    </div>
-       <div class=infoun>
-       <span [innerHtml]="partenaires.title.rendered" class="hinfo">{{partenaires.title.rendered}}</span>
-
-       <p class="pinfo"> {{partenaires.acf.adresse}}</p>
-       <p class="pinfo"> {{partenaires.acf.cp_ville}}</p>
-       <p class="pinfo"> {{partenaires.acf.telephone}}</p>
-       <p class="pinfo"> {{partenaires.acf.site_web}}</p>
-    </div>
-      </div>
-      <!-- <span [innerHtml]="partenaires.acf.offre" class="description">
-          
-         {{partenaires.acf.offre}}
-      </span>      
-      <span [innerHtml]="partenaires.acf.horaires" class="description">
-
-      {{partenaires.acf.horaires}}
-      </span>
-      <span [innerHtml]="partenaires.acf.tarifs" class="description">
-
-       {{partenaires.acf.tarifs}}
-        </span> -->
-
-          <!-- <div>
+    <ion-row *ngFor="let partenaires of partenaire_display"  >
+      <div class="info"  id={{partenaires.id}} #pipi (click)="clickshow($event)"  >
+            
+        <img class="imagepart" src="{{partenaires.image}}">
         
-          <p> {{partenaires.acf.offre}}</p> 
-        </div>  -->
-            </ion-row>
-  </div>
-    
+            <div class=infoun>
+                <span [innerHtml]="partenaires.title.rendered" class="hinfo">{{partenaires.title.rendered}}</span>
+
+                <p class="pinfo"> {{partenaires.acf.adresse}}</p>
+                <p class="pinfo"> {{partenaires.acf.cp_ville}}</p>
+                <p class="pinfo"> {{partenaires.acf.telephone}}</p>
+                <p class="pinfo"> {{partenaires.acf.site_web}}</p>
+             </div>
+      </div>
+      <div class="divdesc" #caca id="1{{partenaires.id}}">
+        <span  [innerHtml]="partenaires.title.rendered" class="descriptiontitre">{{partenaires.title.rendered}}</span><br>
+
+            
+        <span [innerHtml]="partenaires.acf.horaires" class="description">
+
+            {{partenaires.acf.horaires}}
+        </span>
+        <span [innerHtml]="partenaires.acf.tarifs" class="description">
+
+             {{partenaires.acf.tarifs}}
+        </span>
+
+        <div>
+            
+            <p> {{partenaires.acf.offre}}</p> 
+        </div> 
+         </div>
+    </ion-row>
+      
+    </div>
+</div>
       <ion-scroll  scrollX="true">
         </ion-scroll>
-  </div>   
+ 
   
 
 
@@ -81,15 +83,15 @@
 
 
   <div id="pagesearch">
-      <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="selected">
-          <ion-option *ngFor="let ages of tdage" value="{{ages}}">{{ages.name}}</ion-option>
-      </ion-select>
-      <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="selected">
-          <ion-option *ngFor="let activitee of activite" value="{{activitee}}">{{activitee.name}}</ion-option>
-      </ion-select>
-      <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="selected">
-          <ion-option *ngFor="let lieuu of lieu" value="{{lieuu}}">{{lieuu.name}}</ion-option>
-      </ion-select>  
+   <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
+              <ion-option *ngFor="let ages of tdage" value="{{ages.id}}" >{{ages.name}}</ion-option>
+          </ion-select>
+          <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
+              <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
+          </ion-select>
+          <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
+              <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
+          </ion-select>  
       
         <div id="buttonsuite">
            <div class="butsuite"> Afficher la liste</div>

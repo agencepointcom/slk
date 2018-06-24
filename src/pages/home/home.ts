@@ -30,6 +30,8 @@ export class HomePage {
   value: any;
   //je definie loc comme un tableau
   loc: Array<any> = new Array<any>();
+  partenaire_display:  Array<any> = new Array<any>();
+  title: any;
 ;
   partenaire_marker: Array<any> = new Array<any>();
   locations: any;
@@ -56,7 +58,9 @@ export class HomePage {
 lieu: Array<any> = new Array<any>();
 tdage:Array<any> = new Array<any>();
 
-
+ageselected='';
+catselected='';
+lieuselected='';
 
 
 
@@ -103,45 +107,56 @@ ionViewWillEnter() {
   ); 
     console.log('ionViewDidLoad ListePage');
   
+  
+    Observable.forkJoin(
+      this.getActivite()).subscribe(data=> {
+        let item= data[0]
+        for( let i = 0; i < item.length; i++){
+             let items= item[i]
 
-      Observable.forkJoin(
-        this.getActivite()).subscribe(data=> {
-          for( let i = 0; i <= data.length; i++){
-            let item = data[0][i];
-  
-            this.activite.push(item.name);
+          this.activite.push(items);
+        }
+      
+      })
+    Observable.forkJoin(
+      this.getLieu()).subscribe(data=> {
+          let items = data[0]
+        for( let i = 0; i < items.length; i++){
+          let item = items[i];
+          if(item){
+            this.lieu.push(item);
           }
-        
-        })
+        }
+      
+      })
       Observable.forkJoin(
-        this.getLieu()).subscribe(data=> {
-          for( let i = 0; i <= data.length; i++){
-            let item = data[0][i];
-  
-            this.lieu.push(item.name);
-          }
-        
-        })
-        Observable.forkJoin(
-          this.getAge()).subscribe(data=> {
-            for( let i = 0; i <= data.length; i++){
-              let item = data[0][i];
-    
-              this.tdage.push(item.name);
+         
+        this.getAge()).subscribe(data=> {
+          let items = data[0]
+          for( let i = 0; i < items.length; i++){
+            let item = items[i];
+            
+            if(item){
+              this.tdage.push(item);
             }
-          
-          })
+            
+          }
+        
+        })
           Observable.forkJoin(
             this.getPartenaire()).subscribe(data=> {
               let item = data[0];
               console.log(item)
               for( let i = 0; i < item.length; i++){
+                let items= item[i];
+                this.partenaire.push(items);
+                this.partenaire_display.push(items);
+                console.log(this.partenaire_display);
             
-               
-            
-                  let items= item[i];
-                
+                  
+                this.title= item[i].title.redenred
                 var itemgeo = item[i].martygeocoderlatlng.martygeocoderlatlng
+                if(itemgeo){
                 //je converti mon tableau en string pour pouvoir faire le replace
                 var itemstring = itemgeo.toString();
 
@@ -156,8 +171,9 @@ ionViewWillEnter() {
               }          
                
               this.addMarkerMap()
-      })
-    }
+      }
+    })
+  }
   
   getActivite(){
 
@@ -185,20 +201,31 @@ ionViewWillEnter() {
 
 
       //ajoue marker
-  addMarkerMap(){
-    
-    for( let location of this.partenaire_marker){
-      console.log(location)
-      let marker= new google.maps.Marker({
-        zoom:10,
-        position:location,
-        map: this.map
-      })
-      
-    
-    
-    }
-  }
+      addMarkerMap(){
+  
+        for( let location of this.partenaire_marker){
+          let marker= new google.maps.Marker({
+            zoom:10,
+            position:location,
+            map: this.map,
+          })
+          	
+
+          marker.addListener('click', function() {
+            infowindow.open(this.map, marker);
+          });
+        
+        }
+        for(let partenaire of this.partenaire_display){
+          var title =  partenaire.title.rendered
+          var horaire = partenaire.acf.horaires
+          var tarif =partenaire.acf.tarifs
+          var offre =partenaire.acf.offre
+        }
+        var infowindow = new google.maps.InfoWindow({
+          content: title + horaire + tarif +offre
+        });
+      }
     
     
 addCluster(map){
@@ -396,10 +423,7 @@ addCluster(map){
   }
 
   choosePosition() {
-    let image = {
-      url : 'assets/icon/moi.png',
-      size: new google.maps.Size(25, 40)
-    }
+  
     console.log(this.loggedUser)  
     this.storage.get('Dernière position').then((result) => {
       if (result) {
@@ -439,9 +463,10 @@ addCluster(map){
   // go show currrent location
   getCurrentPosition()    {
     let image = {
-      url : './assets/icon/moi.png',
-      size: new google.maps.Size(25, 40)
+      url : 'C:/MAMP/htdocs/TESTT/kids/map/src/assets/icon',
+    
     }
+    console.log(image)
     // attente recherche de votre position
     this.loading = this.loadingCtrl.create({
       content: 'Recherche de votre position ...'
@@ -469,7 +494,7 @@ addCluster(map){
             let options = {
               center: myPos,
               zoom: 11,
-              icon:image ,
+              icon:image
               
             };
             console.log(image)
@@ -522,13 +547,14 @@ addCluster(map){
   addMarker(position, content) {
     let image = {
       url : './assets/icon/moi.png',
-   
+    
     }
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: position,
-    icon:image
+    icon:image,
+ 
     });
 
     this.addInfoWindow(marker, content);
@@ -681,6 +707,124 @@ else{
 
 }
 
+}
+
+filter(){
+
+  this.partenaire_display = this.partenaire.slice(); //copy array
+  if( this.ageselected.length > 0 ){
+  // Pour chaque partenaire
+  for( let i=this.partenaire_display.length-1; i >= 0 ; i-- ){
+    var partenaires = this.partenaire_display[i]
+
+      var find = false;
+    
+      // Pour chaque age coché
+      for( let age of this.ageselected ){
+        
+        let int_age = parseInt(age);
+        
+        // Si on trouve au moins une fois l'age dans le tableau du partenaire
+        if( partenaires["tranche-dage"].indexOf(int_age) > -1 ){
+          find = true;
+          break;
+        }
+        
+      }
+    
+      // Si aucune correspondance, on enlève l'élément du tableau
+      if( !find ){
+        this.partenaire_display.splice(i, 1);
+      }
+  
+    }
+  }
+//categories
+// Pour chaque partenaire
+if( this.catselected.length > 0 ){
+
+  for( let i=this.partenaire_display.length -1; i >= 0; i--){
+    
+    var partenaires = this.partenaire_display[i];
+    var find = false;
+
+    // Pour chaque cat coché
+    for( let cat of this.catselected ){
+      
+      let int_cat = parseInt(cat);
+      
+      // Si on trouve au moins une fois l'cat dans le tableau du partenaire
+      if( partenaires["type-activite"].indexOf(int_cat) > -1 ){ 
+        console.log( partenaires["type-activite"]);
+
+        find = true;
+        break;
+      }
+      
+    }
+
+    // Si aucune correspondance, on enlève l'élément du tableau
+    if( !find ){
+      this.partenaire_display.splice(i, 1);
+    }
+
+  }
+
+}
+//lieu
+// Pour chaque partenaire
+if( this.lieuselected.length > 0 ){
+
+  for( let i=this.partenaire_display.length -1; i >= 0; i--){
+    
+    var partenaires = this.partenaire_display[i];
+    var find = false;
+
+    // Pour chaque lieu coché
+    for( let lieu of this.lieuselected ){
+      
+      let int_lieu = parseInt(lieu);
+      
+      // Si on trouve au moins une fois l'lieu dans le tableau du partenaire
+      if( partenaires["zone-geographique"].indexOf(int_lieu) > -1 ){ 
+        console.log( partenaires["zone-geographique"]);
+        console.log
+        find = true;
+        break;
+      }
+      
+    }
+
+    // Si aucune correspondance, on enlève l'élément du tableau
+    if( !find ){
+      this.partenaire_display.splice(i, 1);
+         for(let item of this.partenaire_display){
+           console.log(item)
+           console.log(item[i])
+
+              var itemgeo = item.martygeocoderlatlng.martygeocoderlatlng
+              if(itemgeo){
+                //je converti mon tableau en string pour pouvoir faire le replace
+                var itemstring = itemgeo.toString();
+
+                itemstring = itemstring.replace(")", ""); //"{42.827682, 2.225718899999947"
+                itemstring = itemstring.replace("(", ""); //"42.827682, 2.225718899999947"
+                let splited = itemstring.split(","); // [ 42.827682, 2.225718899999947 ]
+                let objet = {
+                  lat: parseFloat( splited[0] ),
+                  lng: parseFloat( splited[1] )
+                };
+                this.partenaire_marker.push(objet);
+                console.log(this.partenaire_marker)
+            }          
+     
+  }
+      
+    }
+
+  }
+
+}
 }
     }
 

@@ -27,7 +27,7 @@ export class ListePage {
   partenaire_display:Array<any> = new Array<any>();
   image:Array<any> = new Array<any>();
   partenaireimg:Array<any> = new Array<any>();
-
+teste:any
   hide: any;
   listes: any[];
   loggedUser: boolean=false;
@@ -38,10 +38,13 @@ export class ListePage {
   catselected='';
   lieuselected='';
   partenaire_marker:Array<any> = new Array<any>();
+  a : 1
 
 activite:Array<any> = new Array<any>();
 lieu: Array<any> = new Array<any>();
 tdage:Array<any> = new Array<any>();
+  idvalue: any;
+show = false
 
 
 
@@ -50,7 +53,8 @@ tdage:Array<any> = new Array<any>();
      private http: Http,
       public ConfigServ: ConfigServiceTsProvider,
     public authenticationService: AuthenticationService,
-    public wordpressService :    WordpressService
+    public wordpressService :    WordpressService,
+    
 
   ) {
   }
@@ -65,14 +69,14 @@ tdage:Array<any> = new Array<any>();
                 let items= item[i];
 
                 //service qui va chercher l'image avec items.featured_media
-                Observable.forkJoin(this.getImage( items.featured_media )).subscribe(data => {
+                 Observable.forkJoin(this.getImage( items.featured_media )).subscribe(data => {
 
                   items.image = data[0].source_url;
                   this.partenaire.push(items);
                   this.partenaire_display.push(items);
-                  console.log(this.partenaire);
+                  console.log(this.partenaire_display);
 
-                });
+                 });
                 
                 
                 }
@@ -82,31 +86,7 @@ tdage:Array<any> = new Array<any>();
               
             
             })
-            Observable.forkJoin(
-              this.getPartenaire()).subscribe(data=> {
-                let item = data[0];
-              
-                for( let i = 0; i < item.length; i++){
-                  let items= item[i];
-  
-                  //service qui va chercher l'image avec items.featured_media
-                  Observable.forkJoin(this.getImage( items.featured_media )).subscribe(data => {
-  
-                    items.image = data[0].source_url;
-                    this.partenaire.push(items);
-                    this.partenaire_marker.push(items.martygeocoderlatlng);
-                    console.log(this.partenaire);
-  
-                  });
-                  
-                  
-                  }
-  
-  
-                  
-                
-              
-              })
+      
   
 
       Observable.forkJoin(
@@ -159,8 +139,9 @@ tdage:Array<any> = new Array<any>();
     // this.callBDD( this.http)
   }
 
-  ionViewDidEnter(){
-
+  ionViewDidLoad(caca){
+    let idvalue2 = caca.path[1].id
+    console.log(idvalue2)
   }
 
   getActivite(){
@@ -396,6 +377,28 @@ if(this.locsearch==false){
   document.getElementById('ploc').style.display = "block";
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 else{
   this.catsearch=false
   this.agesearch=false
@@ -503,4 +506,22 @@ if( this.lieuselected.length > 0 ){
 
 }
 }
-}
+
+
+  clickshow(pipi){
+   
+    let a : 1 
+    let idvalue =  1 + pipi.path[1].id
+     if(this.show == false){
+       this.show = true
+      document.getElementById(idvalue).style.display="block"
+      console.log(pipi.path[1].id)
+      console.log(idvalue)
+    }
+    else{
+      document.getElementById(idvalue).style.display="none"
+      this.show= false
+
+    }
+  }
+  }

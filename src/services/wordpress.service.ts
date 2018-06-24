@@ -8,9 +8,8 @@ import 'rxjs/add/observable/forkJoin';
 @Injectable()
 export class WordpressService {
   constructor(public http: Http){}
-
+//recuperer les postes recent 
   getRecentPosts(categoryId:number, page:number = 1){
-    //if we want to query posts by category
     let category_url = categoryId? ("&categories=" + categoryId): "";
 
     return this.http.get(
@@ -19,10 +18,12 @@ export class WordpressService {
       + category_url)
     .map(res => res.json());
   }
+  //recuperer activité
   getActivites(activite){
     return this.http.get(Config.WORDPRESS_REST_API_URL + "type-activite/" )
     .map(res => res.json());
   }
+  //recuperer age 
   getAge(age){
     return this.http.get(Config.WORDPRESS_REST_API_URL + "tranche-dage/" )
     .map(res => res.json());
@@ -33,7 +34,7 @@ export class WordpressService {
     .map(res => res.json());
   }
   getPartenaire(partenaire){
-    return this.http.get(Config.WORDPRESS_REST_API_URL + "activite/" )
+    return this.http.get(Config.WORDPRESS_REST_API_URL + "activite?per_page=100" )
     .map(res => res.json());
   }
 
