@@ -212,23 +212,23 @@ ionViewWillEnter() {
             position: partenaire.location,
             map: this.map,
           })
-          	
-          
           partenaire.marker.addListener('click', function() {
             infowindow.open(this.map, partenaire.marker);
           });
+            var title =  partenaire.title.rendered
+            var horaire = partenaire.acf.horaires
+            var tarif =partenaire.acf.tarifs
+            var offre =partenaire.acf.offre
+          }
+          var infowindow = new google.maps.InfoWindow({
+            content: title + horaire + tarif +offre,
+            maxWidth: 200
+          });
+          
         
-        }
-        for(let partenaire of this.partenaire_display){
-          var title =  partenaire.title.rendered
-          var horaire = partenaire.acf.horaires
-          var tarif =partenaire.acf.tarifs
-          var offre =partenaire.acf.offre
-        }
-        var infowindow = new google.maps.InfoWindow({
-          content: title + horaire + tarif +offre,
-          maxWidth: 200
-        });
+        
+        
+      
       }
       clearMarkerMap() {
         for( let part of this.partenaire ){

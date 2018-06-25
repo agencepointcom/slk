@@ -5,6 +5,8 @@ import { DecoPage } from '../deco/deco';
 import { LoginPage } from '../login/login';
 import { WordpressService } from '../../services/wordpress.service';
 import { Observable } from 'rxjs/Observable';
+import * as moment from 'moment';
+
 
 /**
  * Generated class for the CartePage page.
@@ -19,8 +21,7 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: 'carte.html',
 })
 export class CartePage {
-
-  myDate: String = new Date().toISOString();
+  myDate: any
   user: string;
   loggedUser: boolean=false;
   activite:Array<any> = new Array<any>();
@@ -36,6 +37,8 @@ tdage:Array<any> = new Array<any>();
     console.log('ionViewDidLoad CartePage');
   }
   ionViewWillEnter() {
+    var now = moment();
+this.myDate = moment(now.format(), moment.ISO_8601).format();
 	
     this.authenticationService.getUser()
     .then(
