@@ -148,9 +148,7 @@ ionViewWillEnter() {
               let item = data[0];
               console.log(item)
               for( let i = 0; i < item.length; i++){
-                let items= item[i];
-                this.partenaire.push(items);
-                this.partenaire_display.push(items);
+                
                 console.log(this.partenaire_display);
             
                   
@@ -167,11 +165,16 @@ ionViewWillEnter() {
                   lat: parseFloat( splited[0] ),
                   lng: parseFloat( splited[1] )
                 };
-                this.partenaire_marker.push(objet);
-              }          
-               
-              this.addMarkerMap()
-      }
+
+                let items = item[i];
+                items.location = objet;
+
+                this.partenaire.push(items);
+                this.partenaire_display.push(items);
+                
+              }
+            }   
+            this.addMarkerMap()  
     })
   }
   
@@ -203,16 +206,16 @@ ionViewWillEnter() {
       //ajoue marker
       addMarkerMap(){
   
-        for( let location of this.partenaire_marker){
-          let marker= new google.maps.Marker({
+        for( let partenaire of this.partenaire_display){
+          partenaire.marker= new google.maps.Marker({
             zoom:10,
-            position:location,
+            position: partenaire.location,
             map: this.map,
           })
           	
-
-          marker.addListener('click', function() {
-            infowindow.open(this.map, marker);
+          
+          partenaire.marker.addListener('click', function() {
+            infowindow.open(this.map, partenaire.marker);
           });
         
         }
@@ -223,10 +226,21 @@ ionViewWillEnter() {
           var offre =partenaire.acf.offre
         }
         var infowindow = new google.maps.InfoWindow({
-          content: title + horaire + tarif +offre
+          content: title + horaire + tarif +offre,
+          maxWidth: 200
         });
       }
+      clearMarkerMap() {
+        for( let part of this.partenaire ){
+          part.marker.setVisible( false );
+        }
+      }
     
+      displayMarkerMap() {
+        for( let part of this.partenaire_display){ 
+          part.marker.setVisible( true );
+        }
+      }
     
 addCluster(map){
  
@@ -798,33 +812,15 @@ if( this.lieuselected.length > 0 ){
     // Si aucune correspondance, on enlève l'élément du tableau
     if( !find ){
       this.partenaire_display.splice(i, 1);
-         for(let item of this.partenaire_display){
-           console.log(item)
-           console.log(item[i])
-
-              var itemgeo = item.martygeocoderlatlng.martygeocoderlatlng
-              if(itemgeo){
-                //je converti mon tableau en string pour pouvoir faire le replace
-                var itemstring = itemgeo.toString();
-
-                itemstring = itemstring.replace(")", ""); //"{42.827682, 2.225718899999947"
-                itemstring = itemstring.replace("(", ""); //"42.827682, 2.225718899999947"
-                let splited = itemstring.split(","); // [ 42.827682, 2.225718899999947 ]
-                let objet = {
-                  lat: parseFloat( splited[0] ),
-                  lng: parseFloat( splited[1] )
-                };
-                this.partenaire_marker.push(objet);
-                console.log(this.partenaire_marker)
-            }          
-     
-  }
-      
+  
     }
 
   }
 
 }
+this.clearMarkerMap()
+  this.displayMarkerMap()
+
 }
     }
 

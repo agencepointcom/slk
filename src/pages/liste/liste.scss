@@ -122,6 +122,11 @@ page-liste {
         padding:7px;
       
     }
+    .coucou{
+       
+        font-size:14px !important;
+        width: 100px !important;
+    }
     #button{
         position: relative;
         display:flex;
@@ -283,6 +288,7 @@ ion-sroll{
 #partenairee{
     position: absolute;
     top:0%;
+    left:0px;
 }
 
 .info{
@@ -453,11 +459,35 @@ position:fixed;
 .divdesc{
     display:none;
     width:100%;
-    height:100%
+    height:auto;
+    position:absolute;
+    overflow: hidden;
+    background-color: white;
+  
+    z-index:999999999999;
+    border-bottom:10px solid #14b0b9;
+    position:fixed;
+    font-size:14px;
+    
 }
 .descriptiontitre{
     color:#14b0b9;
     font-size: 20px;
+}
+.fermer{
+    background-color:#6d6d6d;
+    width:20%;
+    height:25px;
+    font-family: 'lado', sans-serif;
+    font-size:13px;
+    border-radius:3px;
+    display:flex;
+    position: relative;
+    justify-content: center;
+    align-content:center;
+    align-items:center;
+    color:white;
+    float: right;
 }
 }
     

@@ -19,6 +19,8 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: 'carte.html',
 })
 export class CartePage {
+
+  myDate: String = new Date().toISOString();
   user: string;
   loggedUser: boolean=false;
   activite:Array<any> = new Array<any>();
@@ -137,19 +139,19 @@ tdage:Array<any> = new Array<any>();
 
   }
   boolean =false
-  clicksearch(){
-    if(this.boolean==false){
-    this.boolean=true
-    document.getElementById('pagesearch').style.display = "flex";
-    document.getElementById('fond').style.display = "flex";
-    }
-    else{
-      this.boolean=false
-      document.getElementById('pagesearch').style.display = "none";
-      document.getElementById('fond').style.display = "none";
-    }
+  // clicksearch(){
+  //   if(this.boolean==false){
+  //   this.boolean=true
+  //   document.getElementById('pagesearch').style.display = "flex";
+  //   document.getElementById('fond').style.display = "flex";
+  //   }
+  //   else{
+  //     this.boolean=false
+  //     document.getElementById('pagesearch').style.display = "none";
+  //     document.getElementById('fond').style.display = "none";
+  //   }
 
-  }
+  // }
   clickcarte(){
     this.nav.setRoot('CartePage');
 

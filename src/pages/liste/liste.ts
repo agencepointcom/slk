@@ -74,7 +74,6 @@ show = false
                   items.image = data[0].source_url;
                   this.partenaire.push(items);
                   this.partenaire_display.push(items);
-                  console.log(this.partenaire_display);
 
                  });
                 
@@ -141,7 +140,6 @@ show = false
 
   ionViewDidLoad(caca){
     let idvalue2 = caca.path[1].id
-    console.log(idvalue2)
   }
 
   getActivite(){
@@ -319,7 +317,6 @@ agesearch=false
 catsearch=false
 locsearch=false
 clickagesearch(){
-  console.log('trolololo')
   if(this.agesearch==false){
     this.agesearch=true
     this.catsearch=false
@@ -512,16 +509,19 @@ if( this.lieuselected.length > 0 ){
    
     let a : 1 
     let idvalue =  1 + pipi.path[1].id
-     if(this.show == false){
-       this.show = true
-      document.getElementById(idvalue).style.display="block"
-      console.log(pipi.path[1].id)
-      console.log(idvalue)
-    }
-    else{
-      document.getElementById(idvalue).style.display="none"
-      this.show= false
+    this.idvalue= idvalue
+    this.show = true
+    document.getElementById(idvalue).style.display="block"
+  
+      this.teste = true
 
-    }
+     
+
+
+  }
+
+  fermer(){
+    document.getElementById(this.idvalue).style.display="none"
+    this.teste=false
   }
   }
