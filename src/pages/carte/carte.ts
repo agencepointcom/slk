@@ -68,7 +68,6 @@ this.myDate = moment(now.format(), moment.ISO_8601).format();
               let item = data[0][i];
     
               this.activite.push(item.name);
-              console.log(this.activite)
             }
           
           })
@@ -78,7 +77,7 @@ this.myDate = moment(now.format(), moment.ISO_8601).format();
                 let item = data[0][i];
       
                 this.user= item.name;
-                console.log(this.user)
+                console.log(item)
               }
             
             })
@@ -88,7 +87,6 @@ this.myDate = moment(now.format(), moment.ISO_8601).format();
               let item = data[0][i];
     
               this.lieu.push(item.name);
-              console.log(this.lieu)
             }
           
           })
@@ -98,10 +96,10 @@ this.myDate = moment(now.format(), moment.ISO_8601).format();
                 let item = data[0][i];
       
                 this.tdage.push(item.name);
-                console.log(this.tdage)
               }
             
             })
+            
           }
     
           getActivite(){

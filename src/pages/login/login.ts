@@ -5,6 +5,10 @@ import { NavController, LoadingController, IonicPage } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 // import { WordpressService } from '../../services/wordpress.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Observable } from 'rxjs/Observable';
+import { WordpressService } from '../../services/wordpress.service';
+
+
 import { DecoPage } from '../deco/deco';
 @IonicPage()
 @Component({
@@ -16,14 +20,15 @@ export class LoginPage {
   error_message: string;
 boolean=false;
 loggedUser: boolean=false;
-
+user: string;
   constructor(
     public nav: NavController,
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     public formBuilder: FormBuilder,
-    // public wordpressService: WordpressService,
-    public authenticationService: AuthenticationService
+    public wordpressService: WordpressService,
+    public authenticationService: AuthenticationService,
+  
   ) {}
   ionViewDidLoad() {
     this.authenticationService.getUser()
@@ -44,8 +49,18 @@ loggedUser: boolean=false;
    
     // this.callBDD( this.http)
   }
+  ionViewWillEnter() {
+  Observable.forkJoin(
+    this.getUser()).subscribe(data=> {
+      for( let i = 0; i <= data.length; i++){
+        let item = data[0][i];
 
-
+        this.user= item.name;
+        console.log(item)
+      }
+    
+    })
+  }
   ionViewWillLoad() {
     this.login_form = this.formBuilder.group({
       user_login: new FormControl('', Validators.compose([
@@ -54,7 +69,10 @@ loggedUser: boolean=false;
       user_pass: new FormControl('', Validators.required)
     });
   }
+  getUser(){
+    return this.wordpressService.getAuthor(this.user);
 
+  }
   login(value){
     let loading = this.loadingCtrl.create();
     loading.present();

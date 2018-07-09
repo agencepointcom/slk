@@ -138,8 +138,7 @@ show = false
     // this.callBDD( this.http)
   }
 
-  ionViewDidLoad(caca){
-    let idvalue2 = caca.path[1].id
+  ionViewDidLoad(){
   }
 
   getActivite(){

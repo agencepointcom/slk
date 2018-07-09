@@ -207,29 +207,36 @@ ionViewWillEnter() {
       addMarkerMap(){
   
         for( let partenaire of this.partenaire_display){
+          var title =  partenaire.title.rendered
+          var horaire = partenaire.acf.horaires
+          var tarif =partenaire.acf.tarifs
+          var offre =partenaire.acf.offre
+
           partenaire.marker= new google.maps.Marker({
             zoom:10,
             position: partenaire.location,
             map: this.map,
           })
-          partenaire.marker.addListener('click', function() {
-            infowindow.open(this.map, partenaire.marker);
-          });
-            var title =  partenaire.title.rendered
-            var horaire = partenaire.acf.horaires
-            var tarif =partenaire.acf.tarifs
-            var offre =partenaire.acf.offre
-          }
-          var infowindow = new google.maps.InfoWindow({
+          partenaire.infowindow = new google.maps.InfoWindow({
             content: title + horaire + tarif +offre,
-            maxWidth: 200
+            maxWidth: 300
           });
+       partenaire.marker.addListener('click', function() {
+            partenaire.infowindow.open(this.map, partenaire.marker);
+          });
+       
           
+     
+        
+        
+         
+        }
         
         
         
       
       }
+      
       clearMarkerMap() {
         for( let part of this.partenaire ){
           part.marker.setVisible( false );
@@ -359,7 +366,7 @@ addCluster(map){
     this.zone.run(() => {
       var mapEle = this.mapElement.nativeElement;
       this.map = new google.maps.Map(mapEle, {
-        zoom: 8,
+        zoom: 7,
         center: myLatLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         disableDoubleClickZoom: false,
@@ -487,7 +494,7 @@ addCluster(map){
     });
     this.loading.present();
 //temps 10 seconde
-    let locationOptions = { timeout: 100, enableHighAccuracy: true };
+    let locationOptions = { timeout: 5000, enableHighAccuracy: true };
     //si le navigateur trouve la position
     if(navigator.geolocation){
       var options={
