@@ -3,7 +3,9 @@
     <ion-title id="title">
 La carte de nos partenaires    </ion-title>
     <ion-buttons end>
-    
+      <button ion-button icon-only (click)='toggleSearch()'>
+        <ion-icon name="search"></ion-icon>
+      </button>
       <button ion-button icon-only class="custom-icon" (click)='choosePosition()'>
         <ion-icon name="ios-locate-outline"></ion-icon>
       </button>
@@ -27,7 +29,7 @@ La carte de nos partenaires    </ion-title>
 
 
   <div class="map" [class.hidemap]="!((switch == 'map') || error)">
-    <ion-searchbar #searchbar placeholder="Suchen" [hidden]="!search"></ion-searchbar>
+    <ion-searchbar #searchbar placeholder="Rechercher" [hidden]="!search"></ion-searchbar>
     <div id="map" #map></div>
   </div>
   <div id="navmenu">

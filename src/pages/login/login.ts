@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { WordpressService } from '../../services/wordpress.service';
 
 
-import { DecoPage } from '../deco/deco';
+import { CartePage } from '../carte/carte';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -21,6 +21,10 @@ export class LoginPage {
 boolean=false;
 loggedUser: boolean=false;
 user: string;
+  users: string;
+display: string;
+  cartepage: any;
+
   constructor(
     public nav: NavController,
     public navCtrl: NavController,
@@ -28,16 +32,22 @@ user: string;
     public formBuilder: FormBuilder,
     public wordpressService: WordpressService,
     public authenticationService: AuthenticationService,
+
   
-  ) {}
+  ) {this.cartepage= CartePage}
   ionViewDidLoad() {
     this.authenticationService.getUser()
     .then(
       (data) => {
+        console.log(data)
+
+
       this.loggedUser = true;
       console.log(this.loggedUser) ;
       this.navCtrl.setRoot(HomePage);
-
+        console.log(this.users)
+      console.log(this.display)
+      data.user_display_name
 
       },
       error => this.loggedUser = false
@@ -76,6 +86,7 @@ user: string;
   login(value){
     let loading = this.loadingCtrl.create();
     loading.present();
+    this.users= value.user_login
     console.log(value.user_login)
     console.log(value.user_pass)
     
@@ -87,13 +98,20 @@ user: string;
        this.authenticationService.setUser({
          token: res.json().token,
          username: value.user_login,
-         displayname: res.json().user_display_name,
-        
+        displayname: res.json().user_display_name,
+     
          email: res.json().user_email
        });
+       this.display= res.json().user_display_name
+     
+       this.navCtrl.push(this.cartepage,{
+         userdata : res.json().user_display_name
+       });
+       
+       console.log( res.json().user_display_name)
        this.boolean=true
        loading.dismiss();
-       this.navCtrl.setRoot(HomePage);
+       console.log(res)
      },
      err => {
        loading.dismiss();
@@ -103,14 +121,20 @@ user: string;
   }
 
   skipLogin(){
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.setRoot(CartePage);
   }
+
   clickparcourir(){
-    this.nav.setRoot('HomePage');
+
+    this.nav.setRoot('CartePage');
   }
   // goToRegister(){
   //   this.navCtrl.push(RegisterPage);
   // }
   
+tutoriel(){
+  this.nav.setRoot('TesthomePage');
+}
+
 
 }

@@ -27,10 +27,17 @@ export class CartePage {
   activite:Array<any> = new Array<any>();
 lieu: Array<any> = new Array<any>();
 tdage:Array<any> = new Array<any>();
+  display: any;
+  userdata: string 
+  caca: string
+  
   constructor(public nav: NavController, public navParams: NavParams,
      public authenticationService: AuthenticationService,
      public wordpressService: WordpressService
     ) {
+
+      this.userdata =navParams.data.userdata;
+    console.log(this.userdata)
   }
 
   ionViewDidLoad() {
@@ -43,11 +50,14 @@ this.myDate = moment(now.format(), moment.ISO_8601).format();
     this.authenticationService.getUser()
     .then(
       (data) => {
+        this.userdata=data.user_login
+        console.log(data)
       this.loggedUser = true;
       console.log(this.loggedUser) ;
       document.getElementById('divpopup').style.display = "none";
       document.getElementById('fond').style.display = "none";
       document.getElementById('fondnouser').style.display = "none";
+      this.userdata =this.navParams.data.userdata;
 
 
       },
@@ -87,6 +97,7 @@ this.myDate = moment(now.format(), moment.ISO_8601).format();
               let item = data[0][i];
     
               this.lieu.push(item.name);
+              console.log(item.name)
             }
           
           })

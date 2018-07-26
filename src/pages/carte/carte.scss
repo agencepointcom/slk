@@ -12,9 +12,7 @@ page-carte {
     font-size: 22px;
 
    }
-   #user{
-       
-   }
+ 
    .select-ios .select-placeholder{
     color:#14b0b9 !important; 
 
@@ -291,7 +289,17 @@ page-carte {
            z-index: 100;
            position:absolute;
            margin-top: 15%;
-          left:15%
+          left:15%;
+          display:flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width:200px;
+       }
+       #date{
+        z-index: 100;
+        position:absolute;
+        margin-top: 18%;
+       left:15%
        }
    
         #carte{
@@ -343,21 +351,16 @@ page-carte {
     }
 }
 .divh{
-    font-family: 'lado', sans-serif;
-    letter-spacing:0.1em;
+    border-radius:4px;
+    margin-top:5%;
+    margin-bottom:10%;
 
-    background-color: #6d6d6d;
-    width:120px;
-    height:20px;
+    margin:auto;
+    width:50%;
+    height:30PX;
+    background: linear-gradient(45deg, #6d6d6d 0%, #6d6d6d 50%, #8a8a8a 51%, #8a8a8a 100%);
+    opacity:1;
     color:white;
-    display:flex;
-    margin-top:10px;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    padding:2px;
-    
-    border-radius:5px;
-    text-align: center;
+    font-family:'lado' sans-serif;
 }
 }

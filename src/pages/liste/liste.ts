@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
@@ -54,7 +54,8 @@ show = false
       public ConfigServ: ConfigServiceTsProvider,
     public authenticationService: AuthenticationService,
     public wordpressService :    WordpressService,
-    
+    public alertCtrl: AlertController,
+
 
   ) {
   }
@@ -138,7 +139,7 @@ show = false
     // this.callBDD( this.http)
   }
 
-  ionViewDidLoad(){
+  ionViewDidLoad(caca){
   }
 
   getActivite(){
@@ -168,6 +169,10 @@ show = false
     return this.wordpressService.getPartenaire(this.partenaire);
 
   }
+  postaller(){
+    return this.wordpressService.updateActivites(this.partenaire);
+
+  }
 // //   callBDD( $http) {
 //     $http.get('../../bdd_wp.php').then(successCallback, errorCallback);
 
@@ -178,6 +183,25 @@ show = false
 //     //error code
 // }
 //   }
+jyete(){
+
+  this.errorAlert('Fonctionnalité en cours de développement.')
+  
+}
+errorAlert(message) {
+  let alert = this.alertCtrl.create({
+    message: message,
+    buttons: [
+      {
+        text: 'OK',
+        handler: data => {
+        
+        }
+      }
+    ]
+  });
+  alert.present();
+}
 
   clickliste(){
     this.nav.setRoot('ListePage');

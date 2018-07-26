@@ -33,17 +33,18 @@
 </section>
 <div id="divpopup">
     <div id="popup">
-        <h5>Merci de vous connecter pour acceder à cette page</h5>
+        <h5>Veuillez vous connecter pour acceder à cette page</h5>
          <button class="divh"(click)='clickexit()'>Me connecter </button>
          
          <button class="divh" (click)='clickmap()'>Continuer</button>
+         <button onclick="window.location.href='https://sortirleskids.com/la-carte'"class="divh" >Acheter la carte</button>
          
     </div>
 </div>
 <div id="fondnouser"></div>
 <div id ="divcarte">
     <img id="carte" src="assets/img/carte.png">
-  <p id="user" >{{user}}</p>
+ <div id="user"> <p>{{userdata}}</p> <p>09/05/2019</p></div>
 </div>
 <div (click)='clickfond()' id="fond"></div>
 <div id="navmenu">

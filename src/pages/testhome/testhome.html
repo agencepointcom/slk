@@ -1,79 +1,33 @@
 <ion-header>
-  <ion-navbar id="navbar">
-    <ion-title id="title">
-La carte de nos partenaires    </ion-title>
-    <ion-buttons end>
     
-      <button ion-button icon-only class="custom-icon" (click)='choosePosition()'>
-        <ion-icon name="ios-locate-outline"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+<button id="retour"(click)='home()'>RETOUR</button>
+
 
 </ion-header>
 
-<div>
-
-</div>
-
-<div class="currentitem" *ngIf="currentregional">
-  <button ion-item no-lines (click)="viewPlace(currentregional.title)">
-    <h2>{{ currentregional.title }}</h2>
-    <ion-note item-right icon-only><ion-icon name="ios-arrow-forward"></ion-icon></ion-note>
-  </button>
-</div>
-
 <ion-content>
-
-
-  <div class="map" [class.hidemap]="!((switch == 'map') || error)">
-    <ion-searchbar #searchbar placeholder="Suchen" [hidden]="!search"></ion-searchbar>
-    <div id="map" #map></div>
-  </div>
-  <button ion-button (click)='clicklegende()' id="legende">LEGENDE</button>
-  <div id="navmenu">
-      <div id="listenav" (click)='clickliste()' class="navbas">
-          <img src="./assets/icon/liste.png">
-      </div>
-
-      <div id="mapinav" (click)='clickmap()' class="navbas">
-          <img src="./assets/icon/map.png" >
-
-      </div>
-
-      <div id="divsearch"> <div id="searchnav" (click)='clicksearch()' class="navbas"><ion-icon name="ios-search"></ion-icon></div></div>
-
-      <div id="cartenav" (click)='clickcarte()' class="navbas">
-          <img src="./assets/icon/carte.png" >
-      </div>
-
-      <div id="conav"  (click)='clickexit()'class="navbas">
-          <img src="./assets/icon/exit.png">
-      </div>
-      
+  <ion-slides (ionSlideDidChange)="slideChanged()">
+    <ion-slide>
+      <img src="./assets/img/1.jpg">
+    </ion-slide>
+    <ion-slide>
+      <img src="./assets/img/2.jpg">
+    </ion-slide>
+    <ion-slide>
+      <img src="./assets/img/3.jpg">>
+    </ion-slide>
+    <ion-slide>
+      <img src="./assets/img/4.jpg">>
+    </ion-slide>
+    <ion-slide>
+      <img src="./assets/img/5.jpg">>
+    </ion-slide>
+    <ion-slide>
+      <img src="./assets/img/6.jpg">>
+    </ion-slide>
   
-  </div>
-  <section id="secserach">
-  <div id="pagesearch">
-      <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="selected">
-          <ion-option *ngFor="let ages of tdage" value="{{ages}}">{{ages}}</ion-option>
-      </ion-select>
-      <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="selected">
-          <ion-option *ngFor="let activitee of activite" value="{{activitee}}">{{activitee}}</ion-option>
-      </ion-select>
-      <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="selected">
-          <ion-option *ngFor="let lieuu of lieu" value="{{lieuu}}">{{lieuu}}</ion-option>
-      </ion-select>  
-      
-     <div id="buttonsuite">
-        <div class="butsuite"> Afficher la liste</div>
-        <div class="butsuites"> Afficher la carte</div>
+  </ion-slides>
 
-     </div>
-    </div>
-  </section>
-<div (click)='clickfond()' id="fond"></div>
-  <div (click)='clicklegendes()' id="legendes"></div>
 </ion-content>
 
 

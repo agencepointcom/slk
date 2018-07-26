@@ -1,9 +1,10 @@
  
 <ion-content padding class="auth-form">
-  <img src="./assets/img/logo.png">
+  <p (click)= "clickparcourir()" id="fermer"> X </p>
+  <img id="imagess" src="./assets/img/logo.png">
   <section id="login">
   <div id="pres">
-    <p>Bienvenue {{user}}</p>
+    <p>Bienvenue {{display}}</p>
     <h3>SORTIR LES KIDS !</h3>
   </div>
    
@@ -17,17 +18,18 @@
       </ion-item>
       <p class="error-message" *ngIf="error_message">{{error_message}}</p>
 
-    <button ion-button full id="button" [disabled]="!login_form.valid" type="submit">Connexion</button>
+    <button ion-button full class="button" [disabled]="!login_form.valid" type="submit">Connexion</button>
 
   </form>
 
   <div id="fin" >  <p><a href="https://sortirleskids.com/mon-compte/mot-passe-perdu/">J'ai oublié mon mot de passe </a></p>
-    <h6 (click)='clickparcourir()'>Parcourir l'application </h6>
   </div>
+  <button onclick="window.location.href='https://sortirleskids.com/la-carte'"class="button" >Acheter la carte</button>
 
+  <button id="tuto" class="button"(click)='tutoriel()'>Tutoriel</button>
+    <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fsortirleskids.com%2Fmentions-legales-et-politique-de-confidentialite%2F&h=AT0JY1AMzkZc3dwermp8MuvFkwyxCgrRzuYhUe6GkBDy8sbTyriH8Dmj6Wps0zohcO6i0OUCZemJBAPvMtxOQ_C1Rd4ZxGJBGnX_cQcTXUfjZnWnTYA05-G-YEj8LsBBfUoP_sOn8hXF13wTnhWVwQ">Mentions légales et confidentialité</a>
   <div id="footer">
-    <p>Design & Création par </p>
-    <p id="ag">AGENCE POINT COM </p>
+    <p>Design & Création par AGENCE POINT COM </p>
   </div>
 </section>
 </ion-content>

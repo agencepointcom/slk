@@ -82,4 +82,12 @@ export class WordpressService {
     },{ headers: header })
     .map(res => res.json());
   }
+  updateActivites( martygeocoderlatlng){
+    let header = new Headers();
+    header.append('Content-Type', 'application/json');
+    return this.http.put(Config.WORDPRESS_REST_API_URL + "activite?per_page=100/",{
+      partenaire_favoris: martygeocoderlatlng.simplefavorites_count
+    },{ headers: header } )
+    .map(res => res.json());
+  }
 }

@@ -1,6 +1,20 @@
 page-login {
+    .fixed-content{
+position: fixed
+    }
     .tabbar.show-tabbar  {
        opacity:0
+    }
+    #fermer{
+        color: white;
+        background-color: #14b0b9;
+        width: 20px;
+        height: 20px;
+        float: right;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        text-align: center;
     }
     .fixed-content{
         background-image:url("../assets/icon/fondlogin.png");
@@ -17,14 +31,31 @@ page-login {
             position: relative;
             top: 9%;
             a{
-                color:white;
+                color: white;
                 text-decoration: none;
             }
             #footer{
                 font-size:10px;
-                margin-top:20%;
+                margin-top:6%;
             }
-            #button{
+            .fermer{
+                position: absolute;
+                top:0px;
+                left:0px;
+                background-color: white;
+                color: black;
+                width:50px;
+                height:30px;
+                font-family: 'lado', sans-serif;
+                font-size:13px;
+            }
+            #tuto{
+                margin-top:3px;
+                margin-bottom:10px;
+
+            }
+       
+            .button{
                    
                 border-radius:4px;
                 margin-top:5%;
@@ -75,7 +106,11 @@ page-login {
                 margin-top:50%
             }
         }
-
+@media(min-height: 300px){
+    #image{
+        width:100%
+    }
+}
         
 
 // #email{
@@ -138,7 +173,7 @@ page-login {
 // font-family:'lado' sans-serif;
 // color:white}
 
-// #fin{
+#fin{
 //     margin-top:5%;
 //     width:100%;
 //     position : absolute;
@@ -149,8 +184,8 @@ page-login {
 // align-content: center;
 // align-items: center;
 // font-family:'lado' sans-serif;
-// color:white
-// }
+color:white
+}
 // #footer{
 //     #ag{
 //         margin-top:-2%

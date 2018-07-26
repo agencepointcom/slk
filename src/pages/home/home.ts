@@ -105,6 +105,7 @@ ionViewWillEnter() {
  
    }
   ); 
+  
     console.log('ionViewDidLoad ListePage');
   
   
@@ -207,25 +208,27 @@ ionViewWillEnter() {
       addMarkerMap(){
   
         for( let partenaire of this.partenaire_display){
+      
           var title =  partenaire.title.rendered
           var horaire = partenaire.acf.horaires
           var tarif =partenaire.acf.tarifs
           var offre =partenaire.acf.offre
-
+        
           partenaire.marker= new google.maps.Marker({
             zoom:10,
             position: partenaire.location,
             map: this.map,
           })
-          partenaire.infowindow = new google.maps.InfoWindow({
-            content: title + horaire + tarif +offre,
-            maxWidth: 300
-          });
-       partenaire.marker.addListener('click', function() {
+          partenaire.marker.addListener('click', function() {
             partenaire.infowindow.open(this.map, partenaire.marker);
           });
+   
        
-          
+          partenaire.infowindow = new google.maps.InfoWindow({
+            content: "<div class='essai'> <img class='image_appli' src='"+partenaire.acf.image_appli+"'></br>"  +  title + horaire + tarif +offre+ "</div>",
+            maxWidth: 315,
+            
+          });
      
         
         
@@ -278,6 +281,7 @@ addCluster(map){
   loadMaps() {
     if (!!google) {
       this.initializeMap();
+           this.initAutocomplete();
      ;
 
     //  this.initAutocomplete();
@@ -324,16 +328,17 @@ addCluster(map){
   }
 
   initAutocomplete(): void {
- 
+    // reference : https://github.com/driftyco/ionic/issues/7223
     this.addressElement = this.searchbar.nativeElement.querySelector('.searchbar-input');
     this.createAutocomplete(this.addressElement).subscribe((location) => {
       console.log('Searchdata', location);
 
       let options = {
         center: location,
-        zoom: 15
+        zoom: 10
       };
       this.map.setOptions(options);
+      this.addMarker(location, "Mein gesuchter Standort");
 
     });
   }
@@ -357,6 +362,7 @@ addCluster(map){
       });
     });
   }
+
 
   initializeMap() {
     console.log(this.loggedUser)
@@ -829,6 +835,8 @@ this.clearMarkerMap()
   this.displayMarkerMap()
 
 }
+
+
     }
 
   
