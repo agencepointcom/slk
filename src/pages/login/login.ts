@@ -18,11 +18,11 @@ import { CartePage } from '../carte/carte';
 export class LoginPage {
   login_form: FormGroup;
   error_message: string;
-boolean=false;
-loggedUser: boolean=false;
-user: string;
+  boolean = false;
+  loggedUser: boolean = false;
+  user: string;
   users: string;
-display: string;
+  display: string;
   cartepage: any;
 
   constructor(
@@ -33,43 +33,43 @@ display: string;
     public wordpressService: WordpressService,
     public authenticationService: AuthenticationService,
 
-  
-  ) {this.cartepage= CartePage}
+
+  ) { this.cartepage = CartePage }
   ionViewDidLoad() {
     this.authenticationService.getUser()
-    .then(
-      (data) => {
-        console.log(data)
+      .then(
+        (data) => {
+          console.log(data)
 
 
-      this.loggedUser = true;
-      console.log(this.loggedUser) ;
-      this.navCtrl.setRoot(HomePage);
-        console.log(this.users)
-      console.log(this.display)
-      data.user_display_name
+          this.loggedUser = true;
+          console.log(this.loggedUser);
+          this.navCtrl.setRoot(HomePage);
+          console.log(this.users)
+          console.log(this.display)
+          data.user_display_name
 
-      },
-      error => this.loggedUser = false
-   
- 
-    ); 
- 
-    
-   
+        },
+        error => this.loggedUser = false
+
+
+      );
+
+
+
     // this.callBDD( this.http)
   }
   ionViewWillEnter() {
-  Observable.forkJoin(
-    this.getUser()).subscribe(data=> {
-      for( let i = 0; i <= data.length; i++){
-        let item = data[0][i];
+    Observable.forkJoin(
+      this.getUser()).subscribe(data => {
+        for (let i = 0; i <= data.length; i++) {
+          let item = data[0][i];
 
-        this.user= item.name;
-        console.log(item)
-      }
-    
-    })
+          this.user = item.name;
+          console.log(item)
+        }
+
+      })
   }
   ionViewWillLoad() {
     this.login_form = this.formBuilder.group({
@@ -79,62 +79,62 @@ display: string;
       user_pass: new FormControl('', Validators.required)
     });
   }
-  getUser(){
+  getUser() {
     return this.wordpressService.getAuthor(this.user);
 
   }
-  login(value){
+  login(value) {
     let loading = this.loadingCtrl.create();
     loading.present();
-    this.users= value.user_login
+    this.users = value.user_login
     console.log(value.user_login)
     console.log(value.user_pass)
-    
-   
-//autentification 
-    this.authenticationService.doLogin(value.user_login, value.user_pass)
-    .subscribe(res => {
 
-       this.authenticationService.setUser({
-         token: res.json().token,
-         username: value.user_login,
-        displayname: res.json().user_display_name,
-     
-         email: res.json().user_email
-       });
-       this.display= res.json().user_display_name
-     
-       this.navCtrl.push(this.cartepage,{
-         userdata : res.json().user_display_name
-       });
-       
-       console.log( res.json().user_display_name)
-       this.boolean=true
-       loading.dismiss();
-       console.log(res)
-     },
-     err => {
-       loading.dismiss();
-       this.error_message = "Mot de passe ou nom invalide.";
-       console.log(err);
-     })
+
+    //autentification 
+    this.authenticationService.doLogin(value.user_login, value.user_pass)
+      .subscribe(res => {
+
+        this.authenticationService.setUser({
+          token: res.json().token,
+          username: value.user_login,
+          displayname: res.json().user_display_name,
+
+          email: res.json().user_email
+        });
+        this.display = res.json().user_display_name
+
+        this.navCtrl.push(this.cartepage, {
+          userdata: res.json().user_display_name
+        });
+
+        console.log(res.json().user_display_name)
+        this.boolean = true
+        loading.dismiss();
+        console.log(res)
+      },
+        err => {
+          loading.dismiss();
+          this.error_message = "Mot de passe ou nom invalide.";
+          console.log(err);
+        })
   }
 
-  skipLogin(){
+  skipLogin() {
     this.navCtrl.setRoot(CartePage);
   }
 
-  clickparcourir(){
+  clickparcourir() {
 
     this.nav.setRoot('CartePage');
   }
   // goToRegister(){
   //   this.navCtrl.push(RegisterPage);
   // }
-  
-tutoriel(){
-  this.nav.setRoot('TesthomePage');
-}
+
+  tutoriel() {
+    this.nav.setRoot('TesthomePage');
+  }
 
 
 }

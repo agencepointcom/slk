@@ -1,218 +1,205 @@
 page-login {
-    .fixed-content{
-position: fixed
+    .fixed-content {
+        position: fixed
     }
-    .tabbar.show-tabbar  {
-       opacity:0
+    .tabbar.show-tabbar {
+        opacity: 0
     }
-    #fermer{
+    #fermer {
         color: white;
         background-color: #14b0b9;
-        width: 20px;
-        height: 20px;
+        width: 50px;
+        height: 50px;
         float: right;
         position: absolute;
         top: 0px;
         right: 0px;
         text-align: center;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        font-size: 20px;
     }
-    .fixed-content{
-        background-image:url("../assets/icon/fondlogin.png");
+    .fixed-content {
+        background-image: url("../assets/icon/fondlogin.png");
         background-size: cover;
         background-position: center;
-        color:white;}
-     .infoun{
-         display:flex;
-         justify-content: center;
-         align-items: center;
-         align-content: center
-     }
-        #login{
-            position: relative;
-            top: 9%;
-            a{
-                color: white;
-                text-decoration: none;
-            }
-            #footer{
-                font-size:10px;
-                margin-top:6%;
-            }
-            .fermer{
-                position: absolute;
-                top:0px;
-                left:0px;
-                background-color: white;
-                color: black;
-                width:50px;
-                height:30px;
-                font-family: 'lado', sans-serif;
-                font-size:13px;
-            }
-            #tuto{
-                margin-top:3px;
-                margin-bottom:10px;
-
-            }
-       
-            .button{
-                   
-                border-radius:4px;
-                margin-top:5%;
-                margin-bottom:10%;
-
-                margin:auto;
-                width:40%;
-                height:30PX;
-                background: linear-gradient(45deg, #6d6d6d 0%, #6d6d6d 50%, #8a8a8a 51%, #8a8a8a 100%);
-                opacity:1;
-                color:white;
-                font-family:'lado' sans-serif;
-                }
-            #email{
-            background-color:white;
-            border-radius:7px;
-            margin-bottom:5%;
-            height:10px;
-                }
-                #password{
-                background-color:white;
-                border-radius:7px;
-                margin-bottom:5%;
-                height:10px;
-
-}
-            display:flex;
-            flex-direction: column;
-            justify-content:center;
-            align-items: center;
-            align-content: center;
-            text-align: center;
-            color:white;
-            position:relative;
-            font-family:'lado' sans-serif;
-          
-       
-        }
-
-  
-
-       @media(min-height: 750px){
-            #login{
-                top:13%;
-
-            }
-            #footer{
-                margin-top:50%
-            }
-        }
-@media(min-height: 300px){
-    #image{
-        width:100%
+        color: white;
     }
-}
-        
-
-// #email{
-// background-color:white;
-// border-radius:7px;
-// margin-bottom:5%;
-// height:10px;
-
-// }
-// .list-ios[inset]{
-//     margin: 0px
-// }
-// #password{
-//     background-color:white;
-// border-radius:7px;
-// }
-// ion-list{
-//     position:relative;
-//     top:40%;
-//     padding: 0%;
-//     width:70%;
-//     margin:0%;
-//     display:flex;
-//     flex-direction:column;
-//     justify-content: center;
-// }
-
-// a[disabled], button[disabled], [ion-button][disabled]{
-//     position:absolute;
-//     background-color:white;
-// border-radius:5px;
-// margin-bottom:6%;
-// margin-top:5%;
-
-// top:100%;
-// width:40%;
-// height:30%;
-// background-color: #6d6d6d;
-// opacity:1;
-// color:white;
-// font-family:'lado' sans-serif;
-// }
-// .item-ios {
-//     font-size: 1.0rem
-// }
-// #pres{
-//     h3{
-//         margin-top:-1%;
-//         letter-spacing:0.09em
-
-//     }
-//     width:100%;
-//     position : relative;
-//     top:10%;
-// display:flex;
-// justify-content: center;
-// flex-direction: column;
-// align-content: center;
-// align-items: center;
-// font-family:'lado' sans-serif;
-// color:white}
-
-#fin{
-//     margin-top:5%;
-//     width:100%;
-//     position : absolute;
-//     top:130%;
-// display:flex;
-// justify-content: center;
-// flex-direction: column;
-// align-content: center;
-// align-items: center;
-// font-family:'lado' sans-serif;
-color:white
-}
-// #footer{
-//     #ag{
-//         margin-top:-2%
-//     }
-//     width:100%;
-//     position : relative;
-//     top:45%;
-// display:flex;
-// justify-content: center;
-// flex-direction: column;
-// align-content: center;
-// align-items: center;
-// font-family:'lado' sans-serif;
-// color:white;
-// font-size:10px;
-// }
-// form{
-//     display:flex;
-//     justify-content: center;
-//     align-items: center;
-//     align-content: center;
-//     top:10%;
-//     position: relative;
-// }
-// a{
-//     color:white;
-//     text-decoration: none;
-    
-// }
+    .infoun {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center
+    }
+    #login {
+        position: relative;
+        top: 9%;
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        #footer {
+            font-size: 10px;
+            margin-top: 6%;
+        }
+        .fermer {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: white;
+            color: black;
+            width: 50px;
+            height: 30px;
+            font-family: 'lado', sans-serif;
+            font-size: 13px;
+        }
+        #tuto {
+            margin-top: 3px;
+            margin-bottom: 10px;
+        }
+        .button {
+            border-radius: 4px;
+            margin-top: 5%;
+            margin-bottom: 10%;
+            margin: auto;
+            width: 40%;
+            height: 30PX;
+            background: linear-gradient(45deg, #6d6d6d 0%, #6d6d6d 50%, #8a8a8a 51%, #8a8a8a 100%);
+            opacity: 1;
+            color: white;
+            font-family: 'lado' sans-serif;
+        }
+        #email {
+            background-color: white;
+            border-radius: 7px;
+            margin-bottom: 5%;
+            height: 10px;
+        }
+        #password {
+            background-color: white;
+            border-radius: 7px;
+            margin-bottom: 5%;
+            height: 10px;
+        }
+        display:flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        align-content: center;
+        text-align: center;
+        color:white;
+        position:relative;
+        font-family:'lado' sans-serif;
+    }
+    @media(min-height: 750px) {
+        #login {
+            top: 13%;
+        }
+        #footer {
+            margin-top: 50%
+        }
+    }
+    @media(min-height: 300px) {
+        #image {
+            width: 100%
+        }
+    }
+    // #email{
+    // background-color:white;
+    // border-radius:7px;
+    // margin-bottom:5%;
+    // height:10px;
+    // }
+    // .list-ios[inset]{
+    //     margin: 0px
+    // }
+    // #password{
+    //     background-color:white;
+    // border-radius:7px;
+    // }
+    // ion-list{
+    //     position:relative;
+    //     top:40%;
+    //     padding: 0%;
+    //     width:70%;
+    //     margin:0%;
+    //     display:flex;
+    //     flex-direction:column;
+    //     justify-content: center;
+    // }
+    // a[disabled], button[disabled], [ion-button][disabled]{
+    //     position:absolute;
+    //     background-color:white;
+    // border-radius:5px;
+    // margin-bottom:6%;
+    // margin-top:5%;
+    // top:100%;
+    // width:40%;
+    // height:30%;
+    // background-color: #6d6d6d;
+    // opacity:1;
+    // color:white;
+    // font-family:'lado' sans-serif;
+    // }
+    // .item-ios {
+    //     font-size: 1.0rem
+    // }
+    // #pres{
+    //     h3{
+    //         margin-top:-1%;
+    //         letter-spacing:0.09em
+    //     }
+    //     width:100%;
+    //     position : relative;
+    //     top:10%;
+    // display:flex;
+    // justify-content: center;
+    // flex-direction: column;
+    // align-content: center;
+    // align-items: center;
+    // font-family:'lado' sans-serif;
+    // color:white}
+    #fin {
+        //     margin-top:5%;
+        //     width:100%;
+        //     position : absolute;
+        //     top:130%;
+        // display:flex;
+        // justify-content: center;
+        // flex-direction: column;
+        // align-content: center;
+        // align-items: center;
+        // font-family:'lado' sans-serif;
+        color: white
+    }
+    // #footer{
+    //     #ag{
+    //         margin-top:-2%
+    //     }
+    //     width:100%;
+    //     position : relative;
+    //     top:45%;
+    // display:flex;
+    // justify-content: center;
+    // flex-direction: column;
+    // align-content: center;
+    // align-items: center;
+    // font-family:'lado' sans-serif;
+    // color:white;
+    // font-size:10px;
+    // }
+    // form{
+    //     display:flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     align-content: center;
+    //     top:10%;
+    //     position: relative;
+    // }
+    // a{
+    //     color:white;
+    //     text-decoration: none;
+    // }
 }

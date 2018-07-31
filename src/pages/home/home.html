@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar id="navbar">
     <ion-title id="title">
-La carte de nos partenaires    </ion-title>
+      La carte de nos partenaires </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)='toggleSearch()'>
         <ion-icon name="search"></ion-icon>
@@ -21,7 +21,9 @@ La carte de nos partenaires    </ion-title>
 <div class="currentitem" *ngIf="currentregional">
   <button ion-item no-lines (click)="viewPlace(currentregional.title)">
     <h2>{{ currentregional.title }}</h2>
-    <ion-note item-right icon-only><ion-icon name="ios-arrow-forward"></ion-icon></ion-note>
+    <ion-note item-right icon-only>
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </ion-note>
   </button>
 </div>
 
@@ -33,46 +35,48 @@ La carte de nos partenaires    </ion-title>
     <div id="map" #map></div>
   </div>
   <div id="navmenu">
-      <div id="listenav" (click)='clickliste()' class="navbas">
-          <img src="./assets/icon/liste.png">
+    <div id="listenav" (click)='clickliste()' class="navbas">
+      <img src="./assets/icon/liste.png">
+    </div>
+
+    <div id="mapinav" (click)='clickmap()' class="navbas">
+      <img src="./assets/icon/map.png">
+
+    </div>
+
+    <div id="divsearch">
+      <div id="searchnav" (click)='clicksearch()' class="navbas">
+        <ion-icon name="ios-search"></ion-icon>
       </div>
+    </div>
 
-      <div id="mapinav" (click)='clickmap()' class="navbas">
-          <img src="./assets/icon/map.png" >
+    <div id="cartenav" (click)='clickcarte()' class="navbas">
+      <img src="./assets/icon/carte.png">
+    </div>
 
-      </div>
+    <div id="conav" (click)='clickexit()' class="navbas">
+      <img src="./assets/icon/exit.png">
+    </div>
 
-      <div id="divsearch"> <div id="searchnav" (click)='clicksearch()' class="navbas"><ion-icon name="ios-search"></ion-icon></div></div>
 
-      <div id="cartenav" (click)='clickcarte()' class="navbas">
-          <img src="./assets/icon/carte.png" >
-      </div>
-
-      <div id="conav"  (click)='clickexit()'class="navbas">
-          <img src="./assets/icon/exit.png">
-      </div>
-      
-  
   </div>
   <section id="secserach">
-  <div id="pagesearch">
-    <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
-      <ion-option *ngFor="let ages of tdage" value="{{ages.id}}" >{{ages.name}}</ion-option>
-  </ion-select>
-  <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
-      <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
-  </ion-select>
-  <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
-      <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
-  </ion-select>  
-      
- 
+    <div id="pagesearch">
+      <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
+        <ion-option *ngFor="let ages of tdage" value="{{ages.id}}">{{ages.name}}</ion-option>
+      </ion-select>
+      <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
+        <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
+      </ion-select>
+      <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
+        <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
+      </ion-select>
+
+
     </div>
   </section>
-<div (click)='clickfond()' id="fond"></div>
+  <div (click)='clickfond()' id="fond"></div>
   <div (click)='clicklegendes()' id="legendes"></div>
 
-  
+
 </ion-content>
-
-

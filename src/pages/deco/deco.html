@@ -1,44 +1,47 @@
- 
 <ion-content padding class="auth-form">
-  <img src="./assets/img/logo.png">
-  <section id="login">
-  <div id="pres">
-    <p>Merci d'être venu sur l'application</p>
-    <h3>SORTIR LES KIDS !</h3>
+    <img src="./assets/img/logo.png">
+    <section id="login">
+        <div id="pres">
+            <p>Merci d'être venu sur l'application</p>
+            <h3>SORTIR LES KIDS !</h3>
 
 
-  </div>
+        </div>
 
 
-  <button ion-button full id="button" (click)="logOut()"  type="submit">Déconnexion</button>
+        <button ion-button full id="button" (click)="logOut()" type="submit">Déconnexion</button>
 
 
-  <div id="navmenu">
-    <div id="listenav" (click)='clickliste()' class="navbas">
-        <img src="./assets/icon/liste.png">
-    </div>
+        <div id="navmenu">
+            <div id="listenav" (click)='clickliste()' class="navbas">
+                <img src="./assets/icon/liste.png">
+            </div>
 
-    <div id="mapinav" (click)='clickmap()' class="navbas">
-        <img src="./assets/icon/map.png" >
+            <div id="mapinav" (click)='clickmap()' class="navbas">
+                <img src="./assets/icon/map.png">
 
-    </div>
+            </div>
 
-    <div id="divsearch"> <div id="searchnav" (click)='clicksearch()' class="navbas"><ion-icon name="ios-search"></ion-icon></div></div>
+            <div id="divsearch">
+                <div id="searchnav" (click)='clicksearch()' class="navbas">
+                    <ion-icon name="ios-search"></ion-icon>
+                </div>
+            </div>
 
-    <div id="cartenav" (click)='clickcarte()' class="navbas">
-        <img src="./assets/icon/carte.png" >
-    </div>
+            <div id="cartenav" (click)='clickcarte()' class="navbas">
+                <img src="./assets/icon/carte.png">
+            </div>
 
-    <div id="conav"  (click)='clickexit()'class="navbas">
-        <img src="./assets/icon/exit.png">
-    </div>
-    
+            <div id="conav" (click)='clickexit()' class="navbas">
+                <img src="./assets/icon/exit.png">
+            </div>
 
-</div>
- 
-  <div id="footer">
-    <p>Design & Création par </p>
-    <p id="ag">AGENCE POINT COM </p>
-  </div>
-</section>
+
+        </div>
+
+        <div id="footer">
+            <p>Design & Création par </p>
+            <p id="ag">AGENCE POINT COM </p>
+        </div>
+    </section>
 </ion-content>

@@ -6,125 +6,131 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-   
-      <div id="butto">
-          
-          <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
-              <ion-option *ngFor="let ages of tdage" value="{{ages.id}}" >{{ages.name}}</ion-option>
-          </ion-select>
-          <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
-              <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
-          </ion-select>
-          <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
-              <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
-          </ion-select>  
-          
+    <ion-navbar>
 
-              </div>
-            
-  </ion-navbar>
+        <div id="butto">
+
+            <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
+                <ion-option *ngFor="let ages of tdage" value="{{ages.id}}">{{ages.name}}</ion-option>
+            </ion-select>
+            <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
+                <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
+            </ion-select>
+            <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
+                <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
+            </ion-select>
+
+
+        </div>
+
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <div id="affichage">
-   <div id="partenairee">
-     
-    <ion-row *ngFor="let partenaires of partenaire_display"  >
-      <div class="info" *ngIf="!teste" id={{partenaires.id}} #pipi (click)="clickshow($event)"  >
-            
-        <img class="imagepart" src="{{partenaires.image}}">
-        
-            <div class=infoun>
-                <span [innerHtml]="partenaires.title.rendered" class="hinfo">{{partenaires.title.rendered}}</span>
+    <div id="affichage">
+        <div id="partenairee">
 
-                <p class="pinfo"> {{partenaires.acf.adresse}}</p>
-                <p class="pinfo"> {{partenaires.acf.cp_ville}}</p>
-                <p class="pinfo"> {{partenaires.acf.telephone}}</p>
-                <p class="pinfo"> {{partenaires.acf.site_web}}</p>
-             </div>
-      </div>
-      <div class="divdesc" #caca id="1{{partenaires.id}}">
-            <p class="fermer" (click)="fermer()">X</p>
-            <img class="image_appli" src="{{partenaires.acf.image_appli}}"> <br>
-            <div class="ecriture">
+            <ion-row *ngFor="let partenaires of partenaire_display">
+                <div class="info" *ngIf="!teste" id={{partenaires.id}} #pipi (click)="clickshow($event)">
 
-        <span  [innerHtml]="partenaires.title.rendered" class="descriptiontitre">{{partenaires.title.rendered}}</span> 
+                    <img class="imagepart" src="{{partenaires.image}}">
 
-            
-        <span [innerHtml]="partenaires.acf.horaires" class="description">
+                    <div class=infoun>
+                        <span [innerHtml]="partenaires.title.rendered" class="hinfo">{{partenaires.title.rendered}}</span>
 
-            {{partenaires.acf.horaires}}
-        </span>
-        <span [innerHtml]="partenaires.acf.tarifs" class="description">
+                        <p class="pinfo"> {{partenaires.acf.adresse}}</p>
+                        <p class="pinfo"> {{partenaires.acf.cp_ville}}</p>
+                        <p class="pinfo"> {{partenaires.acf.telephone}}</p>
+                        <p class="pinfo"> {{partenaires.acf.site_web}}</p>
+                    </div>
+                </div>
+                <div class="divdesc" #caca id="1{{partenaires.id}}">
+                    <p class="fermer" (click)="fermer()">X</p>
+                    <img class="image_appli" src="{{partenaires.acf.image_appli}}">
+                    <br>
+                    <div class="ecriture">
+                        <p [innerHtml]="partenaires.acf.offre"> {{partenaires.acf.offre}}</p>
+                        <span [innerHtml]="partenaires.title.rendered" class="descriptiontitre">{{partenaires.title.rendered}}</span>
 
-             {{partenaires.acf.tarifs}}
-        </span>
-    
-        <div>
-            
-            <p [innerHtml]="partenaires.acf.offre"> {{partenaires.acf.offre}}</p> 
-            <button (click)="jyete()" class="aller"> J'y ai été!<ion-icon name="ios-people"></ion-icon> {{partenaires.martygeocoderlatlng.simplefavorites_count}}  </button>.
-        </div> 
+
+                        <span [innerHtml]="partenaires.acf.horaires" class="description">
+
+                            {{partenaires.acf.horaires}}
+                        </span>
+                        <span [innerHtml]="partenaires.acf.tarifs" class="description">
+
+                            {{partenaires.acf.tarifs}}
+                        </span>
+
+                        <div>
+
+                            <p [innerHtml]="partenaires.acf.offre"> {{partenaires.acf.offre}}</p>
+                            <button (click)="jyete()" class="aller"> J'y ai été!
+                                <ion-icon name="ios-people"></ion-icon> {{partenaires.martygeocoderlatlng.simplefavorites_count}} </button>.
+                        </div>
+                    </div>
+                </div>
+            </ion-row>
+
+        </div>
     </div>
-         </div>
-    </ion-row>
-      
-    </div>
-</div>
-      <ion-scroll  scrollX="true">
-        </ion-scroll>
- 
-  
+    <ion-scroll scrollX="true">
+    </ion-scroll>
 
 
-  <section id="secserach">
-   
+
+
+    <section id="secserach">
 
 
 
 
 
-  <div id="pagesearch">
-   <ion-select multiple="true" class="select coucou" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
-              <ion-option *ngFor="let ages of tdage" value="{{ages.id}}" >{{ages.name}}</ion-option>
-          </ion-select>
-          <ion-select multiple="true" class="select coucou" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
-              <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
-          </ion-select>
-          <ion-select multiple="true" class="select coucou" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
-              <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
-          </ion-select>  
-      
-       
-      </div>
+
+        <div id="pagesearch">
+            <ion-select multiple="true" class="select coucou" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
+                <ion-option *ngFor="let ages of tdage" value="{{ages.id}}">{{ages.name}}</ion-option>
+            </ion-select>
+            <ion-select multiple="true" class="select coucou" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
+                <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
+            </ion-select>
+            <ion-select multiple="true" class="select coucou" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
+                <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
+            </ion-select>
+
+
+        </div>
     </section>
-      <div (click)='clickfond()' id="fond"></div>
-      <div id="navmenu">
+    <div (click)='clickfond()' id="fond"></div>
+    <div id="navmenu">
         <div id="listenav" (click)='clickliste()' class="navbas">
             <img src="./assets/icon/liste.png">
         </div>
-      
+
         <div id="mapinav" (click)='clickmap()' class="navbas">
-            <img src="./assets/icon/map.png" >
-      
+            <img src="./assets/icon/map.png">
+
         </div>
-      
-        <div id="divsearch"> <div id="searchnav" (click)='clicksearch()' class="navbas"><ion-icon name="ios-search"></ion-icon></div></div>
-      
+
+        <div id="divsearch">
+            <div id="searchnav" (click)='clicksearch()' class="navbas">
+                <ion-icon name="ios-search"></ion-icon>
+            </div>
+        </div>
+
         <div id="cartenav" (click)='clickcarte()' class="navbas">
-            <img src="./assets/icon/carte.png" >
+            <img src="./assets/icon/carte.png">
         </div>
-      
-        <div id="conav"  (click)='clickexit()'class="navbas">
+
+        <div id="conav" (click)='clickexit()' class="navbas">
             <img src="./assets/icon/exit.png">
         </div>
-        
-      </div>
-  
 
- 
+    </div>
+
+
+
 
 </ion-content>

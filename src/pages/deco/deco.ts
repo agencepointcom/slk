@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthenticationService } from '../../services/authentication.service';
 import { LoginPage } from '../login/login';
+import { HomePage } from '../home/home';
+import { CartePage } from '../carte/carte';
+import { ListePage } from '../liste/liste';
 
 /**
  * Generated class for the DecoPage page.
@@ -16,54 +19,72 @@ import { LoginPage } from '../login/login';
   templateUrl: 'deco.html',
 })
 export class DecoPage {
+  userdata: any;
+  homePage: any;
+  cartePage: any;
+  ListPage: any
 
-  
+
   constructor(public nav: NavController,
-               public navParams: NavParams,
-              public authenticationService:AuthenticationService,
-             ) {
+    public navParams: NavParams,
+    public authenticationService: AuthenticationService,
+  ) {
+    this.userdata = navParams.data.userdata;
+    this.homePage = HomePage
+    this.cartePage = CartePage
+    this.ListPage = ListePage
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DecoPage');
-  }
-  logOut(){
     this.authenticationService.logOut()
-    .then(
-      res => this.nav.push(LoginPage),
-      err => console.log('Error in log out')
-    )
+      .then(
+        res => this.nav.push(LoginPage),
+        err => console.log('Error in log out')
+      )
+    this.nav.push(this.ListPage, {
+    })
   }
-  clickliste(){
-    this.nav.setRoot('ListePage');
-    ;
+  logOut() {
+    this.authenticationService.logOut()
+      .then(
+        res => this.nav.push(LoginPage),
+        err => console.log('Error in log out')
+      )
+  }
+  clickliste() {
+    this.nav.push(this.ListPage, {
+      userdata: this.userdata
+    })
 
 
   }
-  clickmap(){
-    this.nav.setRoot('HomePage');
-
+  clickmap() {
+    this.nav.push(this.homePage, {
+      userdata: this.userdata
+    })
   }
-  boolean =false
-  clicksearch(){
-    if(this.boolean==false){
-    this.boolean=true
-    document.getElementById('pagesearch').style.display = "flex";
-    document.getElementById('fond').style.display = "flex";
+  boolean = false
+  clicksearch() {
+    if (this.boolean == false) {
+      this.boolean = true
+      document.getElementById('pagesearch').style.display = "flex";
+      document.getElementById('fond').style.display = "flex";
     }
-    else{
-      this.boolean=false
+    else {
+      this.boolean = false
       document.getElementById('pagesearch').style.display = "none";
       document.getElementById('fond').style.display = "none";
     }
 
   }
-  clickcarte(){
-    this.nav.setRoot('CartePage');
+  clickcarte() {
+    this.nav.push(this.cartePage, {
+      userdata: this.userdata
+    })
 
   }
-  clickexit(){
-    
+  clickexit() {
+
     this.nav.setRoot('LoginPage');
 
   }

@@ -1,6 +1,6 @@
 import { identifierModuleUrl } from '@angular/compiler/compiler';
 import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
-import { ActionSheetController, AlertController, App, LoadingController, NavController, Platform, ToastController, IonicPage } from 'ionic-angular';
+import { ActionSheetController, AlertController, App, LoadingController, NavController, Platform, ToastController, IonicPage, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Observable } from 'rxjs/Observable';
@@ -15,6 +15,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { DecoPage } from '../deco/deco';
 import { LoginPage } from '../login/login';
 import { WordpressService } from '../../services/wordpress.service';
+import { ListePage } from '../liste/liste';
+import { CartePage } from '../carte/carte';
 
 declare var google: any;
 declare var MarkerClusterer: any;
@@ -25,14 +27,19 @@ declare var MarkerClusterer: any;
   templateUrl: 'home.html',
 })
 export class HomePage {
-  partenaire: Array<any> = new Array<any>();string: any;
+  partenaire: Array<any> = new Array<any>(); string: any;
   latLng: Array<any> = new Array<any>();
   value: any;
   //je definie loc comme un tableau
   loc: Array<any> = new Array<any>();
-  partenaire_display:  Array<any> = new Array<any>();
+  partenaire_display: Array<any> = new Array<any>();
   title: any;
-;
+  userdata: any;
+  listPage: any;
+  cartePage: any;
+  decoPage: any;
+  listePage: any;
+  ;
   partenaire_marker: Array<any> = new Array<any>();
   locations: any;
   @ViewChild('map') mapElement: ElementRef;
@@ -47,20 +54,20 @@ export class HomePage {
   search: boolean = false;
   error: any;
   switch: string = "map";
-  markercluster:""
+  markercluster: ""
   regionals: any = [];
   currentregional: any;
   markerCluster: any;
   mapLoaded: any;
   morePagesAvailable: boolean = true;
-  loggedUser: boolean=false;
-  activite:Array<any> = new Array<any>();
-lieu: Array<any> = new Array<any>();
-tdage:Array<any> = new Array<any>();
+  loggedUser: boolean = false;
+  activite: Array<any> = new Array<any>();
+  lieu: Array<any> = new Array<any>();
+  tdage: Array<any> = new Array<any>();
 
-ageselected='';
-catselected='';
-lieuselected='';
+  ageselected = '';
+  catselected = '';
+  lieuselected = '';
 
 
 
@@ -77,200 +84,206 @@ lieuselected='';
     public geolocation: Geolocation,
     private androidPermissions: AndroidPermissions,
     public authenticationService: AuthenticationService,
-    public wordpressService: WordpressService
+    public wordpressService: WordpressService,
+    public navParams: NavParams
   ) {
     this.platform.ready().then(() => this.loadMaps());
     console.log('Hello GoogleMapsCluster Provider');
     //permission localisation 
     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
-      result => console.log('Has permission?',result.hasPermission),
+      result => console.log('Has permission?', result.hasPermission),
       err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
     );
-    
+
     this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION, this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
-}
+    this.userdata = navParams.data.userdata;
+    this.listePage = ListePage
+    this.cartePage = CartePage
+    this.decoPage = DecoPage
+
+  }
 
 
-ionViewWillEnter() {
-  this.authenticationService.getUser()
-  .then(
-    (data) => {
-    this.loggedUser = true;
-    console.log(this.loggedUser) ;
+  ionViewWillEnter() {
+    this.authenticationService.getUser()
+      .then(
+        (data) => {
+          this.loggedUser = true;
+          console.log(this.loggedUser);
 
-    },
-   (error) => {
-     this.loggedUser = false;
-    console.log(this.loggedUser)
- 
-   }
-  ); 
-  
+        },
+        (error) => {
+          this.loggedUser = false;
+          console.log(this.loggedUser)
+
+        }
+      );
+
     console.log('ionViewDidLoad ListePage');
-  
-  
+
+
     Observable.forkJoin(
-      this.getActivite()).subscribe(data=> {
-        let item= data[0]
-        for( let i = 0; i < item.length; i++){
-             let items= item[i]
+      this.getActivite()).subscribe(data => {
+        let item = data[0]
+        for (let i = 0; i < item.length; i++) {
+          let items = item[i]
 
           this.activite.push(items);
         }
-      
+
       })
     Observable.forkJoin(
-      this.getLieu()).subscribe(data=> {
-          let items = data[0]
-        for( let i = 0; i < items.length; i++){
+      this.getLieu()).subscribe(data => {
+        let items = data[0]
+        for (let i = 0; i < items.length; i++) {
           let item = items[i];
-          if(item){
+          if (item) {
             this.lieu.push(item);
           }
         }
-      
+
       })
-      Observable.forkJoin(
-         
-        this.getAge()).subscribe(data=> {
-          let items = data[0]
-          for( let i = 0; i < items.length; i++){
-            let item = items[i];
-            
-            if(item){
-              this.tdage.push(item);
-            }
-            
+    Observable.forkJoin(
+
+      this.getAge()).subscribe(data => {
+        let items = data[0]
+        for (let i = 0; i < items.length; i++) {
+          let item = items[i];
+
+          if (item) {
+            this.tdage.push(item);
           }
-        
-        })
-          Observable.forkJoin(
-            this.getPartenaire()).subscribe(data=> {
-              let item = data[0];
-              console.log(item)
-              for( let i = 0; i < item.length; i++){
-                
-                console.log(this.partenaire_display);
-            
-                  
-                this.title= item[i].title.redenred
-                var itemgeo = item[i].martygeocoderlatlng.martygeocoderlatlng
-                if(itemgeo){
-                //je converti mon tableau en string pour pouvoir faire le replace
-                var itemstring = itemgeo.toString();
 
-                itemstring = itemstring.replace(")", ""); //"{42.827682, 2.225718899999947"
-                itemstring = itemstring.replace("(", ""); //"42.827682, 2.225718899999947"
-                let splited = itemstring.split(","); // [ 42.827682, 2.225718899999947 ]
-                let objet = {
-                  lat: parseFloat( splited[0] ),
-                  lng: parseFloat( splited[1] )
-                };
+        }
 
-                let items = item[i];
-                items.location = objet;
+      })
+    Observable.forkJoin(
+      this.getPartenaire()).subscribe(data => {
+        let item = data[0];
+        console.log(item)
+        for (let i = 0; i < item.length; i++) {
 
-                this.partenaire.push(items);
-                this.partenaire_display.push(items);
-                
-              }
-            }   
-            this.addMarkerMap()  
-    })
+          console.log(this.partenaire_display);
+
+
+          this.title = item[i].title.redenred
+          var itemgeo = item[i].martygeocoderlatlng.martygeocoderlatlng
+          if (itemgeo) {
+            //je converti mon tableau en string pour pouvoir faire le replace
+            var itemstring = itemgeo.toString();
+
+            itemstring = itemstring.replace(")", ""); //"{42.827682, 2.225718899999947"
+            itemstring = itemstring.replace("(", ""); //"42.827682, 2.225718899999947"
+            let splited = itemstring.split(","); // [ 42.827682, 2.225718899999947 ]
+            let objet = {
+              lat: parseFloat(splited[0]),
+              lng: parseFloat(splited[1])
+            };
+
+            let items = item[i];
+            items.location = objet;
+
+            this.partenaire.push(items);
+            this.partenaire_display.push(items);
+
+          }
+        }
+        this.addMarkerMap()
+      })
   }
-  
-  getActivite(){
+
+  getActivite() {
 
     return this.wordpressService.getActivites(this.activite);
 
   }
 
-  getLieu(){
+  getLieu() {
 
     return this.wordpressService.getLieu(this.lieu);
 
   }
 
- 
 
-  getAge(){
+
+  getAge() {
 
     return this.wordpressService.getAge(this.tdage);
 
   }
-  getPartenaire(){
+  getPartenaire() {
     return this.wordpressService.getPartenaire(this.partenaire);
 
   }
 
 
-      //ajoue marker
-      addMarkerMap(){
-  
-        for( let partenaire of this.partenaire_display){
-      
-          var title =  partenaire.title.rendered
-          var horaire = partenaire.acf.horaires
-          var tarif =partenaire.acf.tarifs
-          var offre =partenaire.acf.offre
-        
-          partenaire.marker= new google.maps.Marker({
-            zoom:10,
-            position: partenaire.location,
-            map: this.map,
-          })
-          partenaire.marker.addListener('click', function() {
-            partenaire.infowindow.open(this.map, partenaire.marker);
-          });
-   
-       
-          partenaire.infowindow = new google.maps.InfoWindow({
-            content: "<div class='essai'> <img class='image_appli' src='"+partenaire.acf.image_appli+"'></br>"  +  title + horaire + tarif +offre+ "</div>",
-            maxWidth: 315,
-            
-          });
-     
-        
-        
-         
-        }
-        
-        
-        
-      
-      }
-      
-      clearMarkerMap() {
-        for( let part of this.partenaire ){
-          part.marker.setVisible( false );
-        }
-      }
-    
-      displayMarkerMap() {
-        for( let part of this.partenaire_display){ 
-          part.marker.setVisible( true );
-        }
-      }
-    
-addCluster(map){
- 
-  if(google.maps){
+  //ajoue marker
+  addMarkerMap() {
+
+    for (let partenaire of this.partenaire_display) {
+
+      var title = partenaire.title.rendered
+      var horaire = partenaire.acf.horaires
+      var tarif = partenaire.acf.tarifs
+      var offre = partenaire.acf.offre
+
+      partenaire.marker = new google.maps.Marker({
+        zoom: 10,
+        position: partenaire.location,
+        map: this.map,
+      })
+      partenaire.marker.addListener('click', function () {
+        partenaire.infowindow.open(this.map, partenaire.marker);
+      });
+
+
+      partenaire.infowindow = new google.maps.InfoWindow({
+        content: "<div class='essai'> <img class='image_appli' src='" + partenaire.acf.image_appli + "'></br>" +offre+ title + horaire + tarif + offre + "</div>",
+        maxWidth: 315,
+
+      });
+
+
+
+
+    }
+
+
+
+
+  }
+
+  clearMarkerMap() {
+    for (let part of this.partenaire) {
+      part.marker.setVisible(false);
+    }
+  }
+
+  displayMarkerMap() {
+    for (let part of this.partenaire_display) {
+      part.marker.setVisible(true);
+    }
+  }
+
+  addCluster(map) {
+
+    if (google.maps) {
 
       //Convert locations into array of markers
       let markers = this.locations.map((location) => {
-          return new google.maps.Marker({
-              position: location,
-              label: "Hello!"
-          });
+        return new google.maps.Marker({
+          position: location,
+          label: "Hello!"
+        });
       });
 
-      this.markerCluster = new MarkerClusterer(map, markers, {imagePath: 'assets/m'});
+      this.markerCluster = new MarkerClusterer(map, markers, { imagePath: 'assets/m' });
 
-  } else {
+    } else {
       console.warn('Google maps needs to be loaded before adding a cluster');
-  }
+    }
 
-}
+  }
 
 
   viewPlace(id) {
@@ -281,10 +294,10 @@ addCluster(map){
   loadMaps() {
     if (!!google) {
       this.initializeMap();
-           this.initAutocomplete();
-     ;
+      this.initAutocomplete();
+      ;
 
-    //  this.initAutocomplete();
+      //  this.initAutocomplete();
     } else {
       this.errorAlert('Error', 'Something went wrong with the Internet Connection. Please check your Internet.')
     }
@@ -367,7 +380,7 @@ addCluster(map){
   initializeMap() {
     console.log(this.loggedUser)
 
-    var myLatLng = {lat: 42.6990296, lng: 2.8342897};
+    var myLatLng = { lat: 42.6990296, lng: 2.8342897 };
 
     this.zone.run(() => {
       var mapEle = this.mapElement.nativeElement;
@@ -383,7 +396,7 @@ addCluster(map){
       });
 
 
-    
+
 
       google.maps.event.addListener(this.map, 'bounds_changed', () => {
         this.zone.run(() => {
@@ -391,18 +404,18 @@ addCluster(map){
         });
       });
 
-   
+
       this.addMarkerMap()
     });
-        // Create an array of alphabetical characters
+    // Create an array of alphabetical characters
 
     // Add some markers to the map.
     // Note: The code uses the JavaScript Array.prototype.map() method to
     // create an array of markers based on a given "locations" array.
     // The map() method here has nothing to do with the Google Maps API.
 
-    
-    
+
+
   }
 
   //Center zoom
@@ -450,8 +463,8 @@ addCluster(map){
   }
 
   choosePosition() {
-  
-    console.log(this.loggedUser)  
+
+    console.log(this.loggedUser)
     this.storage.get('Dernière position').then((result) => {
       if (result) {
         let actionSheet = this.actionSheetCtrl.create({
@@ -488,10 +501,10 @@ addCluster(map){
   }
 
   // go show currrent location
-  getCurrentPosition()    {
+  getCurrentPosition() {
     let image = {
-      url : 'C:/MAMP/htdocs/TESTT/kids/map/src/assets/icon',
-    
+      url: 'C:/MAMP/htdocs/TESTT/kids/map/src/assets/icon',
+
     }
     console.log(image)
     // attente recherche de votre position
@@ -499,35 +512,35 @@ addCluster(map){
       content: 'Recherche de votre position ...'
     });
     this.loading.present();
-//temps 10 seconde
+    //temps 10 seconde
     let locationOptions = { timeout: 5000, enableHighAccuracy: true };
     //si le navigateur trouve la position
-    if(navigator.geolocation){
-      var options={
+    if (navigator.geolocation) {
+      var options = {
         // enableHighAccuracy est un Boolean qui indique que l'application souhaite recevoir les meilleurs résultats possibles
         enableHighAccuracy: true
 
       }
       navigator.geolocation.getCurrentPosition(
-        
+
         (position) => {
           //
           this.loading.dismiss().then(() => {
-  
+
             this.showToast('Position trouvée!');
-  
+
             console.log(position.coords.latitude, position.coords.longitude);
             let myPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             let options = {
               center: myPos,
               zoom: 11,
-              icon:image
-              
+              icon: image
+
             };
             console.log(image)
             this.map.setOptions(options);
             this.addMarker(myPos, "Mein Standort!");
-  
+
             let alert = this.alertCtrl.create({
               title: 'Position',
               message: 'Voulez vous sauvegarder la position?',
@@ -548,13 +561,13 @@ addCluster(map){
               ]
             });
             alert.present();
-  
+
           });
         },
         (error) => {
           this.loading.dismiss().then(() => {
             this.showToast("Position non trouvée. Merci d'activer votre GPS!");
-  
+
             console.log(error);
           }, options);
         }
@@ -573,15 +586,15 @@ addCluster(map){
 
   addMarker(position, content) {
     let image = {
-      url : './assets/icon/moi.png',
-    
+      url: './assets/icon/moi.png',
+
     }
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: position,
-    icon:image,
- 
+      icon: image,
+
     });
 
     this.addInfoWindow(marker, content);
@@ -598,245 +611,249 @@ addCluster(map){
     });
   }
 
-  
-  clickliste(){
-    this.nav.setRoot('ListePage');
-    ;
+
+  clickliste() {
+    this.nav.push(this.listePage, {
+      userdata: this.userdata
+    })
 
 
-  }
-  clickmap(){
-    this.nav.setRoot('HomePage');
 
   }
-  boolean =false
-  clicksearch(){
-    if(this.boolean==false){
-    this.boolean=true
-    document.getElementById('pagesearch').style.display = "flex";
-    document.getElementById('fond').style.display = "flex";
+
+  boolean = false
+  clicksearch() {
+    if (this.boolean == false) {
+      this.boolean = true
+      document.getElementById('pagesearch').style.display = "flex";
+      document.getElementById('fond').style.display = "flex";
     }
-    else{
-      this.boolean=false
+    else {
+      this.boolean = false
       document.getElementById('pagesearch').style.display = "none";
       document.getElementById('fond').style.display = "none";
     }
 
   }
-  clickcarte(){
-    this.nav.setRoot('CartePage');
+  clickcarte() {
 
+    this.nav.push(this.cartePage, {
+      userdata: this.userdata
+    })
   }
-  clickexit(){
+  clickexit() {
     this.authenticationService.getUser()
-    .then(
-      (data) => {
-      this.loggedUser = true;
-      console.log(this.loggedUser) ;
-      this.nav.setRoot(DecoPage);
+      .then(
+        (data) => {
+          this.loggedUser = true;
+          console.log(this.loggedUser);
+          this.nav.push(this.decoPage, {
+            userdata: this.userdata
+          })
 
 
-      },
-      (error) => {this.loggedUser = false;
-      this.nav.setRoot(LoginPage);
+        },
+        (error) => {
+        this.loggedUser = false;
+          this.nav.setRoot(LoginPage);
 
-      }
+        }
 
- 
-    );
+
+      );
 
   }
-  clickfond(){
-    this.boolean=false
+  clickfond() {
+    this.boolean = false
     document.getElementById('pagesearch').style.display = "none";
     document.getElementById('fond').style.display = "none";
     document.getElementById('legendes').style.left = "-22%";
     document.getElementById('legendes').style.transition = "1s";
   }
-  clicklegende(){
+  clicklegende() {
 
     document.getElementById('legendes').style.top = "25%";
     document.getElementById('legendes').style.transition = "1s";
+  }
+  clicklegendes() {
+    document.getElementById('legendes').style.top = "100%";
+    document.getElementById('legendes').style.transition = "1s";
+  }
+  agesearch = false
+  catsearch = false
+  locsearch = false
+  clickagesearch() {
+    console.log('trolololo')
+    if (this.agesearch == false) {
+      this.agesearch = true
+      this.catsearch = false
+      this.locsearch = false
+
+      document.getElementById('clickag').style.height = "80px";
+      document.getElementById('clickag').style.transition = "1s";
+      document.getElementById('clickcategori').style.height = "0px";
+      document.getElementById('clicklocalisatio').style.height = "0px";
     }
-   clicklegendes(){
-      document.getElementById('legendes').style.top = "100%";
-      document.getElementById('legendes').style.transition = "1s";
-   }
-   agesearch=false
-catsearch=false
-locsearch=false
-clickagesearch(){
-  console.log('trolololo')
-  if(this.agesearch==false){
-    this.agesearch=true
-    this.catsearch=false
-    this.locsearch=false
+    else {
+      this.agesearch = false
+      document.getElementById('clickag').style.height = "0px";
+      document.getElementById('clickag').style.transition = "1s";
+      this.catsearch = false
+      this.locsearch = false
 
-    document.getElementById('clickag').style.height = "80px";
-    document.getElementById('clickag').style.transition = "1s";
-    document.getElementById('clickcategori').style.height = "0px";
-    document.getElementById('clicklocalisatio').style.height = "0px";
-  }
-  else{
-    this.agesearch=false
-    document.getElementById('clickag').style.height = "0px";
-    document.getElementById('clickag').style.transition = "1s";
-    this.catsearch=false
-    this.locsearch=false
+
+    }
 
 
   }
 
-
-}
-
-clickcatsearch(){
-if(this.catsearch==false){
-  this.catsearch=true
-  this.agesearch=false
-  this.locsearch=false
-  document.getElementById('clickcategori').style.height = "80px";
-  document.getElementById('clickcategori').style.transition = "1s";   
-  document.getElementById('clicklocalisatio').style.height = "0px";
-  document.getElementById('clickag').style.height = "0px";
+  clickcatsearch() {
+    if (this.catsearch == false) {
+      this.catsearch = true
+      this.agesearch = false
+      this.locsearch = false
+      document.getElementById('clickcategori').style.height = "80px";
+      document.getElementById('clickcategori').style.transition = "1s";
+      document.getElementById('clicklocalisatio').style.height = "0px";
+      document.getElementById('clickag').style.height = "0px";
 
 
-}
-else{
-  this.catsearch=false
-  this.agesearch=false
-  this.locsearch=false
-  document.getElementById('clickcategori').style.height = "0px";
-  document.getElementById('clickcategori').style.transition = "1s";
-;
-}
+    }
+    else {
+      this.catsearch = false
+      this.agesearch = false
+      this.locsearch = false
+      document.getElementById('clickcategori').style.height = "0px";
+      document.getElementById('clickcategori').style.transition = "1s";
+      ;
+    }
 
 
-}
+  }
 
-clicklocsearch(){
-if(this.locsearch==false){
-  this.locsearch=true
-  document.getElementById('clicklocalisatio').style.height = "80px";
-  document.getElementById('clickcategori').style.height = "0px";
-  document.getElementById('clickag').style.height = "0px";
-  document.getElementById('clicklocalisatio').style.transition = "1s";
-  document.getElementById('ploc').style.display = "block";
+  clicklocsearch() {
+    if (this.locsearch == false) {
+      this.locsearch = true
+      document.getElementById('clicklocalisatio').style.height = "80px";
+      document.getElementById('clickcategori').style.height = "0px";
+      document.getElementById('clickag').style.height = "0px";
+      document.getElementById('clicklocalisatio').style.transition = "1s";
+      document.getElementById('ploc').style.display = "block";
 
-}
-else{
-  this.catsearch=false
-  this.agesearch=false
-  this.locsearch=false
-  document.getElementById('clicklocalisatio').style.height = "0px";
-  document.getElementById('clicklocalisatio').style.transition = "1s";
-  document.getElementById('ploc').style.display = "none";
+    }
+    else {
+      this.catsearch = false
+      this.agesearch = false
+      this.locsearch = false
+      document.getElementById('clicklocalisatio').style.height = "0px";
+      document.getElementById('clicklocalisatio').style.transition = "1s";
+      document.getElementById('ploc').style.display = "none";
 
-}
+    }
 
-}
+  }
 
-filter(){
+  filter() {
 
-  this.partenaire_display = this.partenaire.slice(); //copy array
-  if( this.ageselected.length > 0 ){
-  // Pour chaque partenaire
-  for( let i=this.partenaire_display.length-1; i >= 0 ; i-- ){
-    var partenaires = this.partenaire_display[i]
+    this.partenaire_display = this.partenaire.slice(); //copy array
+    if (this.ageselected.length > 0) {
+      // Pour chaque partenaire
+      for (let i = this.partenaire_display.length - 1; i >= 0; i--) {
+        var partenaires = this.partenaire_display[i]
 
-      var find = false;
-    
-      // Pour chaque age coché
-      for( let age of this.ageselected ){
-        
-        let int_age = parseInt(age);
-        
-        // Si on trouve au moins une fois l'age dans le tableau du partenaire
-        if( partenaires["tranche-dage"].indexOf(int_age) > -1 ){
-          find = true;
-          break;
+        var find = false;
+
+        // Pour chaque age coché
+        for (let age of this.ageselected) {
+
+          let int_age = parseInt(age);
+
+          // Si on trouve au moins une fois l'age dans le tableau du partenaire
+          if (partenaires["tranche-dage"].indexOf(int_age) > -1) {
+            find = true;
+            break;
+          }
+
         }
-        
+
+        // Si aucune correspondance, on enlève l'élément du tableau
+        if (!find) {
+          this.partenaire_display.splice(i, 1);
+        }
+
       }
-    
-      // Si aucune correspondance, on enlève l'élément du tableau
-      if( !find ){
-        this.partenaire_display.splice(i, 1);
-      }
-  
     }
+    //categories
+    // Pour chaque partenaire
+    if (this.catselected.length > 0) {
+
+      for (let i = this.partenaire_display.length - 1; i >= 0; i--) {
+
+        var partenaires = this.partenaire_display[i];
+        var find = false;
+
+        // Pour chaque cat coché
+        for (let cat of this.catselected) {
+
+          let int_cat = parseInt(cat);
+
+          // Si on trouve au moins une fois l'cat dans le tableau du partenaire
+          if (partenaires["type-activite"].indexOf(int_cat) > -1) {
+            console.log(partenaires["type-activite"]);
+
+            find = true;
+            break;
+          }
+
+        }
+
+        // Si aucune correspondance, on enlève l'élément du tableau
+        if (!find) {
+          this.partenaire_display.splice(i, 1);
+        }
+
+      }
+
+    }
+    //lieu
+    // Pour chaque partenaire
+    if (this.lieuselected.length > 0) {
+
+      for (let i = this.partenaire_display.length - 1; i >= 0; i--) {
+
+        var partenaires = this.partenaire_display[i];
+        var find = false;
+
+        // Pour chaque lieu coché
+        for (let lieu of this.lieuselected) {
+
+          let int_lieu = parseInt(lieu);
+
+          // Si on trouve au moins une fois l'lieu dans le tableau du partenaire
+          if (partenaires["zone-geographique"].indexOf(int_lieu) > -1) {
+            console.log(partenaires["zone-geographique"]);
+            console.log
+            find = true;
+            break;
+          }
+
+        }
+
+        // Si aucune correspondance, on enlève l'élément du tableau
+        if (!find) {
+          this.partenaire_display.splice(i, 1);
+
+        }
+
+      }
+
+    }
+    this.clearMarkerMap()
+    this.displayMarkerMap()
+
   }
-//categories
-// Pour chaque partenaire
-if( this.catselected.length > 0 ){
 
-  for( let i=this.partenaire_display.length -1; i >= 0; i--){
-    
-    var partenaires = this.partenaire_display[i];
-    var find = false;
-
-    // Pour chaque cat coché
-    for( let cat of this.catselected ){
-      
-      let int_cat = parseInt(cat);
-      
-      // Si on trouve au moins une fois l'cat dans le tableau du partenaire
-      if( partenaires["type-activite"].indexOf(int_cat) > -1 ){ 
-        console.log( partenaires["type-activite"]);
-
-        find = true;
-        break;
-      }
-      
-    }
-
-    // Si aucune correspondance, on enlève l'élément du tableau
-    if( !find ){
-      this.partenaire_display.splice(i, 1);
-    }
-
-  }
 
 }
-//lieu
-// Pour chaque partenaire
-if( this.lieuselected.length > 0 ){
-
-  for( let i=this.partenaire_display.length -1; i >= 0; i--){
-    
-    var partenaires = this.partenaire_display[i];
-    var find = false;
-
-    // Pour chaque lieu coché
-    for( let lieu of this.lieuselected ){
-      
-      let int_lieu = parseInt(lieu);
-      
-      // Si on trouve au moins une fois l'lieu dans le tableau du partenaire
-      if( partenaires["zone-geographique"].indexOf(int_lieu) > -1 ){ 
-        console.log( partenaires["zone-geographique"]);
-        console.log
-        find = true;
-        break;
-      }
-      
-    }
-
-    // Si aucune correspondance, on enlève l'élément du tableau
-    if( !find ){
-      this.partenaire_display.splice(i, 1);
-  
-    }
-
-  }
-
-}
-this.clearMarkerMap()
-  this.displayMarkerMap()
-
-}
 
 
-    }
-
-  
