@@ -33,7 +33,7 @@
         <div id="partenairee">
 
             <ion-row *ngFor="let partenaires of partenaire_display">
-                <div class="info" *ngIf="!teste" id={{partenaires.id}} #pipi (click)="clickshow($event)">
+                <div class="info" *ngIf="!teste" id={{partenaires.id}} #test (click)="clickshow($event)">
 
                     <img class="imagepart" src="{{partenaires.image}}">
 

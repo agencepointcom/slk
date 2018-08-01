@@ -149,7 +149,7 @@ export class ListePage {
     // this.callBDD( this.http)
   }
 
-  ionViewDidLoad(caca) {
+  ionViewDidLoad() {
   }
 
   getActivite() {
@@ -543,10 +543,10 @@ export class ListePage {
   }
 
 
-  clickshow(pipi) {
+  clickshow(test) {
 
     let a: 1
-    let idvalue = 1 + pipi.path[1].id
+    let idvalue = 1 + test.path[1].id
     this.idvalue = idvalue
     this.show = true
     document.getElementById(idvalue).style.display = "block"
