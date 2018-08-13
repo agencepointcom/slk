@@ -1,4 +1,34 @@
 page-testhome {
+
+    .header {
+        .toolbar-background-ios, .toolbar-background-md {
+            background-color: #fff;
+            color: #14b0b9;
+            border-width: 0px !important;
+            border-color: transparent;
+        }
+
+        .toolbar-title {
+            &.toolbar-title-ios {
+                color: transparent;
+            }
+
+            &.toolbar-title-md {
+                color: transparent;
+            }
+        }
+
+        .bar-button-default-ios, .bar-button-default-md, .bar-button-clear-ios-default, .bar-button-clear-md-default {
+            color: #14b0b9;
+        }
+
+        &.header-md {
+            &:after {
+                background-image: none;
+            }
+        }
+    }
+
 #retour{
     position: absolute;
     top:20px;

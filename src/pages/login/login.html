@@ -1,6 +1,24 @@
+<ion-header>
+  <ion-navbar id="navbar">
+    <ion-title id="title">
+      Connexion
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)='clickparcourir()'>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
 <ion-content padding class="auth-form">
+  <!--
   <p (click)="clickparcourir()" id="fermer"> X </p>
+  -->
+  <!--
   <img id="imagess" src="./assets/img/logo.png">
+  -->
   <section id="login">
     <div id="pres">
       <p>Bienvenue {{display}}</p>
@@ -9,7 +27,7 @@
 
     <form class="form" [formGroup]="login_form" (ngSubmit)="login(login_form.value)">
       <ion-item id="email">
-        <ion-input type="text" formControlName="user_login" class="form-controll" required></ion-input>
+        <ion-input type="email" formControlName="user_login" class="form-controll" required autofocus></ion-input>
       </ion-item>
 
       <ion-item id="password">
@@ -19,19 +37,23 @@
 
       <button ion-button full class="button" [disabled]="!login_form.valid" type="submit">Connexion</button>
 
-    </form>
-
-    <div id="fin">
       <p>
         <a href="https://sortirleskids.com/mon-compte/mot-passe-perdu/">J'ai oublié mon mot de passe </a>
       </p>
-    </div>
-    <button onclick="window.location.href='https://sortirleskids.com/la-carte'" class="button">Acheter la carte</button>
 
-    <button id="tuto" class="button" (click)='tutoriel()'>Tutoriel</button>
+        <button onclick="window.location.href='https://sortirleskids.com/la-carte'" ion-button full class="button">Acheter la carte</button>
+        <button id="tuto" ion-button full class="button" (click)='tutoriel()'>Tutoriel</button>
+
+    </form>
+
+    <div id="fin">
+    </div>
+
+
+
     <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fsortirleskids.com%2Fmentions-legales-et-politique-de-confidentialite%2F&h=AT0JY1AMzkZc3dwermp8MuvFkwyxCgrRzuYhUe6GkBDy8sbTyriH8Dmj6Wps0zohcO6i0OUCZemJBAPvMtxOQ_C1Rd4ZxGJBGnX_cQcTXUfjZnWnTYA05-G-YEj8LsBBfUoP_sOn8hXF13wTnhWVwQ">Mentions légales et confidentialité</a>
     <div id="footer">
-      <p>Design & Création par AGENCE POINT COM </p>
+      <a href="http://agencepoint.com">Design & Création par AGENCE POINT COM</a>
     </div>
   </section>
 </ion-content>

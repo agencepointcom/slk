@@ -78,13 +78,14 @@ page-liste {
         align-items: center;
     }
     #pagesearch {
-        background-image: url('../assets/img/search.png');
-        background-size: cover;
+        //background-image: url('../assets/img/search.png');
+        background-color: #fff;
+        //background-size: cover;
         width: 210px;
         height: 250px;
         z-index: 102;
         border-radius: 5px;
-        display: flex;
+        //display: flex;
         justify-content: center;
         flex-direction: column;
         align-content: center;
@@ -439,7 +440,21 @@ page-liste {
         padding: 10px;
         font-size: 14px;
         cursor: pointer;
-        margin-bottom: 15px;
+        //margin-bottom: 15px;
+        margin: 5px auto 15px auto;
+        display: block;
+
+        span {
+            display: inline-block;
+            padding: 0 6px;
+            background: #FFF;
+            height: 30px;
+            line-height: 30Px;
+            margin-left: 7px;
+            margin-right: 5px;
+            border-radius: 8px;
+            color: #14B0BA;
+        }
     }
     .fermer {
         background-color: white;

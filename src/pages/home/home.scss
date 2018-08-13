@@ -4,6 +4,12 @@ page-home {
     justify-content: center;
     align-content: center;
     align-items: center;
+
+    .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default,
+    .bar-button-default-ios, .bar-button-clear-ios-default, .bar-button-ios-default {
+        color: #fff !important;
+    }
+
     #legende {
         width: 70px;
         height: 20px;
@@ -186,8 +192,9 @@ page-home {
         align-items: center;
     }
     #pagesearch {
-        background-image: url('../assets/img/search.png');
-        background-size: cover;
+        //background-image: url('../assets/img/search.png');
+        //background-size: cover;
+        background-color: #fff;
         width: 210px;
         height: 250px;
         position: relative;

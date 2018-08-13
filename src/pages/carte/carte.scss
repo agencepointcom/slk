@@ -1,4 +1,25 @@
 page-carte {
+
+    .toolbar-background-ios, .toolbar-background-md {
+        background: transparent !important;
+        border-width: 0px !important;
+    }
+
+    .toolbar-title-ios, .toolbar-title-md {
+        color: transparent;
+    }
+
+    .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default,
+    .bar-button-default-ios, .bar-button-clear-ios-default, .bar-button-ios-default {
+        color: #fff !important;
+    }
+
+    .content {
+        background-image: url("../assets/icon/fondcarte.png");
+        background-size: cover;
+        background-position: center;
+    }
+
    h1, h2{
     color:white;
     text-align: center;
@@ -41,11 +62,8 @@ page-carte {
 
 }
     .fixed-content{
-    background-image:url("../assets/icon/fondcarte.png");
-    background-size: cover;
-    background-position: center;
-
-    color:white;}
+    color:white;
+    }
     #navmenu{
         width:100%;
         height:120px;
@@ -137,8 +155,9 @@ page-carte {
        align-items: center;
     }
     #pagesearch{
-        background-image:url('../assets/img/search.png');
-        background-size: cover;
+        //background-image:url('../assets/img/search.png');
+        //background-size: cover;
+        background-color: #fff;
         width: 210px;
         height:250px;
      
@@ -332,8 +351,10 @@ page-carte {
        left:0px;
     #popup{
       
-        width: 200px;
-        height:200px;
+        //width: 200px;
+        //height:200px;
+        width: 75%;
+        height: auto;
         background-color: #14b0b9;
         color:white;
         z-index:300;
@@ -346,21 +367,45 @@ page-carte {
         font-family: 'lado', sans-serif;
         letter-spacing:0.1em;
         border-radius:7px;
-        padding:3px;
+        //padding:3px;
+        padding: 1rem;
+
+        h5 {
+            margin-bottom: 1.6rem;
+        }
+
+        /*
+        .divh{
+
+            border-radius:4px;
+            margin-top:5%;
+            margin-bottom:10%;
+
+            margin:auto;
+            width:80%;
+            height:30PX;
+            background: linear-gradient(45deg, #6d6d6d 0%, #6d6d6d 50%, #8a8a8a 51%, #8a8a8a 100%);
+            opacity:1;
+            color:white;
+            font-family: 'lado', sans-serif;
+        }
+        */
+
+        .divh {
+            border-radius: 4px;
+            margin: 0 auto 0.8rem auto;
+            padding: 4px 30px;
+            width: 100%;
+            background: linear-gradient(45deg, #6d6d6d 0%, #6d6d6d 50%, #8a8a8a 51%, #8a8a8a 100%);
+            opacity: 1;
+            color: white;
+            font-family: 'lado' sans-serif;
+            font-weight: bold;
+            height: 3.5rem !important;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+        }
       
     }
-}
-.divh{
-    border-radius:4px;
-    margin-top:5%;
-    margin-bottom:10%;
-
-    margin:auto;
-    width:80%;
-    height:30PX;
-    background: linear-gradient(45deg, #6d6d6d 0%, #6d6d6d 50%, #8a8a8a 51%, #8a8a8a 100%);
-    opacity:1;
-    color:white;
-    font-family:'lado' sans-serif;
 }
 }

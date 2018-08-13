@@ -35,15 +35,18 @@ export class CartePage {
   listPage: any;
   homepage: any;
   decopage: typeof DecoPage;
+  cartePage: any;
+  boolean: boolean = false;
 
   constructor(public nav: NavController, public navParams: NavParams,
     public authenticationService: AuthenticationService,
     public wordpressService: WordpressService
   ) {
-    this.listPage = ListePage
-    this.homepage = HomePage
-    this.decopage = DecoPage
+    this.listPage = ListePage;
+    this.homepage = HomePage;
+    this.decopage = DecoPage;
     this.userdata = navParams.data.userdata;
+    this.cartePage = CartePage;
     console.log(this.userdata)
   }
 
@@ -147,7 +150,7 @@ export class CartePage {
 
   }
   clickliste() {
-    this.nav.push(this.listPage, {
+    this.nav.setRoot(this.listPage, {
       userdata: this.userdata
     });
 
@@ -155,11 +158,11 @@ export class CartePage {
 
   }
   clickmap() {
-    this.nav.push(this.homepage, {
+    this.nav.setRoot(this.homepage, {
       userdata: this.userdata
     });
   }
-  boolean = false
+  //boolean = false
   // clicksearch(){
   //   if(this.boolean==false){
   //   this.boolean=true
@@ -183,10 +186,9 @@ export class CartePage {
           this.nav.push(this.decopage, {
             userdata: this.userdata
           });
-
-
         },
         (error) => {
+          console.log(JSON.stringify(error));
         this.loggedUser = false;
           this.nav.setRoot(LoginPage);
 
@@ -202,9 +204,9 @@ export class CartePage {
     document.getElementById('pagesearch').style.display = "none";
     document.getElementById('fond').style.display = "none";
   }
-  agesearch = false
-  catsearch = false
-  locsearch = false
+  agesearch = false;
+  catsearch = false;
+  locsearch = false;
   clickagesearch() {
     console.log('trolololo')
     if (this.agesearch == false) {
@@ -275,5 +277,15 @@ export class CartePage {
     }
 
   }
+
+    /**
+     * Fonction manquante
+     */
+    clickcarte() {
+
+        this.nav.setRoot(this.cartePage, {
+            userdata: this.userdata
+        })
+    }
 }
 

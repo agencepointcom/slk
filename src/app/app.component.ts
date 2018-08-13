@@ -15,12 +15,12 @@ import { CartePage } from '../pages/carte/carte';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = LoginPage
+  rootPage = LoginPage;
   constructor(platform: Platform, public SplashScreen: SplashScreen, public StatusBar: StatusBar) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.StatusBar.styleDefault();
+      this.StatusBar.styleBlackOpaque();
       this.SplashScreen.hide();
     });
   }

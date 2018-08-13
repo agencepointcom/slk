@@ -1,10 +1,41 @@
 page-login {
+
+    .header {
+        .toolbar-background-ios, .toolbar-background-md {
+            background-color: #fff;
+            color: #14b0b9;
+            border-width: 0px !important;
+            border-color: transparent;
+        }
+
+        .toolbar-title {
+            &.toolbar-title-ios {
+                color: transparent;
+            }
+
+            &.toolbar-title-md {
+                color: transparent;
+            }
+        }
+
+        .bar-button-default-ios, .bar-button-default-md, .bar-button-clear-ios-default, .bar-button-clear-md-default {
+            color: #14b0b9;
+        }
+
+        &.header-md {
+            &:after {
+                background-image: none;
+            }
+        }
+    }
+
     .fixed-content {
         position: fixed
     }
     .tabbar.show-tabbar {
         opacity: 0
     }
+
     #fermer {
         color: white;
         background-color: #14b0b9;
@@ -22,9 +53,11 @@ page-login {
         font-size: 20px;
     }
     .fixed-content {
-        background-image: url("../assets/icon/fondlogin.png");
-        background-size: cover;
-        background-position: center;
+        background-position: center top, center center;
+        background-repeat: no-repeat, no-repeat;
+
+        background-image: url('../assets/img/logo.png'), url("../assets/icon/fondlogin.png");
+        background-size: 100%, cover;
         color: white;
     }
     .infoun {
@@ -35,7 +68,12 @@ page-login {
     }
     #login {
         position: relative;
-        top: 9%;
+        top: 30%;
+        background-color: #14b0b9;
+        border-radius: 10px;
+        padding: 0 1.5rem 1.5rem 1.5rem;
+        margin: 0 10%;
+
         a {
             color: white;
             text-decoration: none;
@@ -61,15 +99,16 @@ page-login {
         }
         .button {
             border-radius: 4px;
-            margin-top: 5%;
-            margin-bottom: 10%;
-            margin: auto;
-            width: 40%;
-            height: 30PX;
+            margin: 0 auto;
+            padding: 4px 30px;
+            width: 100%;
             background: linear-gradient(45deg, #6d6d6d 0%, #6d6d6d 50%, #8a8a8a 51%, #8a8a8a 100%);
             opacity: 1;
             color: white;
             font-family: 'lado' sans-serif;
+            font-weight: bold;
+            height: 3.5rem !important;
+            text-transform: uppercase;
         }
         #email {
             background-color: white;

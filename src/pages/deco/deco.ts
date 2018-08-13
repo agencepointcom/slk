@@ -41,7 +41,7 @@ export class DecoPage {
         res => this.nav.push(LoginPage),
         err => console.log('Error in log out')
       )
-    this.nav.push(this.ListPage, {
+    this.nav.setRoot(this.ListPage, {
     })
   }
   logOut() {
@@ -52,14 +52,14 @@ export class DecoPage {
       )
   }
   clickliste() {
-    this.nav.push(this.ListPage, {
+    this.nav.setRoot(this.ListPage, {
       userdata: this.userdata
     })
 
 
   }
   clickmap() {
-    this.nav.push(this.homePage, {
+    this.nav.setRoot(this.homePage, {
       userdata: this.userdata
     })
   }
@@ -78,7 +78,7 @@ export class DecoPage {
 
   }
   clickcarte() {
-    this.nav.push(this.cartePage, {
+    this.nav.setRoot(this.cartePage, {
       userdata: this.userdata
     })
 

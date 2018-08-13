@@ -39,7 +39,6 @@ export class HomePage {
   cartePage: any;
   decoPage: any;
   listePage: any;
-  ;
   partenaire_marker: Array<any> = new Array<any>();
   locations: any;
   @ViewChild('map') mapElement: ElementRef;
@@ -613,7 +612,7 @@ export class HomePage {
 
 
   clickliste() {
-    this.nav.push(this.listePage, {
+    this.nav.setRoot(this.listePage, {
       userdata: this.userdata
     })
 
@@ -624,12 +623,12 @@ export class HomePage {
   boolean = false
   clicksearch() {
     if (this.boolean == false) {
-      this.boolean = true
+      this.boolean = true;
       document.getElementById('pagesearch').style.display = "flex";
       document.getElementById('fond').style.display = "flex";
     }
     else {
-      this.boolean = false
+      this.boolean = false;
       document.getElementById('pagesearch').style.display = "none";
       document.getElementById('fond').style.display = "none";
     }
@@ -637,7 +636,7 @@ export class HomePage {
   }
   clickcarte() {
 
-    this.nav.push(this.cartePage, {
+    this.nav.setRoot(this.cartePage, {
       userdata: this.userdata
     })
   }
@@ -647,13 +646,14 @@ export class HomePage {
         (data) => {
           this.loggedUser = true;
           console.log(this.loggedUser);
-          this.nav.push(this.decoPage, {
+          this.nav.setRoot(this.decoPage, {
             userdata: this.userdata
           })
 
 
         },
         (error) => {
+            console.log(JSON.stringify(error));
         this.loggedUser = false;
           this.nav.setRoot(LoginPage);
 
@@ -853,7 +853,9 @@ export class HomePage {
 
   }
 
+  clickmap() {
 
+  }
 }
 
 

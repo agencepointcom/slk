@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 .tabs-ios .tabbar  {
     border-top:0px solid rgba(255, 255, 255, 0);
@@ -15,3 +16,8 @@
 }
 .scroll-content{
 overflow:hidden}
+
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default
+.bar-button-default-md, .bar-button-default.bar-button-md-default, .bar-button-clear-md-default {
+    color: #fff;
+}

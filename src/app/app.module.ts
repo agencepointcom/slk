@@ -24,26 +24,24 @@ import { DecoPageModule } from '../pages/deco/deco.module';
 import { ListePageModule } from '../pages/liste/liste.module';
 
 import { TesthomePageModule } from '../pages/testhome/testhome.module';
-import {DescriptionPageModule} from'../pages/description/description.module';
+//import {DescriptionPageModule} from'../pages/description/description.module';
 import { ConfigServiceTsProvider } from '../providers/config-service-ts/config-service-ts';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { AuthenticationService } from '../services/authentication.service';
 import { WordpressService} from '../services/wordpress.service';
 
-
-
-
 @NgModule({
   declarations: [
     MyApp,
-  
   ],
   imports: [
     HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: true,
-
+      backButtonText: '',
+      iconMode: 'md',
+      pageTransition: 'md',
     }),
     IonicStorageModule.forRoot(),
     HttpModule,
@@ -55,7 +53,7 @@ import { WordpressService} from '../services/wordpress.service';
     DecoPageModule,
     ListePageModule,
     TesthomePageModule,
-    DescriptionPageModule
+    //DescriptionPageModule
 
   ],
   bootstrap: [IonicApp],

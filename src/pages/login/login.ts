@@ -45,8 +45,8 @@ export class LoginPage {
           this.loggedUser = true;
           console.log(this.loggedUser);
           this.navCtrl.setRoot(HomePage);
-          console.log(this.users)
-          console.log(this.display)
+          console.log(this.users);
+          console.log(this.display);
           data.user_display_name
 
         },

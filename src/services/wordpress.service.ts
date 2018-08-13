@@ -20,7 +20,7 @@ export class WordpressService {
   }
   //recuperer activité
   getActivites(activite){
-    return this.http.get(Config.WORDPRESS_REST_API_URL + "type-activite/" )
+    return this.http.get(Config.WORDPRESS_REST_API_URL + "type-activite/?per_page=100" )
     .map(res => res.json());
   }
   //recuperer age 

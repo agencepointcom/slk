@@ -220,7 +220,7 @@ export class ListePage {
 
   }
   clickmap() {
-    this.nav.push(this.homePage, {
+    this.nav.setRoot(this.homePage, {
       userdata: this.userdata
     })
   }
@@ -239,7 +239,7 @@ export class ListePage {
 
   }
   clickcarte() {
-    this.nav.push(this.cartePage, {
+    this.nav.setRoot(this.cartePage, {
       userdata: this.userdata
     })
   }
@@ -249,13 +249,14 @@ export class ListePage {
         (data) => {
           this.loggedUser = true;
           console.log(this.loggedUser);
-          this.nav.push(this.decoPage, {
+          this.nav.setRoot(this.decoPage, {
             userdata: this.userdata
           })
 
 
         },
         (error) => {
+            console.log(JSON.stringify(error));
         this.loggedUser = false;
           this.nav.setRoot(LoginPage);
 
@@ -543,23 +544,28 @@ export class ListePage {
   }
 
 
-  clickshow(test) {
+  clickshow(partnerId) {
 
-    let a: 1
-    let idvalue = 1 + test.path[1].id
-    this.idvalue = idvalue
-    this.show = true
-    document.getElementById(idvalue).style.display = "block"
+    /*
+    let a: 1;
+    let idvalue = 1 + test.path[1].id;
+    this.idvalue = idvalue;
+    this.show = true;
+    document.getElementById(idvalue).style.display = "block";
+    */
 
-    this.teste = true
+    this.show = true;
+    document.getElementById('show_' + partnerId).style.display = 'block';
+    this.teste = true;
 
 
 
 
   }
 
-  fermer() {
-    document.getElementById(this.idvalue).style.display = "none"
+  fermer(id) {
+    document.getElementById('show_' + id).style.display = 'none';
+    //document.getElementById(this.idvalue).style.display = "none";
     this.teste = false
   }
 }
