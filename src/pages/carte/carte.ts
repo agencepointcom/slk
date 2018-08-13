@@ -47,14 +47,16 @@ export class CartePage {
     this.decopage = DecoPage;
     this.userdata = navParams.data.userdata;
     this.cartePage = CartePage;
-    console.log(this.userdata)
+    console.log(this.userdata);
   }
-
-
 
   ionViewWillEnter() {
     var now = moment();
     this.myDate = moment(now.format(), moment.ISO_8601).format();
+
+    setInterval(() => {
+      this.myDate = moment(moment().format(), moment.ISO_8601).format();
+    }, 100);
 
     this.authenticationService.getUser()
       .then(
