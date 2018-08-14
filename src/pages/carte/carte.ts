@@ -51,8 +51,7 @@ export class CartePage {
   }
 
   ionViewWillEnter() {
-    var now = moment();
-    this.myDate = moment(now.format(), moment.ISO_8601).format();
+    this.myDate = moment(moment().format(), moment.ISO_8601).format();
 
     setInterval(() => {
       this.myDate = moment(moment().format(), moment.ISO_8601).format();
