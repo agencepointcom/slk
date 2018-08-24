@@ -1,4 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
+//@import url('https://fonts.googleapis.com/css?family=Lato');
+
+@font-face{
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./../assets/fonts/Lato-Regular.woff2') format('woff2');
+}
 
 .tabs-ios .tabbar  {
     border-top:0px solid rgba(255, 255, 255, 0);

@@ -32,7 +32,7 @@
     <div id="affichage">
         <div id="partenairee">
 
-            <ion-row *ngFor="let partenaires of partenaire_display">
+            <ion-row *ngFor="let partenaires of partenaire_display; index as i">
                 <div class="info" *ngIf="!teste" id={{partenaires.id}} #test (click)="clickshow(partenaires.id)">
 
                     <img class="imagepart" src="{{partenaires.image}}">
@@ -67,9 +67,9 @@
                         <div>
 
                             <p [innerHtml]="partenaires.acf.offre"> {{partenaires.acf.offre}}</p>
-                            <button (click)="jyete()" class="aller"> J'y étais !
+                            <button (click)="jyete(partenaires.id, i)" class="aller"> J'y étais !
                                 <span>
-                                    <ion-icon name="ios-people"></ion-icon> {{partenaires.martygeocoderlatlng.simplefavorites_count}}
+                                    <ion-icon name="ios-people"></ion-icon> {{ parseNumber(partenaires.martygeocoderlatlng.simplefavorites_count) }}
                                 </span>
                             </button>
                         </div>

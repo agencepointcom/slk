@@ -90,4 +90,12 @@ export class WordpressService {
     },{ headers: header } )
     .map(res => res.json());
   }
+
+  iWasHere(activityId, nicename) {
+      let header = new Headers();
+      header.append('Content-Type', 'application/json');
+    return this.http.post(Config.WORDPRESS_URL + 'wp-json/simplefavorite/favorite?favorite&nicename=' + nicename + '&postid=' + activityId, {}, {
+      headers: header
+    }).map(response => response.json());
+  }
 }

@@ -94,10 +94,12 @@ export class LoginPage {
     //autentification 
     this.authenticationService.doLogin(value.user_login, value.user_pass)
       .subscribe(res => {
-
+          console.log('USER');
+          console.log(JSON.stringify(res));
         this.authenticationService.setUser({
           token: res.json().token,
           username: value.user_login,
+          nicename: res.json().user_nicename,
           displayname: res.json().user_display_name,
 
           email: res.json().user_email

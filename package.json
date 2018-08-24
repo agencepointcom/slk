@@ -2,9 +2,12 @@
   "name": "sortir-les-kids",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
+  "description": "Ionic 2 Google Maps Marker Clusterer: An Ionic project",
+  "version": "1.1",
   "private": true,
   "config": {
-    "ionic_copy": "./copy.config.js"
+    "ionic_copy": "./copy.config.js",
+    "ionic_purge_unused_fonts": false
   },
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -74,7 +77,6 @@
       "locator": "ios"
     }
   ],
-  "description": "Ionic 2 Google Maps Marker Clusterer: An Ionic project",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},

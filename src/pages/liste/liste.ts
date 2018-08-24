@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
@@ -11,6 +11,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { WordpressService } from '../../services/wordpress.service';
 import { CartePage } from '../carte/carte';
 import { HomePage } from '../home/home';
+import {Storage} from "@ionic/storage";
 /**
  * Generated class for the ListePage page.
  *
@@ -40,19 +41,20 @@ export class ListePage {
   catselected = '';
   lieuselected = '';
   partenaire_marker: Array<any> = new Array<any>();
-  a: 1
+  a: 1;
 
   activite: Array<any> = new Array<any>();
   lieu: Array<any> = new Array<any>();
   tdage: Array<any> = new Array<any>();
   idvalue: any;
-  show = false
+  show = false;
   userdata: any;
   cartePage: any;
-  decoPage: any
+  decoPage: any;
   homePage: any;
 
-
+  public activitiesDone: {id: number}[] = [];
+  public voteInProgress: boolean = false;
 
   constructor(public nav: NavController,
     public navParams: NavParams,
@@ -61,13 +63,22 @@ export class ListePage {
     public authenticationService: AuthenticationService,
     public wordpressService: WordpressService,
     public alertCtrl: AlertController,
-
+    public storage: Storage,
+    public loadingCtrl: LoadingController,
 
   ) {
     this.userdata = navParams.data.userdata;
-    this.homePage = HomePage
-    this.cartePage = CartePage
-    this.decoPage = DecoPage
+    this.homePage = HomePage;
+    this.cartePage = CartePage;
+    this.decoPage = DecoPage;
+
+    /*
+    this.storage.get('activities_done').then(activities => {
+        if( activities ) {
+            this.activitiesDone = activities;
+        }
+    });
+    */
   }
 
   ionViewWillEnter() {
@@ -193,11 +204,75 @@ export class ListePage {
   //     //error code
   // }
   //   }
-  jyete() {
 
-    this.errorAlert('Fonctionnalité en cours de développement.')
-
+  parseNumber(number) {
+    return parseInt(number);
   }
+
+  jyete(id, index) {
+
+      //let voted = false;
+      if( this.voteInProgress ) {
+        return false;
+      }
+
+      let loading = this.loadingCtrl.create({
+          content: ''
+      });
+
+      loading.present();
+
+      this.voteInProgress = true;
+      this.authenticationService.getUser()
+          .then(user => {
+                /*
+                  Object.keys(this.activitiesDone).forEach(key => {
+                      if (this.activitiesDone[key]['id'] === id) {
+                          voted = true;
+                      }
+                  });
+                  */
+
+                  this.wordpressService.iWasHere(id, user.nicename).subscribe((response) => {
+                    console.log(response);
+                    if( response.status ) {
+                        this.partenaire[index].martygeocoderlatlng.simplefavorites_count = parseInt(this.partenaire[index].martygeocoderlatlng.simplefavorites_count) + 1;
+                    } else {
+                        this.partenaire[index].martygeocoderlatlng.simplefavorites_count = parseInt(this.partenaire[index].martygeocoderlatlng.simplefavorites_count) - 1;
+                    }
+                    this.voteInProgress = false;
+                    loading.dismiss();
+                  }, error => {
+                    console.log(error);
+                    console.log(JSON.stringify(error));
+                    loading.dismiss();
+                  });
+
+                /*
+                  if( voted ) {
+                      this.voteInProgress = false;
+                      this.errorAlert('Vous avez déjà indiqué avoir été présent dans ce lieu');
+                      return false;
+                  } else {
+                      this.wordpressService.iWasHere(id, user.nicename).subscribe(() => {
+                          this.partenaire[index].martygeocoderlatlng.simplefavorites_count = parseInt(this.partenaire[index].martygeocoderlatlng.simplefavorites_count) + 1;
+                          this.activitiesDone = this.activitiesDone.concat({'id': id});
+                          this.storage.set('activities_done', this.activitiesDone);
+                          this.voteInProgress = false;
+                      }, error => {
+                          this.voteInProgress = false;
+                          console.log(JSON.stringify(error));
+                          this.errorAlert('Une erreur est survenue durant l\'opération. Si le problème persiste, veuillez contacter l\'équipe technique en charge de l\'application.');
+                      });
+                  }
+                  */
+          }, error => {
+              this.voteInProgress = false;
+              loading.dismiss();
+              this.errorAlert('Vous devez être connecté pour participer aux votes');
+          });
+  };
+
   errorAlert(message) {
     let alert = this.alertCtrl.create({
       message: message,
