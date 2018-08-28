@@ -27,18 +27,18 @@
 
     <form class="form" [formGroup]="login_form" (ngSubmit)="login(login_form.value)">
       <ion-item id="email">
-        <ion-input type="email" formControlName="user_login" class="form-controll" required autofocus></ion-input>
+        <ion-input type="email" formControlName="user_login" class="form-controll" placeholder="Adresse email" required autofocus></ion-input>
       </ion-item>
 
       <ion-item id="password">
-        <ion-input type="password" formControlName="user_pass" class="form-controll" required></ion-input>
+        <ion-input type="password" formControlName="user_pass" class="form-controll" placeholder="Mot de passe" required></ion-input>
       </ion-item>
       <p class="error-message" *ngIf="error_message">{{error_message}}</p>
 
       <button ion-button full class="button" [disabled]="!login_form.valid" type="submit">Connexion</button>
 
       <p>
-        <a href="https://sortirleskids.com/mon-compte/mot-passe-perdu/">J'ai oublié mon mot de passe </a>
+        <a href="https://sortirleskids.com/mon-compte/mot-passe-perdu/">J'ai oublié mon mot de passe</a>
       </p>
 
         <button onclick="window.location.href='https://sortirleskids.com/la-carte'" ion-button full class="button">Acheter la carte</button>

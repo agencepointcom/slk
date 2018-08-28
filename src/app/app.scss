@@ -1,16 +1,23 @@
 //@import url('https://fonts.googleapis.com/css?family=Lato');
 
-@font-face{
+@font-face {
     font-family: 'Lato';
+    font-weight: 300;
     font-style: normal;
-    font-weight: 400;
-    src: url('./../assets/fonts/Lato-Regular.woff2') format('woff2');
+    src: url('./../assets/fonts/lato-regular.eot');
+    src: url('./../assets/fonts/lato-regular.eot?#iefix') format('embedded-opentype'),
+    local('lato-regular'),
+    url('./../assets/fonts/lato-regular.woff2') format('woff2'),
+    url('./../assets/fonts/lato-regular.woff') format('woff'),
+    url('./../assets/fonts/lato-regular.ttf') format('truetype'),
+    url('./../assets/fonts/lato-regular.svg#Lato') format('svg');
 }
 
 .tabs-ios .tabbar  {
     border-top:0px solid rgba(255, 255, 255, 0);
-    background-color: #14b0b9
+    background-color: #14b0b9;
 }
+
 .tabs-md{
     border-top:0px solid rgba(255, 255, 255, 0);
     background-color: rgba(255, 255, 255, 0)
@@ -21,8 +28,9 @@
     top:0px;
     height:0px
 }
-.scroll-content{
-overflow:hidden}
+.scroll-content {
+overflow:hidden
+}
 
 .bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default
 .bar-button-default-md, .bar-button-default.bar-button-md-default, .bar-button-clear-md-default {
