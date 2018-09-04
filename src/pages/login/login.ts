@@ -40,14 +40,12 @@ export class LoginPage {
       .then(
         (data) => {
           console.log(data)
-
-
           this.loggedUser = true;
           console.log(this.loggedUser);
           this.navCtrl.setRoot(HomePage);
           console.log(this.users);
           console.log(this.display);
-          data.user_display_name
+          //data.user_display_name
 
         },
         error => this.loggedUser = false

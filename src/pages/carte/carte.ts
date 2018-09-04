@@ -60,14 +60,17 @@ export class CartePage {
     this.authenticationService.getUser()
       .then(
         (data) => {
-          this.user
-          console.log(data)
+          //this.user
+
+            //console.log('USER');
+          //console.log(JSON.stringify(data));
           this.loggedUser = true;
           console.log(this.loggedUser);
           document.getElementById('divpopup').style.display = "none";
           document.getElementById('fond').style.display = "none";
           document.getElementById('fondnouser').style.display = "none";
-          this.userdata = this.navParams.data.userdata;
+          //this.userdata = this.navParams.data.userdata;
+          this.userdata = data.displayname;
 
 
         },
