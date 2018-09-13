@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.sortirleskids.app" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.sortirleskids.app" version="1.2.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Sortir Les Kids</name>
     <description>Aidez votre famille à trouver de super sorties pour vos enfants pas loin de chez vous</description>
     <author email="Pointcom@agencepoint.com" href="http://sortirleskids.com/">Agence Point Com</author>
@@ -89,6 +89,16 @@
     <allow-navigation href="http://192.168.1.13:8100" />
     <allow-navigation href="http://192.168.1.72:8100" />
     <allow-navigation href="http://192.168.0.24:8100" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Pour vous localiser" />
+    </plugin>
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>Pour plus de précisions, il est préférable d'activer la géolocalisation.</string>
+    </edit-config>
+    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.2.2">
+        <variable name="OKHTTP_VERSION" value="3.+" />
+        <variable name="LOCATION_USAGE_DESCRIPTION" value="This app requires access to your location for navigation purposes" />
+    </plugin>
     <engine name="browser" spec="~5.0.3" />
     <engine name="ios" spec="4.5.5" />
     <engine name="android" spec="7.0.0" />

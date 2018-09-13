@@ -1,6 +1,17 @@
 import { identifierModuleUrl } from '@angular/compiler/compiler';
 import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
-import { ActionSheetController, AlertController, App, LoadingController, NavController, Platform, ToastController, IonicPage, NavParams } from 'ionic-angular';
+import {
+    ActionSheetController,
+    AlertController,
+    App,
+    LoadingController,
+    NavController,
+    Platform,
+    ToastController,
+    IonicPage,
+    NavParams,
+    ModalController
+} from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Observable } from 'rxjs/Observable';
@@ -84,7 +95,8 @@ export class HomePage {
     private androidPermissions: AndroidPermissions,
     public authenticationService: AuthenticationService,
     public wordpressService: WordpressService,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
   ) {
     this.platform.ready().then(() => this.loadMaps());
     console.log('Hello GoogleMapsCluster Provider');
@@ -108,12 +120,12 @@ export class HomePage {
       .then(
         (data) => {
           this.loggedUser = true;
-          console.log(this.loggedUser);
+          //console.log(this.loggedUser);
 
         },
         (error) => {
           this.loggedUser = false;
-          console.log(this.loggedUser)
+          //console.log(this.loggedUser)
 
         }
       );
@@ -159,10 +171,10 @@ export class HomePage {
     Observable.forkJoin(
       this.getPartenaire()).subscribe(data => {
         let item = data[0];
-        console.log(item)
+        //console.log(item)
         for (let i = 0; i < item.length; i++) {
 
-          console.log(this.partenaire_display);
+          //console.log(this.partenaire_display);
 
 
           this.title = item[i].title.redenred
@@ -219,6 +231,7 @@ export class HomePage {
   //ajoue marker
   addMarkerMap() {
 
+    let thisApp = this;
     for (let partenaire of this.partenaire_display) {
 
       var title = partenaire.title.rendered
@@ -232,15 +245,29 @@ export class HomePage {
         map: this.map,
       })
       partenaire.marker.addListener('click', function () {
-        partenaire.infowindow.open(this.map, partenaire.marker);
+        //partenaire.infowindow.open(this.map, partenaire.marker);
+
+          let modal = thisApp.modalCtrl.create('PlacePage', {
+              place: partenaire
+          });
+          modal.present();
       });
 
-
+      /*
       partenaire.infowindow = new google.maps.InfoWindow({
-        content: "<div class='essai'> <img class='image_appli' src='" + partenaire.acf.image_appli + "'></br>" +offre+ title + horaire + tarif + offre + "</div>",
+        content: '<div class="essai"> ' +
+              '<img class="image_appli" src="' + partenaire.acf.image_appli + '">' +
+              '</br>' +
+               +offre
+               + title
+               + horaire
+               + tarif
+               + offre
+               + '</div>',
         maxWidth: 315,
 
       });
+      */
 
 
 
@@ -342,15 +369,18 @@ export class HomePage {
   initAutocomplete(): void {
     // reference : https://github.com/driftyco/ionic/issues/7223
     this.addressElement = this.searchbar.nativeElement.querySelector('.searchbar-input');
+
     this.createAutocomplete(this.addressElement).subscribe((location) => {
-      console.log('Searchdata', location);
+      console.log('Searchdata', JSON.stringify(location));
 
       let options = {
-        center: location,
-        zoom: 10
+        center: location.location,
+        zoom: 16,
+        //icon: location.icon
       };
+
       this.map.setOptions(options);
-      this.addMarker(location, "Mein gesuchter Standort");
+      this.addMarker(location.location, location.name, location.icon);
 
     });
   }
@@ -361,6 +391,7 @@ export class HomePage {
     return new Observable((sub: any) => {
       google.maps.event.addListener(autocomplete, 'place_changed', () => {
         const place = autocomplete.getPlace();
+        console.log(JSON.stringify(place));
         if (!place.geometry) {
           sub.error({
             message: 'Autocomplete returned place with no geometry'
@@ -368,7 +399,16 @@ export class HomePage {
         } else {
           console.log('Search Lat', place.geometry.location.lat());
           console.log('Search Lng', place.geometry.location.lng());
-          sub.next(place.geometry.location);
+
+          let data = {
+            name: place.name,
+            icon: place.icon,
+            location: place.geometry.location
+          };
+          console.log(JSON.stringify(place.geometry.location));
+          //sub.next(place.geometry.location);
+            sub.next(data);
+
           //sub.complete();
         }
       });
@@ -377,7 +417,6 @@ export class HomePage {
 
 
   initializeMap() {
-    console.log(this.loggedUser)
 
     var myLatLng = { lat: 42.6990296, lng: 2.8342897 };
 
@@ -436,14 +475,14 @@ export class HomePage {
   }
 
   getCurrentPositionfromStorage(markers) {
-    this.storage.get('lastLocation').then((result) => {
+    this.storage.get('last_ocation').then((result) => {
       if (result) {
         let myPos = new google.maps.LatLng(result.lat, result.long);
         this.map.setOptions({
           center: myPos,
           zoom: 9
         });
-        let marker = this.addMarker(myPos, "Mon ancienne position sauvegardée: " + result.location);
+        let marker = this.addMarker(myPos, "Mon ancienne position sauvegardée: " + result.location, null);
 
         markers.push(marker);
         // this.bounceMap(markers);
@@ -463,9 +502,9 @@ export class HomePage {
 
   choosePosition() {
 
-    console.log(this.loggedUser)
-    this.storage.get('Dernière position').then((result) => {
+    this.storage.get('last_position').then((result) => {
       if (result) {
+        console.log(JSON.stringify(result));
         let actionSheet = this.actionSheetCtrl.create({
           buttons: [
             {
@@ -476,12 +515,23 @@ export class HomePage {
               }
             },
             {
-              text: 'Supprimer',
-              handler: () => {
-                this.storage.set('Dernière Position ', null);
-                this.showToast('Position supprimée!');
-                this.initializeMap();
-              }
+                text: 'Mon ancienne position',
+                handler: () => {
+                  this.addMarker(result, 'Ma position', null);
+                    let options = {
+                        center: result,
+                        zoom: 11,
+                    };
+                    this.map.setOptions(options);
+                }
+            },
+            {
+                text: 'Supprimer',
+                handler: () => {
+                    this.storage.set('last_position', null);
+                    this.showToast('Position supprimée!');
+                    this.initializeMap();
+                }
             },
             {
               text: 'Annuler',
@@ -501,19 +551,56 @@ export class HomePage {
 
   // go show currrent location
   getCurrentPosition() {
-    let image = {
-      url: 'C:/MAMP/htdocs/TESTT/kids/map/src/assets/icon',
 
-    }
-    console.log(image)
     // attente recherche de votre position
-    this.loading = this.loadingCtrl.create({
-      content: 'Recherche de votre position ...'
+    let loading = this.loadingCtrl.create({
+      content: 'Recherche de votre position...'
     });
-    this.loading.present();
+    loading.present();
     //temps 10 seconde
     let locationOptions = { timeout: 5000, enableHighAccuracy: true };
-    //si le navigateur trouve la position
+
+    this.geolocation.getCurrentPosition().then((resp) => {
+        loading.dismiss();
+        this.showToast('Position trouvée !');
+
+        console.log(resp.coords.latitude, resp.coords.longitude);
+        let myPos = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+        let options = {
+            center: myPos,
+            zoom: 11,
+        };
+
+        this.map.setOptions(options);
+        this.addMarker(myPos, "Ma position", null);
+
+        let alert = this.alertCtrl.create({
+            title: 'Position',
+            message: 'Souhaitez vous sauvegarder votre position ?',
+            buttons: [
+                {
+                    text: 'Annuler'
+                },
+                {
+                    text: 'Sauvegarder',
+                    handler: data => {
+                        let lastLocation = { lat: resp.coords.latitude, lng: resp.coords.longitude };
+                        console.log(lastLocation);
+                        this.storage.set('last_position', lastLocation).then(() => {
+                            this.showToast('Votre position a correctement été sauvegardée.');
+                        });
+                    }
+                }
+            ]
+        });
+        alert.present();
+
+    }).catch((error) => {
+        console.log('Error getting location', error);
+        this.showToast('Une erreur empêche de retrouver votre localisation. Assurez vous que votre GPS est activé.');
+    });
+
+    /*
     if (navigator.geolocation) {
       var options = {
         // enableHighAccuracy est un Boolean qui indique que l'application souhaite recevoir les meilleurs résultats possibles
@@ -534,7 +621,6 @@ export class HomePage {
               center: myPos,
               zoom: 11,
               icon: image
-
             };
             console.log(image)
             this.map.setOptions(options);
@@ -572,6 +658,7 @@ export class HomePage {
         }
       )
     }
+    */
 
   }
 
@@ -583,11 +670,24 @@ export class HomePage {
     }
   }
 
-  addMarker(position, content) {
-    let image = {
-      url: './assets/icon/moi.png',
+  addMarker(position, content, icon: null) {
 
+
+    let image = {};
+    if( icon !== null ) {
+      image = {
+        url: icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      }
+    } else {
+        image = {
+            url: './assets/icon/moi.png',
+        };
     }
+
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,

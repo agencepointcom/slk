@@ -3,7 +3,7 @@
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
   "description": "Ionic 2 Google Maps Marker Clusterer: An Ionic project",
-  "version": "1.1",
+  "version": "1.2.1",
   "private": true,
   "config": {
     "ionic_copy": "./copy.config.js",
@@ -30,8 +30,9 @@
     "@angular/platform-browser-dynamic": "5.0.0",
     "@ionic-native/android-permissions": "^4.7.0",
     "@ionic-native/core": "4.5.2",
-    "@ionic-native/geolocation": "4.5.2",
+    "@ionic-native/geolocation": "^4.5.2",
     "@ionic-native/google-maps": "^4.5.3",
+    "@ionic-native/launch-navigator": "^4.12.2",
     "@ionic-native/native-storage": "^4.7.0",
     "@ionic-native/splash-screen": "4.5.2",
     "@ionic-native/sqlite": "^4.6.0",
@@ -41,8 +42,11 @@
     "cordova-android": "7.0.0",
     "cordova-browser": "~5.0.3",
     "cordova-ios": "4.5.5",
+    "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-android-permissions": "^1.0.0",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-dialogs": "^2.0.1",
+    "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-nativestorage": "^2.3.2",
@@ -56,6 +60,7 @@
     "node-js-marker-clusterer": "^1.0.0",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.4.0",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "^4.2.2",
     "zone.js": "0.8.18"
   },
   "devDependencies": {
@@ -87,7 +92,14 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-android-permissions": {},
-      "cordova-plugin-nativestorage": {}
+      "cordova-plugin-nativestorage": {},
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "Pour vous localiser"
+      },
+      "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+        "OKHTTP_VERSION": "3.+",
+        "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
+      }
     },
     "platforms": [
       "browser",

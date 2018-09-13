@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, AlertController, LoadingController, ModalController} from 'ionic-angular';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +12,9 @@ import { WordpressService } from '../../services/wordpress.service';
 import { CartePage } from '../carte/carte';
 import { HomePage } from '../home/home';
 import {Storage} from "@ionic/storage";
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { Geolocation } from '@ionic-native/geolocation';
+
 /**
  * Generated class for the ListePage page.
  *
@@ -65,6 +68,9 @@ export class ListePage {
     public alertCtrl: AlertController,
     public storage: Storage,
     public loadingCtrl: LoadingController,
+    private launchNavigator: LaunchNavigator,
+    public geolocation: Geolocation,
+    public modalCtrl: ModalController,
 
   ) {
     this.userdata = navParams.data.userdata;
@@ -205,8 +211,42 @@ export class ListePage {
   // }
   //   }
 
+  /***
   parseNumber(number) {
     return parseInt(number);
+  }
+
+  goPlace(id, index) {
+
+    console.log(JSON.stringify(this.partenaire[index].martygeocoderlatlng.martygeocoderlatlng));
+
+      var itemstring = this.partenaire[index].martygeocoderlatlng.martygeocoderlatlng.toString();
+
+      itemstring = itemstring.replace(")", ""); //"{42.827682, 2.225718899999947"
+      itemstring = itemstring.replace("(", ""); //"42.827682, 2.225718899999947"
+      let splited = itemstring.split(","); // [ 42.827682, 2.225718899999947 ]
+      let coords = {
+          lat: parseFloat(splited[0]),
+          lng: parseFloat(splited[1])
+      };
+
+      this.geolocation.getCurrentPosition().then(response => {
+          this.launchNavigator.navigate([coords.lat, coords.lng], {
+              start: response.coords.latitude + ', ' + response.coords.longitude,
+              appSelection: {
+                  dialogHeaderText: "Sélectionnez une application pour l'itinéraire",
+                  cancelButtonText: "Cancel",
+                  rememberChoice: {
+                      prompt: {
+                          headerText: "Se souvenir de mon choix ?",
+                          bodyText: "Utiliser la même application la prochaine fois ?",
+                          yesButtonText: "Oui",
+                          noButtonText: "Non"
+                      }
+                  }
+              }
+          });
+      });
   }
 
   jyete(id, index) {
@@ -225,13 +265,13 @@ export class ListePage {
       this.voteInProgress = true;
       this.authenticationService.getUser()
           .then(user => {
-                /*
+
                   Object.keys(this.activitiesDone).forEach(key => {
                       if (this.activitiesDone[key]['id'] === id) {
                           voted = true;
                       }
                   });
-                  */
+
 
                   this.wordpressService.iWasHere(id, user.nicename).subscribe((response) => {
                     console.log(response);
@@ -248,7 +288,7 @@ export class ListePage {
                     loading.dismiss();
                   });
 
-                /*
+
                   if( voted ) {
                       this.voteInProgress = false;
                       this.errorAlert('Vous avez déjà indiqué avoir été présent dans ce lieu');
@@ -265,13 +305,14 @@ export class ListePage {
                           this.errorAlert('Une erreur est survenue durant l\'opération. Si le problème persiste, veuillez contacter l\'équipe technique en charge de l\'application.');
                       });
                   }
-                  */
+
           }, error => {
               this.voteInProgress = false;
               loading.dismiss();
               this.errorAlert('Vous devez être connecté pour participer aux votes');
           });
   };
+***/
 
   errorAlert(message) {
     let alert = this.alertCtrl.create({
@@ -619,7 +660,7 @@ export class ListePage {
   }
 
 
-  clickshow(partnerId) {
+  clickshow(partnerId, index) {
 
     /*
     let a: 1;
@@ -629,9 +670,18 @@ export class ListePage {
     document.getElementById(idvalue).style.display = "block";
     */
 
+    console.log(this.partenaire_display[index]);
+
+    let modal = this.modalCtrl.create('PlacePage', {
+      place: this.partenaire_display[index],
+    });
+    modal.present();
+
+    /*
     this.show = true;
     document.getElementById('show_' + partnerId).style.display = 'block';
     this.teste = true;
+    */
 
 
 

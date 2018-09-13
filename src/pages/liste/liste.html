@@ -33,7 +33,7 @@
         <div id="partenairee">
 
             <ion-row *ngFor="let partenaires of partenaire_display; index as i">
-                <div class="info" *ngIf="!teste" id={{partenaires.id}} #test (click)="clickshow(partenaires.id)">
+                <div class="info" *ngIf="!teste" id={{partenaires.id}} #test (click)="clickshow(partenaires.id, i)">
 
                     <img class="imagepart" src="{{partenaires.image}}">
 
@@ -46,6 +46,7 @@
                         <p class="pinfo"> {{partenaires.acf.site_web}}</p>
                     </div>
                 </div>
+                <!--
                 <div class="divdesc" #caca id="show_{{partenaires.id}}">
                     <p class="fermer" (click)="fermer(partenaires.id)">X</p>
                     <img class="image_appli" src="{{partenaires.acf.image_appli}}">
@@ -72,9 +73,16 @@
                                     <ion-icon name="ios-people"></ion-icon> {{ parseNumber(partenaires.martygeocoderlatlng.simplefavorites_count) }}
                                 </span>
                             </button>
+                            <button (click)="goPlace(partenaires.id, i)" class="aller">
+                                Je veux y aller
+                                <span>
+                                    <ion-icon name="navigate"></ion-icon>
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
+                -->
             </ion-row>
 
         </div>

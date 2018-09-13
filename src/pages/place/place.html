@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar hideBackButton="false">
+    <ion-title>{{ place.title.rendered }}</ion-title>
+    <ion-buttons end right>
+      <button ion-button icon-only (click)="closePlace()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <div class="cover" [ngStyle]="{'background-image': 'url(' + place.acf.image_appli + ')'}"></div>
+
+  <div class="place-content">
+    <h3>{{ place.title.rendered }}</h3>
+
+    <div class="offer" [innerHtml]="place.acf.offre"></div>
+
+    <div [innerHtml]="place.acf.horaires" class="description"></div>
+
+    <div class="tarifs" [innerHtml]="place.acf.tarifs"></div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+          <button (click)="iWasHere(place.id)" class="aller"> J'y étais !
+            <span>
+            <ion-icon name="ios-people"></ion-icon> {{ place.martygeocoderlatlng.simplefavorites_count }}
+          </span>
+          </button>
+        </ion-col>
+        <ion-col text-center>
+          <button (click)="goPlace(place.id)" class="aller">
+            Y aller !
+            <span>
+            <ion-icon name="navigate"></ion-icon>
+          </span>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

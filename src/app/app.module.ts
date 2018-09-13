@@ -29,6 +29,7 @@ import { ConfigServiceTsProvider } from '../providers/config-service-ts/config-s
 import { NativeStorage } from '@ionic-native/native-storage';
 import { AuthenticationService } from '../services/authentication.service';
 import { WordpressService} from '../services/wordpress.service';
+import {LaunchNavigator, LaunchNavigatorOptions} from "@ionic-native/launch-navigator";
 
 @NgModule({
   declarations: [
@@ -80,8 +81,8 @@ import { WordpressService} from '../services/wordpress.service';
     AuthService,
     TokenExpiration,
     ConfigServiceTsProvider,
-    AndroidPermissions
-
+    AndroidPermissions,
+    LaunchNavigator,
   ]
 })
 export class AppModule { }

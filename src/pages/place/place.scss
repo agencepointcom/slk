@@ -1,0 +1,67 @@
+page-place {
+  .toolbar-background-ios, .toolbar-background-md {
+    background-color: #14b0b9;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .toolbar-title-ios, .toolnbar-title-md {
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .cover {
+    background-position: top center;
+    background-size: cover;
+    height: 35%;
+    width: 100%;
+  }
+
+  .place-content {
+
+    padding: 10px;
+    font-size: 15px;
+
+    h3 {
+      color: #14b0b9;
+      font-weight: bold;
+      text-align: center;
+      font-size: 2.5rem;
+    }
+
+    .offer {
+      color: #fff;
+      background-color: #14b0b9;
+      margin: 0;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 600;
+    }
+    .grid {
+      padding: 0;
+      margin: 15px 0;
+      .col {
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    .aller {
+      background-color: #14b0b9;
+      font-family: 'Lato', sans-serif;
+      color: #fff;
+      letter-spacing: 1px;
+      font-weight: 700;
+      padding: 10px;
+      font-size: 14px;
+
+      span {
+        display: inline-block;
+        padding: 6px 10px;
+        background: #fff;
+        border-radius: 10px;
+        margin: 4px 0 4px 8px;
+        color: #14B0BA;
+      }
+    }
+  }
+}
