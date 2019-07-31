@@ -36,6 +36,19 @@ page-place {
       padding: 10px;
       font-weight: 600;
     }
+
+    .promo {
+      margin-top: 10px;
+      .code {
+        border-radius: 10px;
+        background-color: #fff;
+        border: 1px dashed #14b0b9;
+        text-align: center;
+        padding: 10px;
+        color: #14b0b9;
+      }
+    }
+
     .grid {
       padding: 0;
       margin: 15px 0;

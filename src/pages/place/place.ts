@@ -20,6 +20,7 @@ import {Geolocation} from "@ionic-native/geolocation";
 export class PlacePage {
 
   place: any;
+  user: any;
   voteInProgress: boolean = false;
 
   constructor(
@@ -34,6 +35,12 @@ export class PlacePage {
       public geolocation: Geolocation,
   ) {
     this.place = this.navParams.get('place');
+
+      this.authenticationService.getUser()
+          .then(user => {
+              this.user = user;
+              console.log(user);
+          });
   }
 
   closePlace() {
