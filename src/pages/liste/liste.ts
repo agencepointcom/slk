@@ -109,48 +109,40 @@ export class ListePage {
             }
 
 
-
-
-
         });
 
-
-
-        Observable.forkJoin(
-            this.getActivite()).subscribe(data => {
-            let item = data[0]
-            for (let i = 0; i < item.length; i++) {
-                let items = item[i]
-
+    Observable.forkJoin(
+      this.getActivite()).subscribe(data => {
+        let item = data[0];
+        for (let i = 0; i < item.length; i++) {
+          let items = item[i];
                 this.activite.push(items);
             }
+        });
+    Observable.forkJoin(
+      this.getLieu()).subscribe(data => {
+        let items = data[0];
+        for (let i = 0; i < items.length; i++) {
+          let item = items[i];
+          if (item) {
+            this.lieu.push(item);
+          }
+        }
 
-        })
-        Observable.forkJoin(
-            this.getLieu()).subscribe(data => {
-            let items = data[0]
-            for (let i = 0; i < items.length; i++) {
-                let item = items[i];
-                if (item) {
-                    this.lieu.push(item);
-                }
-            }
+      });
+    Observable.forkJoin(
 
-        })
-        Observable.forkJoin(
-
-            this.getAge()).subscribe(data => {
-            let items = data[0]
-            for (let i = 0; i < items.length; i++) {
-                let item = items[i];
+      this.getAge()).subscribe(data => {
+        let items = data[0];
+        for (let i = 0; i < items.length; i++) {
+          let item = items[i];
 
                 if (item) {
                     this.tdage.push(item);
                 }
 
             }
-
-        })
+      });
 
         // Observable.forkJoin(
         //   this.getImage()).subscribe(data=> {

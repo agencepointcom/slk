@@ -20,6 +20,7 @@ import {Geolocation} from "@ionic-native/geolocation";
 export class PlacePage {
 
   place: any;
+  user: any;
   voteInProgress: boolean = false;
   loggedUser: boolean = false;
   isEngaged: boolean = false;
@@ -58,7 +59,6 @@ export class PlacePage {
                   console.log(this.loggedUser)
               }
           );
-
   }
 
   closePlace() {

@@ -11,7 +11,6 @@
 
 </ion-header>
 
-
 <ion-content>
 
   <div class="cover" [ngStyle]="{'background-image': 'url(' + place.acf.image_appli + ')'}"></div>
@@ -21,7 +20,9 @@
 
     <div class="offer" [innerHtml]="place.acf.offre"></div>
 
+
     <div class="promo" *ngIf="isEngaged && place.acf.code_promo && place.acf.code_promo != ''">
+
       <h5>Votre code promo adhérent :</h5>
       <div class="code">Code PROMO</div>
     </div>
