@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar hideBackButton="false">
-    <ion-title>{{ place.title.rendered }}</ion-title>
+    <ion-title [innerHtml]="place.title.rendered"></ion-title>
     <ion-buttons end right>
       <button ion-button icon-only (click)="closePlace()">
         <ion-icon name="close"></ion-icon>
@@ -17,9 +17,14 @@
   <div class="cover" [ngStyle]="{'background-image': 'url(' + place.acf.image_appli + ')'}"></div>
 
   <div class="place-content">
-    <h3>{{ place.title.rendered }}</h3>
+    <h3 [innerHtml]="place.title.rendered"></h3>
 
     <div class="offer" [innerHtml]="place.acf.offre"></div>
+
+    <div class="promo" *ngIf="isEngaged && place.acf.code_promo && place.acf.code_promo != ''">
+      <h5>Votre code promo adhérent :</h5>
+      <div class="code">Code PROMO</div>
+    </div>
 
     <div [innerHtml]="place.acf.horaires" class="description"></div>
 
@@ -28,7 +33,7 @@
     <ion-grid>
       <ion-row>
         <ion-col text-center>
-          <button (click)="iWasHere(place.id)" class="aller"> J'y étais !
+          <button (click)="iWasHere(place.id)" class="aller"> J'ai aimé !
             <span>
             <ion-icon name="ios-people"></ion-icon> {{ place.martygeocoderlatlng.simplefavorites_count }}
           </span>

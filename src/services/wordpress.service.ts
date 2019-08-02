@@ -8,7 +8,7 @@ import 'rxjs/add/observable/forkJoin';
 @Injectable()
 export class WordpressService {
   constructor(public http: Http){}
-//recuperer les postes recent 
+//recuperer les postes recent
   getRecentPosts(categoryId:number, page:number = 1){
     let category_url = categoryId? ("&categories=" + categoryId): "";
 
@@ -20,10 +20,10 @@ export class WordpressService {
   }
   //recuperer activité
   getActivites(activite){
-    return this.http.get(Config.WORDPRESS_REST_API_URL + "type-activite/?per_page=100" )
+    return this.http.get(Config.WORDPRESS_REST_API_URL + "type-activite/?per_page=100")
     .map(res => res.json());
   }
-  //recuperer age 
+  //recuperer age
   getAge(age){
     return this.http.get(Config.WORDPRESS_REST_API_URL + "tranche-dage/" )
     .map(res => res.json());
@@ -33,8 +33,9 @@ export class WordpressService {
     return this.http.get(Config.WORDPRESS_REST_API_URL + "zone-geographique/" )
     .map(res => res.json());
   }
-  getPartenaire(partenaire){
-    return this.http.get(Config.WORDPRESS_REST_API_URL + "activite?per_page=100" )
+  getPartenaire(partenaire, page: number = 1){
+    //console.log(page);
+    return this.http.get(Config.WORDPRESS_REST_API_URL + "activite?per_page=500&page=" + page)
     .map(res => res.json());
   }
 
@@ -91,11 +92,28 @@ export class WordpressService {
     .map(res => res.json());
   }
 
+    /**
+     * Click "j'ai aimé"
+     * @param activityId
+     * @param nicename
+     */
   iWasHere(activityId, nicename) {
       let header = new Headers();
       header.append('Content-Type', 'application/json');
     return this.http.post(Config.WORDPRESS_URL + 'wp-json/simplefavorite/favorite?favorite&nicename=' + nicename + '&postid=' + activityId, {}, {
       headers: header
     }).map(response => response.json());
+  }
+
+    /**
+     * Retourne la date de fin d'engagement
+     * @param nicename
+     */
+  getSuscribeEndingDate(nicename) {
+      let header = new Headers();
+      header.append('Content-Type', 'application/json');
+      return this.http.get(Config.WORDPRESS_URL + 'wp-json/abonnement/endsub?nicename=' + nicename, {
+        headers: header
+      }).map(response => response.json());
   }
 }

@@ -20,6 +20,20 @@ page-carte {
         background-position: center;
     }
 
+    .nonEngaded {
+        position: absolute;
+        background-color: #ee2b2b;
+        color: #fff;
+        font-weight: bold;
+        margin: -85px auto 0 auto;
+        padding: 5px 15px;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 15px 15px 0 0;
+        font-family: 'Lato', sans-serif;
+        width: 80%;
+    }
+
    h1, h2{
     color:white;
     text-align: center;

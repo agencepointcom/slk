@@ -37,6 +37,8 @@ export class CartePage {
   decopage: typeof DecoPage;
   cartePage: any;
   boolean: boolean = false;
+  isEngaged: boolean = false;
+  endDate: string = '';
 
   constructor(public nav: NavController, public navParams: NavParams,
     public authenticationService: AuthenticationService,
@@ -50,7 +52,7 @@ export class CartePage {
     console.log(this.userdata);
   }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.myDate = moment(moment().format(), moment.ISO_8601).format();
 
     setInterval(() => {
@@ -72,12 +74,19 @@ export class CartePage {
           //this.userdata = this.navParams.data.userdata;
           this.userdata = data.displayname;
 
-
+          console.log(JSON.stringify(data));
+          this.wordpressService.getSuscribeEndingDate(data.nicename).subscribe(response => {
+            console.log(JSON.stringify(response));
+            if( response.end_date !== false ) {
+              this.isEngaged = true;
+              let endingDate = response.end_date;
+              this.endDate = endingDate.replace(/-/g, '/');
+            }
+          });
         },
         (error) => {
           this.loggedUser = false;
           console.log(this.loggedUser)
-
         }
       );
 

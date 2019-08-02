@@ -15,7 +15,7 @@ import {AuthenticationService} from "../services/authentication.service";
   templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage: any = 'LoginPage';
+    rootPage: any = 'CartePage';
   constructor(platform: Platform, public SplashScreen: SplashScreen, public StatusBar: StatusBar, public authenticationService: AuthenticationService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -23,12 +23,14 @@ export class MyApp {
       this.StatusBar.styleBlackOpaque();
       this.SplashScreen.hide();
 
+      /*
         this.authenticationService.getUser().then((data) => {
             this.rootPage = 'CartePage';
         },
         error => {
           this.rootPage = 'LoginPage';
         });
+        */
     });
   }
 }

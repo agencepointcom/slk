@@ -1,9 +1,9 @@
 {
   "name": "sortir-les-kids",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
-  "description": "Ionic 2 Google Maps Marker Clusterer: An Ionic project",
-  "version": "1.2.1",
+  "author": "Agence Point Com",
+  "homepage": "https://sortirleskids.com/",
+  "description": "Application officielle de Sortir Les Kids",
+  "version": "1.3.1",
   "private": true,
   "config": {
     "ionic_copy": "./copy.config.js",
@@ -94,11 +94,11 @@
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-nativestorage": {},
       "cordova-plugin-geolocation": {
-        "GEOLOCATION_USAGE_DESCRIPTION": "Pour vous localiser"
+        "GEOLOCATION_USAGE_DESCRIPTION": "Votre emplacement actuel sera affiché sur la carte afin de pouvoir consulter les activités proches de vous."
       },
       "uk.co.workingedge.phonegap.plugin.launchnavigator": {
         "OKHTTP_VERSION": "3.+",
-        "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
+        "LOCATION_USAGE_DESCRIPTION": "Votre emplacement actuel sera affiché sur la carte afin de pouvoir consulter les activités proches de vous."
       }
     },
     "platforms": [

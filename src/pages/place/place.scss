@@ -4,9 +4,34 @@ page-place {
     font-family: 'Lato', sans-serif;
   }
 
-  .toolbar-title-ios, .toolnbar-title-md {
+  .toolbar-title-ios, .toolbar-title-md {
     color: #fff;
     font-family: 'Lato', sans-serif;
+  }
+
+  .title-ios, .title-md {
+    justify-content: center;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 1.8rem;
+
+    display: -webkit-box;
+    height: 3rem;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 4rem;
+    text-align: center;
+  }
+
+  .title-ios {
+    line-height: 4rem;
+  }
+
+  .title-md {
+    line-height: 3rem;
   }
 
   .cover {
@@ -14,6 +39,12 @@ page-place {
     background-size: cover;
     height: 35%;
     width: 100%;
+  }
+
+  .header {
+    .button-inner {
+      color: #fff;
+    }
   }
 
   .place-content {
@@ -36,6 +67,19 @@ page-place {
       padding: 10px;
       font-weight: 600;
     }
+
+    .promo {
+      margin-top: 10px;
+      .code {
+        border-radius: 10px;
+        background-color: #fff;
+        border: 1px dashed #14b0b9;
+        text-align: center;
+        padding: 10px;
+        color: #14b0b9;
+      }
+    }
+
     .grid {
       padding: 0;
       margin: 15px 0;

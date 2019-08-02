@@ -43,10 +43,19 @@
     </div>
 </div>
 <div id="fondnouser"></div>
-<div id ="divcarte">
+<div id="divcarte">
     <img id="carte" src="assets/img/carte.png">
- <div id="user"> <p>{{userdata}}</p> <p>09/05/2019</p></div>
+    <div class="nonEngaded" *ngIf="!isEngaged">
+        Non abonné
+    </div>
+    <div id="user">
+        <p>{{userdata}}</p>
+        <p *ngIf="isEngaged">{{ endDate }}</p>
+        <p *ngIf="!isEngaged">Non abonné</p>
+    </div>
 </div>
+
+
 <div (click)='clickfond()' id="fond"></div>
 <div id="navmenu">
   <div id="listenav" (click)='clickliste()' class="navbas">

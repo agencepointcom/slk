@@ -21,6 +21,8 @@ export class PlacePage {
 
   place: any;
   voteInProgress: boolean = false;
+  loggedUser: boolean = false;
+  isEngaged: boolean = false;
 
   constructor(
       public navCtrl: NavController,
@@ -33,7 +35,30 @@ export class PlacePage {
       private launchNavigator: LaunchNavigator,
       public geolocation: Geolocation,
   ) {
-    this.place = this.navParams.get('place');
+      this.place = this.navParams.get('place');
+
+      this.authenticationService.getUser()
+          .then(
+              (data) => {
+                  //this.user
+
+                  //console.log('USER');
+                  //console.log(JSON.stringify(data));
+                  this.loggedUser = true;
+
+                  this.wordpressService.getSuscribeEndingDate(data.nicename).subscribe(response => {
+                      console.log(JSON.stringify(response));
+                      if (response.end_date !== false) {
+                          this.isEngaged = true;
+                      }
+                  });
+              },
+              (error) => {
+                  this.loggedUser = false;
+                  console.log(this.loggedUser)
+              }
+          );
+
   }
 
   closePlace() {
