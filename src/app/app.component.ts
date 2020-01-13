@@ -15,7 +15,7 @@ import {AuthenticationService} from "../services/authentication.service";
   templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage: any = 'CartePage';
+    rootPage: any = 'HomePage';
   constructor(platform: Platform, public SplashScreen: SplashScreen, public StatusBar: StatusBar, public authenticationService: AuthenticationService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

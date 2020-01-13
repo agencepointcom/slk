@@ -78,6 +78,7 @@ export class HomePage {
     ageselected = '';
     catselected = '';
     lieuselected = '';
+    keywords = '';
 
 
 
@@ -137,8 +138,7 @@ export class HomePage {
             this.getActivite()).subscribe(data => {
             let item = data[0]
             for (let i = 0; i < item.length; i++) {
-                let items = item[i]
-
+                let items = item[i];
                 this.activite.push(items);
             }
 
@@ -193,6 +193,9 @@ export class HomePage {
 
                     let items = item[i];
                     items.location = objet;
+
+                    items.title.slug = items.title.rendered.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    items.acf.text_slug = items.acf.horaires.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
                     this.partenaire.push(items);
                     this.partenaire_display.push(items);
@@ -732,7 +735,6 @@ export class HomePage {
             document.getElementById('pagesearch').style.display = "none";
             document.getElementById('fond').style.display = "none";
         }
-
     }
     clickcarte() {
 
@@ -880,7 +882,6 @@ export class HomePage {
                 if (!find) {
                     this.partenaire_display.splice(i, 1);
                 }
-
             }
         }
         //categories
@@ -932,7 +933,6 @@ export class HomePage {
                     // Si on trouve au moins une fois l'lieu dans le tableau du partenaire
                     if (partenaires["zone-geographique"].indexOf(int_lieu) > -1) {
                         console.log(partenaires["zone-geographique"]);
-                        console.log
                         find = true;
                         break;
                     }
@@ -942,15 +942,39 @@ export class HomePage {
                 // Si aucune correspondance, on enlève l'élément du tableau
                 if (!find) {
                     this.partenaire_display.splice(i, 1);
+                }
+            }
+        }
 
+        if( this.keywords.length > 0 ) {
+            for (let i = this.partenaire_display.length - 1; i >= 0; i--) {
+
+                var partenaires = this.partenaire_display[i];
+                var find = false;
+
+                if( partenaires.title.slug.match(new RegExp("[^,]*"+ this.keywords +"[^,]*",'ig')) || partenaires.title.rendered.match(new RegExp("[^,]*"+ this.keywords +"[^,]*",'ig')) || partenaires.acf.text_slug.match(new RegExp("[^,]*"+ this.keywords +"[^,]*",'ig')) || partenaires.acf.horaires.match(new RegExp("[^,]*"+ this.keywords +"[^,]*",'ig')) ) {
+                    //console.log('trouvé');
+                    find = true;
+                    //break;
                 }
 
+                if (!find) {
+                    this.partenaire_display.splice(i, 1);
+                }
             }
-
         }
+
         this.clearMarkerMap()
         this.displayMarkerMap()
 
+    }
+
+    reset() {
+        this.keywords = '';
+        this.lieuselected = '';
+        this.ageselected = '';
+        this.catselected = '';
+        this.filter();
     }
 
     clickmap() {

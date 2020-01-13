@@ -43,6 +43,7 @@ export class ListePage {
     ageselected = '';
     catselected = '';
     lieuselected = '';
+    keywords = '';
     partenaire_marker: Array<any> = new Array<any>();
     a: 1;
 
@@ -93,19 +94,23 @@ export class ListePage {
             this.getPartenaire()).subscribe( (data) => {
             let item = data[0];
 
+
             for (let i = 0; i < item.length; i++) {
                 let items = item[i];
 
-                //service qui va chercher l'image avec items.featured_media
-                Observable.forkJoin(this.getImage(items.featured_media)).subscribe(data => {
+                items.title.slug = items.title.rendered.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                items.acf.text_slug = items.acf.horaires.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+                this.partenaire.push(items);
+                this.partenaire_display.push(items);
+
+                /*
+                Observable.forkJoin(this.getImage(items.featured_media)).subscribe(data => {
                     items.image = data[0].source_url;
                     this.partenaire.push(items);
                     this.partenaire_display.push(items);
-
                 });
-
-
+                 */
             }
 
 
@@ -638,17 +643,40 @@ export class ListePage {
                         find = true;
                         break;
                     }
-
                 }
 
                 // Si aucune correspondance, on enlève l'élément du tableau
                 if (!find) {
                     this.partenaire_display.splice(i, 1);
                 }
-
             }
-
         }
+
+        if( this.keywords.length > 0 ) {
+            for (let i = this.partenaire_display.length - 1; i >= 0; i--) {
+
+                var partenaires = this.partenaire_display[i];
+                var find = false;
+
+                if( partenaires.title.slug.match(new RegExp("[^,]*"+ this.keywords +"[^,]*",'ig')) || partenaires.title.rendered.match(new RegExp("[^,]*"+ this.keywords +"[^,]*",'ig')) || partenaires.acf.text_slug.match(new RegExp("[^,]*"+ this.keywords +"[^,]*",'ig')) || partenaires.acf.horaires.match(new RegExp("[^,]*"+ this.keywords +"[^,]*",'ig')) ) {
+                    //console.log('trouvé');
+                    find = true;
+                    //break;
+                }
+
+                if (!find) {
+                    this.partenaire_display.splice(i, 1);
+                }
+            }
+        }
+    }
+
+    reset() {
+        this.keywords = '';
+        this.lieuselected = '';
+        this.ageselected = '';
+        this.catselected = '';
+        this.filter();
     }
 
 

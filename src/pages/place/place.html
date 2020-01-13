@@ -24,7 +24,7 @@
     <div class="promo" *ngIf="isEngaged && place.acf.code_promo && place.acf.code_promo != ''">
 
       <h5>Votre code promo adhérent :</h5>
-      <div class="code">Code PROMO</div>
+      <div class="code">{{ place.acf.code_promo }}</div>
     </div>
 
     <div [innerHtml]="place.acf.horaires" class="description"></div>

@@ -7,9 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-
         <div id="butto">
-
             <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
                 <ion-option *ngFor="let ages of tdage" value="{{ages.id}}">{{ages.name}}</ion-option>
             </ion-select>
@@ -19,8 +17,12 @@
             <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
                 <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
             </ion-select>
-
-
+            <div class="keywords-navbar-container">
+                <ion-input type="text" placeholder="Mots clés (cinéma, ...)" class="keywords" [(ngModel)]="keywords"></ion-input>
+                <button class="search-btn" (click)="filter()">
+                    <ion-icon name='checkmark' class="search-icon" item-right ></ion-icon>
+                </button>
+            </div>
         </div>
 
     </ion-navbar>
@@ -28,14 +30,15 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <button ion-button class="btn-reset" outline (click)="reset()"><ion-icon name="refresh" style="font-size: 30px"></ion-icon></button>
     <div id="affichage">
         <div id="partenairee">
 
             <ion-row *ngFor="let partenaires of partenaire_display; index as i">
                 <div class="info" *ngIf="!teste" id={{partenaires.id}} #test (click)="clickshow(partenaires.id, i)">
 
-                    <img class="imagepart" src="{{partenaires.image}}">
+                    <img class="imagepart" src="{{partenaires.featured_image_thumbnail_url}}">
 
                     <div class=infoun>
                         <span [innerHtml]="partenaires.title.rendered" class="hinfo">{{partenaires.title.rendered}}</span>
@@ -90,27 +93,28 @@
     <ion-scroll scrollX="true">
     </ion-scroll>
 
-
-
-
     <section id="secserach">
-
-
-
-
-
-
         <div id="pagesearch">
-            <ion-select multiple="true" class="select coucou" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
-                <ion-option *ngFor="let ages of tdage" value="{{ages.id}}">{{ages.name}}</ion-option>
-            </ion-select>
-            <ion-select multiple="true" class="select coucou" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
-                <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
-            </ion-select>
-            <ion-select multiple="true" class="select coucou" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
-                <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
-            </ion-select>
-
+            <ion-list inset class="keywords-container">
+                <ion-input type="text" placeholder="Mots clés (cinéma, bowling, ...)" class="keywords" [(ngModel)]="keywords"></ion-input>
+                <button class="search-btn" (click)="filter()">
+                    <ion-icon name='checkmark' class="search-icon" item-right ></ion-icon>
+                </button>
+            </ion-list>
+            <ion-list class="search-options">
+                <ion-select multiple="true" class="select coucou" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
+                    <ion-option *ngFor="let ages of tdage" value="{{ages.id}}">{{ages.name}}</ion-option>
+                </ion-select>
+                <ion-select multiple="true" class="select coucou" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
+                    <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
+                </ion-select>
+                <ion-select multiple="true" class="select coucou" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
+                    <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
+                </ion-select>
+            </ion-list>
+            <ion-list>
+                <button ion-button class="btn-search" outline (click)="reset()">Réinitialiser</button>
+            </ion-list>
 
         </div>
     </section>

@@ -36,6 +36,39 @@
     <ion-searchbar #searchbar placeholder="Rechercher" [hidden]="!search"></ion-searchbar>
     <div id="map" #map></div>
   </div>
+
+  <section id="secserach">
+    <div id="pagesearch">
+      <ion-list inset class="keywords-container">
+        <ion-input type="text" placeholder="Mots clés (cinéma, bowling, ...)" class="keywords" [(ngModel)]="keywords"></ion-input>
+        <button class="search-btn" (click)="filter()">
+          <ion-icon name='checkmark' class="search-icon" item-right ></ion-icon>
+        </button>
+      </ion-list>
+      <ion-list class="search-options">
+        <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
+          <ion-option *ngFor="let ages of tdage" value="{{ages.id}}">{{ages.name}}</ion-option>
+        </ion-select>
+        <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
+          <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
+        </ion-select>
+        <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
+          <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
+        </ion-select>
+      </ion-list>
+      <ion-list>
+        <button ion-button class="btn-search" outline (click)="reset()">Réinitialiser</button>
+      </ion-list>
+
+
+    </div>
+  </section>
+  <div (click)='clickfond()' id="fond"></div>
+  <!--
+
+  <div (click)='clicklegendes()' id="legendes"></div>
+  -->
+
   <div id="navmenu">
     <div id="listenav" (click)='clickliste()' class="navbas">
       <img src="./assets/icon/liste.png">
@@ -62,23 +95,5 @@
 
 
   </div>
-  <section id="secserach">
-    <div id="pagesearch">
-      <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="ageselected" (ionChange)="filter()">
-        <ion-option *ngFor="let ages of tdage" value="{{ages.id}}">{{ages.name}}</ion-option>
-      </ion-select>
-      <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="catselected" (ionChange)="filter()">
-        <ion-option *ngFor="let activitee of activite" value="{{activitee.id}}">{{activitee.name}}</ion-option>
-      </ion-select>
-      <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="lieuselected" (ionChange)="filter()">
-        <ion-option *ngFor="let lieuu of lieu" value="{{lieuu.id}}">{{lieuu.name}}</ion-option>
-      </ion-select>
-
-
-    </div>
-  </section>
-  <div (click)='clickfond()' id="fond"></div>
-  <div (click)='clicklegendes()' id="legendes"></div>
-
 
 </ion-content>

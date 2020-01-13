@@ -17,21 +17,20 @@
 
 <section id="serach">
 <div id="pagesearch">
-        <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="selected">
-                <ion-option *ngFor="let ages of tdage" value="{{ages}}">{{ages}}</ion-option>
-            </ion-select>
-            <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="selected">
-                <ion-option *ngFor="let activitee of activite" value="{{activitee}}">{{activitee}}</ion-option>
-            </ion-select>
-            <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="selected">
-                <ion-option *ngFor="let lieuu of lieu" value="{{lieuu}}">{{lieuu}}</ion-option>
-            </ion-select>  
-            
-  <div id="buttonsuite">
-     <div class="butsuite"> Afficher la liste</div>
-     <div class="butsuites"> Afficher la carte</div>
+    <ion-select multiple="true" class="select" placeholder="Age" [(ngModel)]="selected">
+        <ion-option *ngFor="let ages of tdage" value="{{ages}}">{{ages}}</ion-option>
+    </ion-select>
+    <ion-select multiple="true" class="select" placeholder="Categories" [(ngModel)]="selected">
+        <ion-option *ngFor="let activitee of activite" value="{{activitee}}">{{activitee}}</ion-option>
+    </ion-select>
+    <ion-select multiple="true" class="select" placeholder="Lieux" [(ngModel)]="selected">
+        <ion-option *ngFor="let lieuu of lieu" value="{{lieuu}}">{{lieuu}}</ion-option>
+    </ion-select>
 
-  </div>
+      <div id="buttonsuite">
+         <div class="butsuite"> Afficher la liste</div>
+         <div class="butsuites"> Afficher la carte</div>
+      </div>
 </div>
 </section>
 <div id="divpopup">
@@ -76,7 +75,7 @@
   <div id="conav"  (click)='clickexit()'class="navbas">
       <img src="./assets/icon/exit.png">
   </div>
-  
+
 
 </div>
 </ion-content>
