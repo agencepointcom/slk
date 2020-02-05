@@ -116,6 +116,7 @@ export class HomePage {
     }
 
 
+
     ionViewWillEnter() {
         this.authenticationService.getUser()
             .then(
@@ -503,9 +504,10 @@ export class HomePage {
         toast.present();
     }
 
-    choosePosition() {
+     choosePosition() {
 
-        this.storage.get('last_position').then((result) => {
+        console.log('on cherche la position');
+         this.storage.get('last_position').then((result) => {
             if (result) {
                 console.log(JSON.stringify(result));
                 let actionSheet = this.actionSheetCtrl.create({
@@ -553,7 +555,7 @@ export class HomePage {
     }
 
     // go show currrent location
-    getCurrentPosition() {
+     getCurrentPosition() {
 
         // attente recherche de votre position
         let loading = this.loadingCtrl.create({
@@ -561,9 +563,9 @@ export class HomePage {
         });
         loading.present();
         //temps 10 seconde
-        let locationOptions = { timeout: 5000, enableHighAccuracy: true };
-
-        this.geolocation.getCurrentPosition().then((resp) => {
+        let locationOptions = {timeout: 3000, enableHighAccuracy: true, maximumAge: 3600};
+        console.log(JSON.stringify(locationOptions));
+         this.geolocation.getCurrentPosition(locationOptions).then((resp) => {
             loading.dismiss();
             this.showToast('Position trouvée !');
 
@@ -599,7 +601,8 @@ export class HomePage {
             alert.present();
 
         }).catch((error) => {
-            console.log('Error getting location', error);
+            console.log('Error getting location', JSON.stringify(error));
+            loading.dismiss();
             this.showToast('Une erreur empêche de retrouver votre localisation. Assurez vous que votre GPS est activé.');
         });
 

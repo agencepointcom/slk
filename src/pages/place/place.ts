@@ -104,6 +104,8 @@ export class PlacePage {
   goPlace() {
       var itemstring = this.place.martygeocoderlatlng.martygeocoderlatlng.toString();
 
+      console.log(itemstring);
+
       itemstring = itemstring.replace(")", ""); //"{42.827682, 2.225718899999947"
       itemstring = itemstring.replace("(", ""); //"42.827682, 2.225718899999947"
       let splited = itemstring.split(","); // [ 42.827682, 2.225718899999947 ]
@@ -112,12 +114,20 @@ export class PlacePage {
           lng: parseFloat(splited[1])
       };
 
-      this.geolocation.getCurrentPosition().then(response => {
+      console.log(JSON.stringify(this.place));
+      let locationOptions = {timeout: 3000, enableHighAccuracy: true, maximumAge: 3600};
+      this.geolocation.getCurrentPosition(locationOptions).then(response => {
+
+          console.log('coordonnées');
+          console.log(JSON.stringify(response));
+
           this.launchNavigator.navigate([coords.lat, coords.lng], {
-              start: response.coords.latitude + ', ' + response.coords.longitude,
+              //start: response.coords.latitude + ', ' + response.coords.longitude,
+              start: [response.coords.latitude, response.coords.longitude],
+              destinationName: this.place.title.rendered,
               appSelection: {
                   dialogHeaderText: "Sélectionnez une application pour l'itinéraire",
-                  cancelButtonText: "Cancel",
+                  cancelButtonText: "Annuler",
                   rememberChoice: {
                       prompt: {
                           headerText: "Se souvenir de mon choix ?",
